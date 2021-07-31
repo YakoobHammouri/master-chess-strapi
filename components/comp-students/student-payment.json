@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_comp_students_student_payments",
+  "info": {
+    "name": "Student payment",
+    "icon": "file-invoice-dollar",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "amount": {
+      "type": "decimal"
+    },
+    "course": {
+      "model": "courses"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "courseName": {
+      "type": "string"
+    }
+  }
+}

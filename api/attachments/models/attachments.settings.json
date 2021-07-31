@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "attachments",
+  "info": {
+    "name": "Attachments",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "files": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "course": {
+      "model": "courses",
+      "via": "attachments"
+    }
+  }
+}

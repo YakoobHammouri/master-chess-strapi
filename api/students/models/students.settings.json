@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "students",
+  "info": {
+    "name": "students",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "birthDate": {
+      "type": "date"
+    },
+    "subscriptionDate": {
+      "type": "date"
+    },
+    "phoneNumber": {
+      "type": "biginteger"
+    },
+    "address": {
+      "type": "string"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "lichess": {
+      "type": "string"
+    },
+    "courses": {
+      "collection": "courses",
+      "via": "student"
+    },
+    "name": {
+      "type": "string"
+    },
+    "student_payments": {
+      "via": "student",
+      "collection": "student-payment"
+    }
+  }
+}

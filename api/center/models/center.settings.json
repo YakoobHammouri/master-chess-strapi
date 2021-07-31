@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "centers",
+  "info": {
+    "name": "center",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "courses": {
+      "via": "center",
+      "collection": "courses"
+    }
+  }
+}

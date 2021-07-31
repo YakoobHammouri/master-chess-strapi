@@ -1,0 +1,68 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "name": "courses",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "uid"
+    },
+    "level": {
+      "type": "enumeration",
+      "enum": [
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven"
+      ]
+    },
+    "center": {
+      "via": "courses",
+      "model": "center"
+    },
+    "numberOfLecture": {
+      "type": "integer",
+      "required": true
+    },
+    "time": {
+      "type": "time"
+    },
+    "days": {
+      "type": "string",
+      "required": true
+    },
+    "lecturesTotal": {
+      "type": "integer"
+    },
+    "start": {
+      "type": "date",
+      "required": true
+    },
+    "end": {
+      "type": "date"
+    },
+    "attachments": {
+      "via": "course",
+      "collection": "attachments"
+    },
+    "student": {
+      "via": "courses",
+      "model": "students"
+    },
+    "attendances": {
+      "via": "course",
+      "collection": "attendance"
+    }
+  }
+}

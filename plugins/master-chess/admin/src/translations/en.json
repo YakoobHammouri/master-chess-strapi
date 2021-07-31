@@ -1,0 +1,9 @@
+{
+  "menu.section.models.name.": "Master Chess Service",
+  "prompt.unsaved": "unsaved",
+  "menu.section.models.attendance": "Attendance",
+  "CenterList.label": "The Center ",
+  "CourseList.label": " The Course",
+  "CourseList.load.defualt": "Select ...",
+  "CenterList.error.onload": "Error in load Center List"
+}

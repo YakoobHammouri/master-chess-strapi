@@ -1,0 +1,28 @@
+{
+  "name": "strapi-plugin-master-chess",
+  "version": "0.0.1",
+  "description": "This plugin for master chess academy, this plugin cover centers, courses , students , attachments , attendance payment.",
+  "strapi": {
+    "name": "master-chess",
+    "icon": "chess",
+    "description": "This plugin for master chess academy, this plugin cover centers, courses , students , attachments , attendance payment."
+  },
+  "dependencies": {},
+  "author": {
+    "name": "We Creative",
+    "email": "yakoob.hammouri@hotmail.com",
+    "url": "https://github.com/YakoobHammouri"
+  },
+  "maintainers": [
+    {
+      "name": "We Creative",
+      "email": "yakoob.hammouri@hotmail.com",
+      "url": "https://github.com/YakoobHammouri"
+    }
+  ],
+  "engines": {
+    "node": ">=10.16.0 <=14.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
