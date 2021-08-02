@@ -5,5 +5,8 @@
   "CenterList.label": "The Center ",
   "CourseList.label": " The Course",
   "CourseList.load.defualt": "Select ...",
-  "CenterList.error.onload": "Error in load Center List"
+  "CenterList.error.onload": "Error in load Center List",
+  "takeAttendances.error": "Error in Take Attendances",
+  "takeAttendances.success": "The attendances successfully saved",
+  "Attendances.TakeDate": " Date"
 }

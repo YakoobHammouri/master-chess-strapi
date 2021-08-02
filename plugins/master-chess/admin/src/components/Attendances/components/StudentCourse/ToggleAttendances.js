@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Toggle } from "@buffetjs/core";
-const ToggleAttendances = ({ attendances, onChange }) => {
-  // const [val, setValue] = useState(attendances);
-
+const ToggleAttendances = ({ attendances, onArttChange }) => {
   return (
     <Toggle
       name="toggle"
-      onChange={({ target: { value } }) => onChange(value)}
+      onChange={({ target: { value } }) => onArttChange(value)}
       value={attendances}
       leftLabel={"No"}
       rightLabel={"Yes"}

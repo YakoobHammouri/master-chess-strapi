@@ -30,10 +30,6 @@
     "lichess": {
       "type": "string"
     },
-    "courses": {
-      "collection": "courses",
-      "via": "student"
-    },
     "name": {
       "type": "string"
     },

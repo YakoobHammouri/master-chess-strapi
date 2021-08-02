@@ -1,12 +1,3 @@
 {
-  "routes": [
-    {
-      "method": "GET",
-      "path": "/",
-      "handler": "master-chess.index",
-      "config": {
-        "policies": []
-      }
-    }
-  ]
+  "routes": []
 }

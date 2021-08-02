@@ -1,16 +1,23 @@
 import React from "react";
+import { TAKE_ATTENDANCES, REDUCER_NAME } from "../../../../hooks/constants";
 import { CustomRow as Row } from "@buffetjs/styles";
 import ToggleAttendances from "./ToggleAttendances";
-const CustomRow = ({ row }) => {
-  const { id, name, Attendances } = row;
+import { useDispatch, useSelector } from "react-redux";
+const CustomRow = ({ attend }) => {
+  const dispatch = useDispatch();
+  const { student, studentName, attendance } = attend;
+
+  const takeAttend = useSelector(
+    (state) => state.get(REDUCER_NAME).studetnCourseList
+  );
 
   return (
     <Row>
       <td>
-        <p>{id}</p>
+        <p>{student}</p>
       </td>
       <td>
-        <p>{name}</p>
+        <p>{studentName}</p>
       </td>
       <td>
         {/*
@@ -22,9 +29,19 @@ const CustomRow = ({ row }) => {
         
         */}
         <ToggleAttendances
-          attendances={Attendances}
-          onChange={(value) => {
-            setValue(value);
+          attendances={attendance}
+          onArttChange={(value) => {
+            if (takeAttend) {
+              const temp = takeAttend.map((std) => {
+                if (std.student === student) {
+                  const t = { ...std };
+                  t.attendance = value;
+                  return t;
+                }
+                return std;
+              });
+              dispatch({ type: TAKE_ATTENDANCES, std: temp });
+            }
           }}
         />
       </td>
