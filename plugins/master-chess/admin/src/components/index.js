@@ -4,6 +4,7 @@ import Label from "./Label";
 import LoadingProgress from "./LoadingProgress";
 import CenterList from "./CenterList";
 import CoursesList from "./CoursesList";
+import DatePicker from "./DatePicker";
 
 export {
   Attendances,
@@ -12,4 +13,5 @@ export {
   Label,
   CenterList,
   CoursesList,
+  DatePicker,
 };

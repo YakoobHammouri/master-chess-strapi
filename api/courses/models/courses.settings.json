@@ -56,9 +56,8 @@
       "via": "course",
       "collection": "attachments"
     },
-    "student": {
-      "via": "courses",
-      "model": "students"
+    "students": {
+      "collection": "students"
     },
     "attendances": {
       "via": "course",

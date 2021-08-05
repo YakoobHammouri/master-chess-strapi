@@ -12,21 +12,19 @@ const index = () => {
     (state) => state.get(REDUCER_NAME).studetnCourseList
   );
 
+  // const [studetnList, setStudetnList] = useState([]);
+
   // useEffect(() => {
-  //   if (selectCourse) {
-  //     getStudentCourseList(selectCourse.value)
-  //       .then((t) => {})
-  //       .catch((err) => {
-  //         console.log("err in  get Studetn CourseList in  useEffect :  ", err);
-  //       });
-  //   }
-  // }, [selectCourse]);
+  //   console.log(`studetnCourseList 111`, studetnCourseList);
+  //   console.log(`studetnList 11`, studetnList);
+  //   setStudetnList(studetnCourseList);
+  // }, [studetnCourseList]);
 
   return (
     <Wrapper>
       <BaselineAlignment top size="5px" />
       <Table
-        customRow={CustomRow}
+        customRow={(t) => <CustomRow attend={t.row} />}
         headers={CustomHeaders}
         rows={studetnCourseList}
       />

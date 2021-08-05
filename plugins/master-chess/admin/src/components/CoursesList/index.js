@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import getloading from "../../utils/getloading";
-import { REDUCER_NAME } from "../../hooks/constants";
+import { REDUCER_NAME, SELECT_COURSE_ID } from "../../hooks/constants";
+
 import Select from "react-select";
 import Wrapper from "./Wrapper";
 import Label from "../Label";
@@ -10,9 +11,12 @@ import { BaselineAlignment } from "strapi-helper-plugin";
 import useGetStudentByCourse from "../../hooks/useGetStudentByCourse";
 const CenterList = () => {
   const courseList = useSelector((state) => state.get(REDUCER_NAME).courseList);
-
+  
+  
+  const dispatch = useDispatch();
   const { getStudentCourseList } = useGetStudentByCourse();
   const [selectCourse, setSelectCourse] = useState({});
+
 
   useEffect(() => {
     setSelectCourse(null);
@@ -46,6 +50,7 @@ const CenterList = () => {
         options={courseList}
         onChange={(selected) => {
           setSelectCourse(selected);
+          dispatch({ type: SELECT_COURSE_ID, courseId: selected.value });
         }}
         isDisabled={courseList.length === 0 ? true : false}
       />

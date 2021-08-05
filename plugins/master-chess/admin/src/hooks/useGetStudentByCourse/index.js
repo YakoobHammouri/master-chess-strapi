@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 const fetchStudentCoursesList = async (courseid) => {
   try {
     ///students?courses=1
-    const data = await request(`/students?courses=${courseid}`, {
+    const data = await request(`/courses/${courseid}`, {
       method: "GET",
     });
-    return data;
+    return data?.students;
   } catch (e) {
-    console.log("Error in load product : ", e);
+    console.log("Error in load students : ", e);
     strapi.notification.toggle({
       type: "warning",
       message: { id: getTrad("CenterList.error.onload") },
@@ -31,11 +31,12 @@ const useGetStudentByCourse = () => {
         if (!stdCourse) {
           return;
         }
+
         const aStdCourse = stdCourse.map((prod) => {
           return {
-            id: `${prod.id}`,
-            name: prod.name,
-            Attendances: false,
+            student: `${prod.id}`,
+            studentName: prod.name,
+            attendance: false,
           };
         });
         dispatch({ type: STUDENT_COURSE_LIST, studCourse: aStdCourse });

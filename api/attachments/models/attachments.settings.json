@@ -28,8 +28,8 @@
       "pluginOptions": {}
     },
     "course": {
-      "model": "courses",
-      "via": "attachments"
+      "via": "attachments",
+      "model": "courses"
     }
   }
 }

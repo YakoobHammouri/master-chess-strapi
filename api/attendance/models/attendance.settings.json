@@ -16,8 +16,8 @@
       "type": "datetime"
     },
     "course": {
-      "model": "courses",
-      "via": "attendances"
+      "via": "attendances",
+      "model": "courses"
     },
     "studentAttendance": {
       "type": "component",
