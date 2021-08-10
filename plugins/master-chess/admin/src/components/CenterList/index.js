@@ -3,7 +3,11 @@ import getloading from "../../utils/getloading";
 import useGetCenter from "../../hooks/useGetCenter";
 import useGetCourse from "../../hooks/useGetCourse";
 import { useDispatch, useSelector } from "react-redux";
-import { SELECT_CENTER_ID, REDUCER_NAME } from "../../hooks/constants";
+import {
+  SELECT_CENTER_ID,
+  REDUCER_NAME,
+  CLEAR_TAKE_ATTENDANCES,
+} from "../../hooks/constants";
 import Select from "react-select";
 import Wrapper from "./Wrapper";
 import Label from "../Label";
@@ -40,8 +44,9 @@ const CenterList = () => {
   }, [selectcenter]);
 
   useEffect(() => {
-    setCenterList([]);
-    setSelectCenter([]);
+    // setCenterList([]);
+    setSelectCenter({});
+    dispatch({ type: CLEAR_TAKE_ATTENDANCES, clear_take_attendance: false });
   }, [clear]);
 
   return (

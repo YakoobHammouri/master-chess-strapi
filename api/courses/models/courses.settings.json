@@ -13,19 +13,11 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "uid"
+      "type": "string"
     },
     "level": {
       "type": "enumeration",
-      "enum": [
-        "One",
-        "Two",
-        "Three",
-        "Four",
-        "Five",
-        "Six",
-        "Seven"
-      ]
+      "enum": ["One", "Two", "Three", "Four", "Five", "Six", "Seven"]
     },
     "center": {
       "via": "courses",
@@ -57,7 +49,9 @@
       "collection": "attachments"
     },
     "students": {
-      "collection": "students"
+      "collection": "students",
+      "via": "courses",
+      "dominant": true
     },
     "attendances": {
       "via": "course",

@@ -7,5 +7,9 @@
   "CenterList.error.onload": "Error in load Center List",
   "takeAttendances.error": "Error in Take Attendances",
   "takeAttendances.success": "The attendances successfully saved",
-  "Attendances.TakeDate": " Date"
+  "Attendances.TakeDate": " Date",
+  "models.attendance.take.Attendance": "Take Attendance",
+  "models.attendance.edit.Attendance": "Take Attendance",
+  "models.attendance.search.by.student.Attendance": "search by student",
+  "models.attendance.search.by.course.Attendance": "search by course"
 }
