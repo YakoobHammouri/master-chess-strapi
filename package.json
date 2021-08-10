@@ -8,7 +8,7 @@
     "start": "strapi start",
     "build": "strapi build -- --clean",
     "strapi": "strapi",
-    "adev": "yarn dev --watch-admin"
+    "adev": "npm run dev -- --watch-admin"
   },
   "devDependencies": {},
   "dependencies": {

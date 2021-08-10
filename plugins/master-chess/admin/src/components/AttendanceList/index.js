@@ -8,29 +8,22 @@ import Wrapper from "./Wrapper";
 import Label from "../Label";
 import T from "../../utils/T";
 import { BaselineAlignment } from "strapi-helper-plugin";
-import useGetAttendancesList from "../../hooks/useGetAttendancesList";
 import useGetStudentByCourse from "../../hooks/useGetStudentByCourse";
-const CenterList = ({ isEdit }) => {
+const CenterList = () => {
   const courseList = useSelector((state) => state.get(REDUCER_NAME).courseList);
-
+  
+  
   const dispatch = useDispatch();
-  const { getAttendancesList } = useGetAttendancesList();
   const { getStudentCourseList } = useGetStudentByCourse();
   const [selectCourse, setSelectCourse] = useState({});
+
 
   useEffect(() => {
     setSelectCourse(null);
   }, [courseList]);
 
   useEffect(() => {
-    if (selectCourse?.value && isEdit && isEdit === true) {
-      console.log(`start get Att lsit `);
-      getAttendancesList(selectCourse.value)
-        .then((t) => {})
-        .catch((err) => {
-          console.log("err in  get Attendances List in  useEffect :  ", err);
-        });
-    } else if (selectCourse?.value && (!isEdit || isEdit === false)) {
+    if (selectCourse?.value) {
       getStudentCourseList(selectCourse.value)
         .then((t) => {})
         .catch((err) => {
