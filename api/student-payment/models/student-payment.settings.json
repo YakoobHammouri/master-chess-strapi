@@ -13,8 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "student": {
-      "model": "students",
-      "via": "student_payments"
+      "via": "student_payments",
+      "model": "students"
     },
     "Payments": {
       "type": "component",
