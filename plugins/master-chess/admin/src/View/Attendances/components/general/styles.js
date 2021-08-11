@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
 
-import { TabsNav } from "strapi-helper-plugin";
-
 const TitleTabWrapper = styled.div`
   text-transform: capitalize;
   &:hover,

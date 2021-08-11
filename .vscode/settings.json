@@ -1,0 +1,9 @@
+{
+  "editor.tabSize": 8,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 200,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "prettier.printWidth": 150,
+  "prettier.tabWidth": 8
+}

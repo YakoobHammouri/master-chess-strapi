@@ -11,18 +11,28 @@ import {
   COURSE_LIST,
   STUDENT_COURSE_LIST,
   TAKE_ATTENDANCES,
+  UPDATE_ATTENDANCES,
   CLEAR_TAKE_ATTENDANCES,
+  ATTENDANCE_LEST,
+  STUDENT_ATTENDANCE_LEST,
+  SELECT_ATTENDANCE_ID,
+  ATTENDANCES_TYPE,
 } from "./constants";
 
 export const initialState = {
   isLoading: false,
   clear_take_attendance: false,
+  attendanceType: "",
   centerid: 0,
   courseid: 0,
+  selectedAttendanceId: 0,
   attendanceDate: Moment().format("DD/MM/YYYY"),
   centerList: [],
   courseList: [],
   studetnCourseList: [],
+  updateAttendance: [],
+  studentAttndanceLest: [],
+  attendanceList: [],
 };
 
 const chessReducer = produce((draftState = initialState, action) => {
@@ -38,9 +48,13 @@ const chessReducer = produce((draftState = initialState, action) => {
       if (action.clear_take_attendance === true) {
         draftState.centerid = 0;
         draftState.courseid = 0;
+        draftState.attendanceType = "";
+        draftState.selectedAttendanceId = 0;
         draftState.courseList = [];
         draftState.attendanceDate = Moment().format("DD/MM/YYYY");
         draftState.studetnCourseList = [];
+        draftState.updateAttendance = [];
+        draftState.studentAttndanceLest = [];
       }
       set(draftState);
       break;
@@ -52,8 +66,20 @@ const chessReducer = produce((draftState = initialState, action) => {
       break;
     }
 
+    case ATTENDANCES_TYPE: {
+      draftState.attendanceType = action.attype;
+      set(draftState);
+      break;
+    }
+
     case SELECT_COURSE_ID: {
       draftState.courseid = action.courseId;
+      set(draftState);
+      break;
+    }
+
+    case SELECT_ATTENDANCE_ID: {
+      draftState.selectedAttendanceId = action.attendId;
       set(draftState);
       break;
     }
@@ -88,6 +114,20 @@ const chessReducer = produce((draftState = initialState, action) => {
       break;
     }
 
+    case ATTENDANCE_LEST: {
+      draftState.attendanceList = action.attendlist;
+      set(draftState, "attendanceList", action.attendlist);
+      break;
+    }
+
+    case UPDATE_ATTENDANCES:
+    case STUDENT_ATTENDANCE_LEST: {
+      draftState.studentAttndanceLest = action.stdAttend;
+      set(draftState, "studentAttndanceLest", action.stdAttend);
+      break;
+    }
+
+    //studentAttendance
     default:
       return draftState;
   }

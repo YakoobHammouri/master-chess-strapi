@@ -1,16 +1,29 @@
 import React from "react";
-import T from "../../../../../utils/T";
+import { T } from "../../../../../utils";
 import { Tabs, Tab } from "strapi-helper-plugin";
-import { TitleTabWrapper } from "../../styles";
+import { TitleTabWrapper } from "../../general/styles";
 
 const TabsLsit = () => (
-  <Tabs position="right">
-    <Tab>
-      <TitleTabWrapper type={"take"}>
+  <Tabs position="left">
+    <Tab
+      onSelect={() => {
+        alert("jhjskdf");
+      }}
+    >
+      <TitleTabWrapper
+        type={"take"}
+        onSelect={() => {
+          alert("lskdjfksd");
+        }}
+      >
         {T("models.attendance.take.Attendance")}
       </TitleTabWrapper>
     </Tab>
-    <Tab>
+    <Tab
+      onSelect={() => {
+        alert("jhjskdf");
+      }}
+    >
       <TitleTabWrapper type={"edit"}>
         {T("models.attendance.edit.Attendance")}
       </TitleTabWrapper>

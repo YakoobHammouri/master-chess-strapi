@@ -2,13 +2,11 @@ import React from "react";
 import moment from "moment";
 import { request } from "strapi-helper-plugin";
 import getTrad from "../../utils/getTrad";
-import { STUDENT_COURSE_LIST, REDUCER_NAME } from "../constants";
+import { ATTENDANCE_LEST, REDUCER_NAME } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 
 const fetchGetAttendancesList = async (courseid) => {
   try {
-    ///students?courses=1
-
     const data = await request(`/attendances?course=${courseid}`, {
       method: "GET",
     });
@@ -36,14 +34,12 @@ const useGetAttendancesList = () => {
 
         const _attList = attList?.map((prod) => {
           return {
-            id: `${prod.id}`,
-            date: moment(prod.Date).format("DD/MM/YYYY hh:mm A"),
+            value: `${prod.id}`,
+            label: moment(prod.Date).format("DD/MM/YYYY hh:mm A").toString(),
           };
         });
 
-        console.log(`attList 11 :`, _attList);
-
-        // dispatch({ type: STUDENT_COURSE_LIST, studCourse: aStdCourse });
+        dispatch({ type: ATTENDANCE_LEST, attendlist: _attList });
         r(_attList);
       } catch (err) {
         console.log(`err in get Course`, err);

@@ -10,7 +10,7 @@ import T from "../../utils/T";
 import { BaselineAlignment } from "strapi-helper-plugin";
 import useGetAttendancesList from "../../hooks/useGetAttendancesList";
 import useGetStudentByCourse from "../../hooks/useGetStudentByCourse";
-const CenterList = ({ isEdit }) => {
+const CenterList = ({ isEdit, componentName }) => {
   const courseList = useSelector((state) => state.get(REDUCER_NAME).courseList);
 
   const dispatch = useDispatch();
@@ -18,13 +18,18 @@ const CenterList = ({ isEdit }) => {
   const { getStudentCourseList } = useGetStudentByCourse();
   const [selectCourse, setSelectCourse] = useState({});
 
-  useEffect(() => {
-    setSelectCourse(null);
-  }, [courseList]);
+  // useEffect(() => {
+  //   console.log("isEdit && isEdit === true : ", isEdit && isEdit === true);
+  //   if (isEdit && isEdit === true && componentName === "EditAttendance") {
+  //     // alert("course no chanfge");
+  //   } else {
+  //     console.log("selectCourse : ", selectCourse);
+  //     setSelectCourse(null);
+  //   }
+  // }, [courseList]);
 
   useEffect(() => {
     if (selectCourse?.value && isEdit && isEdit === true) {
-      console.log(`start get Att lsit `);
       getAttendancesList(selectCourse.value)
         .then((t) => {})
         .catch((err) => {

@@ -6,6 +6,8 @@ import {
   TabsNav,
   TabsPanel,
 } from "strapi-helper-plugin";
+import { LoadingProgress } from "../../components";
+
 import {
   TabsList,
   TakeAttendance,
@@ -14,9 +16,7 @@ import {
 
 import { Padded, Separator } from "@buffetjs/core";
 
-import Header from "./components/Header";
-
-import { LoadingProgress } from "..";
+import Header from "./components/general/Header";
 
 function index() {
   return (

@@ -21,7 +21,7 @@ export default (strapi) => {
     id: pluginId,
     initializer: Initializer,
     injectedComponents: [],
-    // isReady: false,
+    isReady: false,
     isRequired: pluginPkg.strapi.required || false,
     layout: null,
     lifecycles,

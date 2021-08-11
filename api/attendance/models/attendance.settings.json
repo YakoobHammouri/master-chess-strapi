@@ -13,7 +13,7 @@
   "pluginOptions": {},
   "attributes": {
     "Date": {
-      "type": "datetime"
+      "type": "date"
     },
     "course": {
       "via": "attendances",
