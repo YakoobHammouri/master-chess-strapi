@@ -28,6 +28,7 @@ function AttendancesHeader() {
   );
 
   const onClickSaveHandler = () => {
+    console.log("Save 1111", type);
     if (type && type === "take") {
       takeAttendancesHandler();
     } else if (type && type === "edit") {
@@ -40,10 +41,11 @@ function AttendancesHeader() {
 
     let attdDate = {};
 
+    console.log("date 1111:", date);
     if (date?._isAMomentObject && date?._isValid) {
       attdDate = date?._d;
     } else {
-      data;
+      date;
     }
 
     const obj = {
