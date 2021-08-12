@@ -1,0 +1,44 @@
+import React from "react";
+import { T } from "../../../../../utils";
+import { Tabs, Tab } from "strapi-helper-plugin";
+import { TitleTabWrapper } from "../../general/styles";
+
+const TabsLsit = () => (
+  <Tabs position="left">
+    <Tab
+      onSelect={() => {
+        alert("jhjskdf");
+      }}
+    >
+      <TitleTabWrapper
+        type={"take"}
+        onSelect={() => {
+          alert("lskdjfksd");
+        }}
+      >
+        {T("models.attendance.take.Attendance")}
+      </TitleTabWrapper>
+    </Tab>
+    <Tab
+      onSelect={() => {
+        alert("jhjskdf");
+      }}
+    >
+      <TitleTabWrapper type={"edit"}>
+        {T("models.attendance.edit.Attendance")}
+      </TitleTabWrapper>
+    </Tab>
+    <Tab>
+      <TitleTabWrapper type={"stdsearch"}>
+        {T("models.attendance.search.by.student.Attendance")}
+      </TitleTabWrapper>
+    </Tab>
+    <Tab>
+      <TitleTabWrapper type={"cousearch"}>
+        {T("models.attendance.search.by.course.Attendance")}
+      </TitleTabWrapper>
+    </Tab>
+  </Tabs>
+);
+
+export default TabsLsit;
