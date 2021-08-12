@@ -8,22 +8,34 @@ import Wrapper from "./Wrapper";
 import Label from "../Label";
 import T from "../../utils/T";
 import { BaselineAlignment } from "strapi-helper-plugin";
+import useGetAttendancesList from "../../hooks/useGetAttendancesList";
 import useGetStudentByCourse from "../../hooks/useGetStudentByCourse";
-const CenterList = () => {
+const CenterList = ({ isEdit, componentName }) => {
   const courseList = useSelector((state) => state.get(REDUCER_NAME).courseList);
-  
-  
+
   const dispatch = useDispatch();
+  const { getAttendancesList } = useGetAttendancesList();
   const { getStudentCourseList } = useGetStudentByCourse();
   const [selectCourse, setSelectCourse] = useState({});
 
+  // useEffect(() => {
+  //   console.log("isEdit && isEdit === true : ", isEdit && isEdit === true);
+  //   if (isEdit && isEdit === true && componentName === "EditAttendance") {
+  //     // alert("course no chanfge");
+  //   } else {
+  //     console.log("selectCourse : ", selectCourse);
+  //     setSelectCourse(null);
+  //   }
+  // }, [courseList]);
 
   useEffect(() => {
-    setSelectCourse(null);
-  }, [courseList]);
-
-  useEffect(() => {
-    if (selectCourse?.value) {
+    if (selectCourse?.value && isEdit && isEdit === true) {
+      getAttendancesList(selectCourse.value)
+        .then((t) => {})
+        .catch((err) => {
+          console.log("err in  get Attendances List in  useEffect :  ", err);
+        });
+    } else if (selectCourse?.value && (!isEdit || isEdit === false)) {
       getStudentCourseList(selectCourse.value)
         .then((t) => {})
         .catch((err) => {

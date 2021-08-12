@@ -1,17 +1,15 @@
-import Attendances from "./Attendances";
-import Payments from "./Payments";
 import Label from "./Label";
 import LoadingProgress from "./LoadingProgress";
-import CenterList from "./CenterList";
+import Dropdowns from "./Dropdowns";
 import CoursesList from "./CoursesList";
+import AttendanceList from "./AttendanceList";
 import DatePicker from "./DatePicker";
 
 export {
-  Attendances,
-  Payments,
   LoadingProgress,
   Label,
-  CenterList,
+  Dropdowns,
   CoursesList,
   DatePicker,
+  AttendanceList,
 };

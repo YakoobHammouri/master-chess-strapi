@@ -26,29 +26,54 @@ const useGetCenter = () => {
 
   const centerList = useSelector((state) => state.get(REDUCER_NAME).centerList);
 
-  const getCenterList = async () => {
-    dispatch({ type: IS_LOADING, isLoading: true });
-    try {
-      const center = await fetchCenterList();
-      if (!center) {
-        return;
-      }
-      const acenter = center.map((prod) => {
-        return {
-          value: `${prod.id}`,
-          label: prod.name,
-        };
-      });
-      dispatch({ type: CENTER_LIST, acenter });
-      return acenter;
-    } catch (err) {
-      console.log(`err`, err);
-    } finally {
-      dispatch({ type: IS_LOADING, isLoading: false });
-    }
-  };
+  // const getCenterList = async () => {
+  //   dispatch({ type: IS_LOADING, isLoading: true });
+  //   try {
+  //     const center = await fetchCenterList();
+  //     if (!center) {
+  //       return;
+  //     }
+  //     const acenter = center.map((prod) => {
+  //       return {
+  //         value: `${prod.id}`,
+  //         label: prod.name,
+  //       };
+  //     });
+  //     dispatch({ type: CENTER_LIST, acenter });
+  //     return acenter;
+  //   } catch (err) {
+  //     console.log(`err`, err);
+  //   } finally {
+  //     dispatch({ type: IS_LOADING, isLoading: false });
+  //   }
+  // };
 
-  return { centerList, getCenterList };
+  useEffect(() => {
+    fetchCenterList()
+      .then((center) => {
+        if (!center) {
+          return;
+        }
+        const acenter = center.map((prod) => {
+          return {
+            value: `${prod.id}`,
+            label: prod.name,
+          };
+        });
+        dispatch({ type: CENTER_LIST, acenter });
+        return acenter;
+      })
+      .catch((err) => {
+        console.log(`err`, err);
+      });
+
+    // finally {
+    //   dispatch({ type: IS_LOADING, isLoading: false });
+    // }
+  }, []);
+
+  return { centerList };
+  //getCenterList
 };
 
 export default useGetCenter;

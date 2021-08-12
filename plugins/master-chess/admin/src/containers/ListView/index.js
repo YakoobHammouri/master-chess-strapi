@@ -7,7 +7,7 @@ import {
   ListWrapper,
   useGlobalContext,
 } from "strapi-helper-plugin";
-import { Attendances, Payments } from "../../components";
+import { Attendances, Payments } from "../../View";
 import getTrad from "../../utils/getTrad";
 import LeftMenu from "../LeftMenu";
 import Wrapper from "./Wrapper";
