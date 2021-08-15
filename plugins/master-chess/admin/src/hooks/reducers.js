@@ -20,6 +20,7 @@ import {
   STUDENT_LiST,
   SELECT_STUDENT_By_ID,
   STUDENT_ATTENDANCES_LIST,
+  SELECT_COURSE_META,
 } from "./constants";
 
 export const initialState = {
@@ -39,6 +40,7 @@ export const initialState = {
   studentList: [],
   SelectStudentById: {},
   studentAttendanceList: [],
+  selectCourseMeta: null,
 };
 
 const chessReducer = produce((draftState = initialState, action) => {
@@ -63,6 +65,7 @@ const chessReducer = produce((draftState = initialState, action) => {
         draftState.studentAttndanceLest = [];
         draftState.studentList = [];
         draftState.studentAttendanceList = [];
+        draftState.selectCourseMeta = null;
       }
       set(draftState);
       break;
@@ -82,6 +85,12 @@ const chessReducer = produce((draftState = initialState, action) => {
 
     case SELECT_COURSE_ID: {
       draftState.courseid = action.courseId;
+      set(draftState);
+      break;
+    }
+
+    case SELECT_COURSE_META: {
+      draftState.selectCourseMeta = action.meta;
       set(draftState);
       break;
     }

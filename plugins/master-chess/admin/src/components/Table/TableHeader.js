@@ -3,7 +3,7 @@ import { T } from "../../utils";
 const TableHeader = ({ headers }) => {
   return (
     <thead>
-      <tr>
+      <tr style={{ borderBottom: "2px solid #e1e1e1" }}>
         {headers && Array.isArray(headers) && headers.length > 0 ? (
           headers.map((header, i) => {
             return (

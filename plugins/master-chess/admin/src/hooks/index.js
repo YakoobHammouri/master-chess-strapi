@@ -5,7 +5,7 @@ import useGetCenter from "./useGetCenter";
 import useGetCourse from "./useGetCourse";
 import useGetStudentByCourse from "./useGetStudentByCourse";
 import useTakeAttendances from "./useTakeAttendances";
-import useEditAttendances from "./useEditAttendances";
+import useEdit from "./useEdit";
 import useGetStudent from "./useGetStudent";
 import useGetStudentById from "./useGetStudentById";
 import useGetCourseById from "./useGetCourseById";
@@ -18,7 +18,7 @@ export {
   useGetCourse,
   useGetStudentByCourse,
   useTakeAttendances,
-  useEditAttendances,
+  useEdit,
   useGetStudent,
   useGetStudentById,
   useGetCourseById,

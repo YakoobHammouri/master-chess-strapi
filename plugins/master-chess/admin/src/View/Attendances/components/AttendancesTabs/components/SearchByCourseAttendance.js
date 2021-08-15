@@ -7,7 +7,7 @@ import { T } from "../../../../../utils";
 import {
   useGetCenter,
   useGetCourse,
-  useGetCourseById,
+  useGetAttendancesById,
 } from "../../../../../hooks";
 import { Dropdowns, Table } from "../../../../../components";
 
@@ -33,7 +33,7 @@ const EditAttendance = () => {
 
   const { centerList } = useGetCenter();
   const { getCourseList } = useGetCourse();
-  const { getCourseById } = useGetCourseById();
+  const { getAttendancesById } = useGetAttendancesById();
 
   const [selectcenter, setSelectCenter] = useState({});
   const [selectCourse, setSelectCourse] = useState({});
@@ -62,13 +62,16 @@ const EditAttendance = () => {
   //selectCourse
   useEffect(() => {
     if (selectCourse?.value) {
-      getCourseById(selectCourse.value)
+      // uisng getAttendancesById with query to sort Attend by date
+      getAttendancesById(null, `?course=${selectCourse.value}&_sort=Date:ASC`)
         .then((result) => {
           let stdCount = 1;
 
           const atted = [];
           const headers = [numText, stdName];
-          const _attendances = result?.attendances;
+          // const _attendances = result?.attendances;
+          // old
+          const _attendances = result;
 
           for (let h = 0; h < _attendances.length; h++) {
             // Build Header
@@ -128,7 +131,9 @@ const EditAttendance = () => {
   // clear
   useEffect(() => {
     setSelectCenter({});
-    setSelectCourse(null);
+    setSelectCourse({});
+    setCourseAttendList([]);
+    setHeaderAttendList([]);
     dispatch({ type: CLEAR_TAKE_ATTENDANCES, clear_take_attendance: false });
   }, [clear]);
 
@@ -168,11 +173,19 @@ const EditAttendance = () => {
       <Row>
         <Col>
           <Padded top bottom size="smd">
-            <Table
-              headers={headerAttendList}
-              rows={courseAttendList}
-              style={{ direction: "rtl" }}
-            />
+            {headerAttendList.length > 0 && courseAttendList.length > 0 ? (
+              <Table
+                headers={headerAttendList}
+                rows={courseAttendList}
+                style={{ direction: "rtl" }}
+              />
+            ) : (
+              <Table
+                headers={headerAttendList}
+                rows={courseAttendList}
+                style={{ direction: "rtl" }}
+              />
+            )}
           </Padded>
         </Col>
       </Row>

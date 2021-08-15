@@ -39,6 +39,11 @@ const useGetCourses = () => {
           return {
             value: `${prod.id}`,
             label: `${prod.name} - Level ${prod.level}`,
+            meta: {
+              lecturesTotal: prod.lecturesTotal,
+              numberOfLecture: prod.numberOfLecture,
+              finished: prod.finished,
+            },
           };
         });
         dispatch({ type: COURSE_LIST, acourse });

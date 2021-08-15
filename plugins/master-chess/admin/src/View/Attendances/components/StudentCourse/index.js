@@ -24,8 +24,9 @@ const index = ({ isEdit, displayStdAttend }) => {
     <Wrapper>
       <BaselineAlignment top size="5px" />
       <Table
-        customRow={(t) => (
+        customRow={(t, i) => (
           <CustomRow
+            key={i}
             isEdit={isEdit}
             displayStdAttend={displayStdAttend}
             attend={t.row}

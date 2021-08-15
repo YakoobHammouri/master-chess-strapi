@@ -5,9 +5,11 @@ import getTrad from "../../utils/getTrad";
 import { ATTENDANCE_LEST, REDUCER_NAME } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 
-const fetchGetAttendancesById = async (id) => {
+const fetchGetAttendancesById = async (byId, byQuery) => {
   try {
-    const data = await request(`/attendances/${id}`, {
+    const url = byQuery ? `/attendances${byQuery}` : `/attendances/${byId}`;
+    // old url : `/attendances/${byId}`
+    const data = await request(url, {
       method: "GET",
     });
     return data;
@@ -24,10 +26,10 @@ const fetchGetAttendancesById = async (id) => {
 const useGetAttendancesById = () => {
   const dispatch = useDispatch();
 
-  const getAttendancesById = async (id) => {
+  const getAttendancesById = async (id, query) => {
     return new Promise(async (r, rej) => {
       try {
-        const attbyid = await fetchGetAttendancesById(id);
+        const attbyid = await fetchGetAttendancesById(id, query);
         if (!attbyid) {
           r(null);
         }

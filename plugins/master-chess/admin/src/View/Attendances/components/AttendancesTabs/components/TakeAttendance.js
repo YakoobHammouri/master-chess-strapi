@@ -16,7 +16,7 @@ import {
   SELECT_COURSE_ID,
   SELECT_ATTENDANCE_DATE,
   CLEAR_TAKE_ATTENDANCES,
-  ATTENDANCES_TYPE,
+  SELECT_COURSE_META,
   REDUCER_NAME,
 } from "../../../../../hooks/constants";
 const TakeAttendance = () => {
@@ -78,6 +78,7 @@ const TakeAttendance = () => {
   const onCourseChange = (selected) => {
     setSelectCourse(selected);
     dispatch({ type: SELECT_COURSE_ID, courseId: selected.value });
+    dispatch({ type: SELECT_COURSE_META, meta: selected });
   };
 
   return (

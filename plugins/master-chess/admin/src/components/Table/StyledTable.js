@@ -88,6 +88,9 @@ const Table = styled.div`
       button {
         padding-bottom: 0;
       }
+      &:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
       &:hover {
         background-color: white;
         background-color: ${colors.greyHover};
