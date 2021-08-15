@@ -15,5 +15,9 @@ export const SELECT_ATTENDANCE_DATE = `${pluginId}/selectAttendanceDate`;
 export const SELECT_ATTENDANCE_ID = `${pluginId}/selectAttendanceId`;
 export const ATTENDANCE_LEST = `${pluginId}/AttendanceLest`;
 export const STUDENT_ATTENDANCE_LEST = `${pluginId}/StudentAttendancesLest`;
+export const SELECT_STUDENT_By_ID = `${pluginId}/SelectStudentById`;
+export const STUDENT_ATTENDANCES_LIST = `${pluginId}/studentAttendanceList`;
+
+export const STUDENT_LiST = `${pluginId}/StudentList`;
 
 export const RESOLVE_Code = `${pluginId}/master-chess/resolve-code`;

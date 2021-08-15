@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_comp_courses_topics",
+  "info": {
+    "name": "Topics",
+    "icon": "layer-group"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "done": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

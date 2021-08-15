@@ -12,6 +12,8 @@ import {
   TabsList,
   TakeAttendance,
   EditAttendance,
+  SearchByStdAttendance,
+  SearchByCourseAttendance,
 } from "./components/AttendancesTabs";
 
 import { Padded, Separator } from "@buffetjs/core";
@@ -37,6 +39,12 @@ function index() {
             </TabPanel>
             <TabPanel>
               <EditAttendance />
+            </TabPanel>
+            <TabPanel>
+              <SearchByStdAttendance />
+            </TabPanel>
+            <TabPanel>
+              <SearchByCourseAttendance />
             </TabPanel>
           </TabsPanel>
         </TabsNav>

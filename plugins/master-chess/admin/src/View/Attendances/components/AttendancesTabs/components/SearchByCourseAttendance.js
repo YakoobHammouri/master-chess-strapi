@@ -8,7 +8,11 @@ import {
   useGetCourse,
   useGetAttendancesList,
 } from "../../../../../hooks";
-import { Dropdowns, AttendanceList } from "../../../../../components";
+import {
+  Dropdowns,
+  AttendanceList,
+  Accordion,
+} from "../../../../../components";
 import StudentCourse from "../../StudentCourse";
 import {
   SELECT_COURSE_ID,
@@ -113,7 +117,26 @@ const EditAttendance = () => {
       <Row>
         <Col>
           <Padded top bottom size="smd">
-            <StudentCourse isEdit={true} displayStdAttend={false} />
+            {/* <StudentCourse isEdit={true} displayStdAttend={false} /> */}
+            <div>
+              <Accordion
+                title="What is your return policy?"
+                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              />
+              <Accordion
+                title="Which languages does you support?"
+                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              />
+              <Accordion
+                title="Can I use a custom domain?"
+                content="
+   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+   </br>
+   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+   </br>
+   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+              />
+            </div>
           </Padded>
         </Col>
       </Row>

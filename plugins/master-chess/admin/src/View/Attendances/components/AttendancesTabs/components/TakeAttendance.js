@@ -66,6 +66,7 @@ const TakeAttendance = () => {
   useEffect(() => {
     setSelectCenter({});
     setSelectCourse(null);
+    setDateVal(new moment());
     dispatch({ type: CLEAR_TAKE_ATTENDANCES, clear_take_attendance: false });
   }, [clear]);
 
@@ -121,7 +122,7 @@ const TakeAttendance = () => {
       <Row>
         <Col>
           <Padded top bottom size="smd">
-            <StudentCourse isEdit={false} />
+            <StudentCourse isEdit={false} displayStdAttend={false} />
           </Padded>
         </Col>
       </Row>

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_comp_courses_lessons",
+  "info": {
+    "name": "lessons",
+    "icon": "calendar-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "progress",
+        "done"
+      ],
+      "default": "pending"
+    },
+    "Topics": {
+      "type": "component",
+      "repeatable": true,
+      "component": "comp-courses.topics"
+    }
+  }
+}

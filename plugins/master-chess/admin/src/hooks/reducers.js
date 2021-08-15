@@ -1,6 +1,6 @@
 import produce from "immer";
 import set from "lodash/set";
-import Moment from "moment";
+import moment from "moment";
 import pluginId from "../pluginId";
 import {
   IS_LOADING,
@@ -17,6 +17,9 @@ import {
   STUDENT_ATTENDANCE_LEST,
   SELECT_ATTENDANCE_ID,
   ATTENDANCES_TYPE,
+  STUDENT_LiST,
+  SELECT_STUDENT_By_ID,
+  STUDENT_ATTENDANCES_LIST,
 } from "./constants";
 
 export const initialState = {
@@ -26,13 +29,16 @@ export const initialState = {
   centerid: 0,
   courseid: 0,
   selectedAttendanceId: 0,
-  attendanceDate: Moment().format("DD/MM/YYYY"),
+  attendanceDate: new moment(),
   centerList: [],
   courseList: [],
   studetnCourseList: [],
   updateAttendance: [],
   studentAttndanceLest: [],
   attendanceList: [],
+  studentList: [],
+  SelectStudentById: {},
+  studentAttendanceList: [],
 };
 
 const chessReducer = produce((draftState = initialState, action) => {
@@ -51,10 +57,12 @@ const chessReducer = produce((draftState = initialState, action) => {
         draftState.attendanceType = "";
         draftState.selectedAttendanceId = 0;
         draftState.courseList = [];
-        draftState.attendanceDate = Moment().format("DD/MM/YYYY");
+        draftState.attendanceDate = new moment();
         draftState.studetnCourseList = [];
         draftState.updateAttendance = [];
         draftState.studentAttndanceLest = [];
+        draftState.studentList = [];
+        draftState.studentAttendanceList = [];
       }
       set(draftState);
       break;
@@ -102,6 +110,17 @@ const chessReducer = produce((draftState = initialState, action) => {
       break;
     }
 
+    case STUDENT_LiST: {
+      draftState.studentList = action.stdList;
+      set(draftState, "studentList", action.stdList);
+      break;
+    }
+
+    case STUDENT_ATTENDANCES_LIST: {
+      draftState.studentAttendanceList = action.stdAttends;
+      set(draftState, "studentAttendanceList", action.stdAttends);
+      break;
+    }
     case STUDENT_COURSE_LIST: {
       draftState.studetnCourseList = action.studCourse;
       set(draftState, "studetnCourseList", action.studCourse);
@@ -127,7 +146,12 @@ const chessReducer = produce((draftState = initialState, action) => {
       break;
     }
 
-    //studentAttendance
+    case SELECT_STUDENT_By_ID: {
+      draftState.SelectStudentById = action.std;
+      set(draftState, "SelectStudentById", action.std);
+      break;
+    }
+
     default:
       return draftState;
   }
