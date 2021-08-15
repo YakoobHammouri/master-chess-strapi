@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Moment from "moment";
+import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { Padded, Separator } from "@buffetjs/core";
+import { Padded } from "@buffetjs/core";
 import { Col, Row } from "reactstrap";
+import { T } from "../../../../../utils";
 import {
   useGetCenter,
   useGetCourse,
-  useGetAttendancesList,
+  useGetCourseById,
 } from "../../../../../hooks";
-import {
-  Dropdowns,
-  AttendanceList,
-  Accordion,
-} from "../../../../../components";
-import StudentCourse from "../../StudentCourse";
+import { Dropdowns, Table } from "../../../../../components";
+
 import {
   SELECT_COURSE_ID,
   SELECT_CENTER_ID,
@@ -36,11 +33,18 @@ const EditAttendance = () => {
 
   const { centerList } = useGetCenter();
   const { getCourseList } = useGetCourse();
-  const { getAttendancesList } = useGetAttendancesList();
+  const { getCourseById } = useGetCourseById();
 
   const [selectcenter, setSelectCenter] = useState({});
   const [selectCourse, setSelectCourse] = useState({});
-  const [dateVal, setDateVal] = useState(Moment().format("DD/MM/YYYY"));
+  const [headerAttendList, setHeaderAttendList] = useState([]);
+  const [courseAttendList, setCourseAttendList] = useState([]);
+
+  const numText = T("table.tableHeader.RowON");
+  const stdName = T("table.tableHeaer.stdName");
+
+  const attendNo = T("attendances.text.NO");
+  const attendYes = T("attendances.text.Yes");
 
   // selectcenter
   useEffect(() => {
@@ -55,19 +59,69 @@ const EditAttendance = () => {
     }
   }, [selectcenter]);
 
-  //courseList
-  useEffect(() => {
-    // setSelectCourse(null);
-  }, [courseList]);
-
   //selectCourse
   useEffect(() => {
     if (selectCourse?.value) {
-      getAttendancesList(selectCourse.value)
-        .then((t) => {})
-        .catch((err) => {
-          console.log("err in  get Attendances List in  useEffect :  ", err);
-        });
+      getCourseById(selectCourse.value)
+        .then((result) => {
+          let stdCount = 1;
+
+          const atted = [];
+          const headers = [numText, stdName];
+          const _attendances = result?.attendances;
+
+          for (let h = 0; h < _attendances.length; h++) {
+            // Build Header
+            const mdate = moment(_attendances[h]?.Date);
+            if (mdate._isValid) {
+              headers.push(`${mdate.format("D")}-${mdate.format("M")}`);
+            } else {
+              return headers.push(_attendances[h]?.Date);
+            }
+            // Build Attend  Rows
+            /*
+            [
+              row 0 : []
+              row 1 : []
+              row 2 : []
+              row 3 : []
+            ]
+            =======
+            row 0 :
+            [
+              atted(h)(r)
+            ]
+            */
+            const stdAttend = _attendances[h]?.studentAttendance;
+
+            if (stdAttend && Array.isArray(stdAttend) && stdAttend.length > 0) {
+              for (let r = 0; r < stdAttend.length; r++) {
+                // if the Row not Found
+                // build first colume with No and Name
+                if (!atted[r]) {
+                  atted.push([
+                    `${stdCount}`,
+                    `${stdAttend[r].studentName}`,
+                    `${stdAttend[r].attendance ? attendYes : attendNo}`,
+                  ]);
+
+                  stdCount++;
+                } else {
+                  // Update Row to Add Attend for Date
+                  atted[r][h + 2] = stdAttend[r].attendance
+                    ? attendYes
+                    : attendNo;
+                }
+              }
+            }
+          }
+
+          // End Map
+
+          setHeaderAttendList(headers);
+          setCourseAttendList(atted);
+        })
+        .catch((err) => console.log(`Error in  get  course by id`, err));
     }
   }, [selectCourse]);
 
@@ -110,33 +164,15 @@ const EditAttendance = () => {
             isDisabled={courseList.length === 0 ? true : false}
           />
         </Col>
-        <Col>
-          <AttendanceList />
-        </Col>
       </Row>
       <Row>
         <Col>
           <Padded top bottom size="smd">
-            {/* <StudentCourse isEdit={true} displayStdAttend={false} /> */}
-            <div>
-              <Accordion
-                title="What is your return policy?"
-                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-              />
-              <Accordion
-                title="Which languages does you support?"
-                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-              />
-              <Accordion
-                title="Can I use a custom domain?"
-                content="
-   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-   </br>
-   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-   </br>
-   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
-              />
-            </div>
+            <Table
+              headers={headerAttendList}
+              rows={courseAttendList}
+              style={{ direction: "rtl" }}
+            />
           </Padded>
         </Col>
       </Row>
@@ -145,3 +181,15 @@ const EditAttendance = () => {
 };
 
 export default EditAttendance;
+
+/*
+            
+            
+            studentAttendance: Array(12)
+0:
+attendance: false
+id: 81
+student: {id: 2, birthDate: null, subscriptionDate: null, phoneNumber: null, address: null, …}
+studentName: "يعقوب حموري"
+
+            */

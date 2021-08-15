@@ -4,6 +4,7 @@ import Dropdowns from "./Dropdowns";
 import AttendanceList from "./AttendanceList";
 import DatePicker from "./DatePicker";
 import Accordion from "./Accordion";
+import Table from "./Table";
 
 export {
   LoadingProgress,
@@ -12,4 +13,5 @@ export {
   DatePicker,
   AttendanceList,
   Accordion,
+  Table,
 };

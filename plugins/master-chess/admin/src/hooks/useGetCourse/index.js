@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import { request } from "strapi-helper-plugin";
 import getTrad from "../../utils/getTrad";
 import { COURSE_LIST, REDUCER_NAME } from "../constants";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const fetchCoursesList = async (centerid) => {
+const fetchCoursesList = async (centerid, isfinished) => {
   try {
-    const data = await request(`/courses?center=${centerid}`, {
+    const url =
+      isfinished === false
+        ? `/courses?center=${centerid}&finished=${isfinished}`
+        : `/courses?center=${centerid}`;
+
+    const data = await request(url, {
       method: "GET",
     });
 
@@ -23,10 +28,10 @@ const fetchCoursesList = async (centerid) => {
 
 const useGetCourses = () => {
   const dispatch = useDispatch();
-  const getCourseList = async (centerid) => {
+  const getCourseList = async (centerid, isfinished) => {
     return new Promise(async (r, rej) => {
       try {
-        const course = await fetchCoursesList(centerid);
+        const course = await fetchCoursesList(centerid, isfinished);
         if (!course) {
           return;
         }

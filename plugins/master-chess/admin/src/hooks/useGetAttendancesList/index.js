@@ -7,9 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 const fetchGetAttendancesList = async (courseid) => {
   try {
-    const data = await request(`/attendances?course=${courseid}`, {
-      method: "GET",
-    });
+    const data = await request(
+      `/attendances?course=${courseid}&_sort=Date:ASC`,
+      {
+        method: "GET",
+      }
+    );
     return data;
   } catch (e) {
     console.log("Error in load Attendances List : ", e);
@@ -35,7 +38,11 @@ const useGetAttendancesList = () => {
         const _attList = attList?.map((prod) => {
           return {
             value: `${prod.id}`,
-            label: moment(prod.Date).format("DD/MM/YYYY hh:mm A").toString(),
+            label: `${moment(prod?.Date)
+              .locale("en")
+              .format("dddd")} - ${moment(prod?.Date)
+              .format("DD/MM/YYYY")
+              .toString()}`,
           };
         });
 

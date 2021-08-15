@@ -14,5 +14,11 @@
   "CenterList.error.onload": "Error in load Center List",
   "takeAttendances.error": "Error in Take Attendances",
   "takeAttendances.success": "The attendances successfully saved",
-  "Attendances.TakeDate": " Date"
+  "Attendances.TakeDate": " Date",
+  "table.tableEmptyText": "There is no data",
+  "table.tableHeaderEmptyText": "Loading Header ...",
+  "table.tableHeader.RowON": "#",
+  "table.tableHeaer.stdName": "Student Name",
+  "attendances.text.NO": "غ",
+  "attendances.text.Yes": "حاضر"
 }

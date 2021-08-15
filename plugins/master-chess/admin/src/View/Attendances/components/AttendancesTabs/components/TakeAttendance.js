@@ -41,7 +41,7 @@ const TakeAttendance = () => {
   // selectcenter
   useEffect(() => {
     if (selectcenter?.value) {
-      getCourseList(selectcenter.value)
+      getCourseList(selectcenter.value, false)
         .then((t) => {
           setSelectCourse(null);
         })
