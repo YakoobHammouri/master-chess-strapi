@@ -64,6 +64,11 @@
     "attendances": {
       "via": "course",
       "collection": "attendance"
+    },
+    "Lessons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "comp-courses.lessons"
     }
   }
 }
