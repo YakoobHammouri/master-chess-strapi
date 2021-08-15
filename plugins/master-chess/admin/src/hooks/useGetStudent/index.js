@@ -33,6 +33,7 @@ const useGetStudent = () => {
         if (!std) {
           return;
         }
+
         const stdList = std.map((prod) => {
           return {
             value: `${prod.id}`,

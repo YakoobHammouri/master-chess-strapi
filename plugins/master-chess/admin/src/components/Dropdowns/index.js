@@ -6,14 +6,7 @@ import Label from "../Label";
 import T from "../../utils/T";
 import { BaselineAlignment } from "strapi-helper-plugin";
 
-const CenterList = ({
-  name,
-  lableTxt,
-  lsit,
-  value,
-  onValChange,
-  isDisabled,
-}) => {
+const index = ({ name, lableTxt, lsit, value, onValChange, isDisabled }) => {
   return (
     <Wrapper>
       <span id="locale-code">
@@ -35,4 +28,4 @@ const CenterList = ({
     </Wrapper>
   );
 };
-export default CenterList;
+export default index;

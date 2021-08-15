@@ -6,12 +6,12 @@ import {
   REDUCER_NAME,
   CLEAR_TAKE_ATTENDANCES,
 } from "../../../../hooks/constants";
-import { useTakeAttendances, useEditAttendances } from "../../../../hooks";
+import { useTakeAttendances, useEdit } from "../../../../hooks";
 
 function AttendancesHeader() {
   const dispatch = useDispatch();
   const { takeAttendances } = useTakeAttendances();
-  const { editAttendances } = useEditAttendances();
+  const { edit } = useEdit();
 
   const type = useSelector((state) => state.get(REDUCER_NAME).attendanceType);
   const course = useSelector((state) => state.get(REDUCER_NAME).courseid);
@@ -19,6 +19,10 @@ function AttendancesHeader() {
   const attendance = useSelector(
     (state) => state.get(REDUCER_NAME).studetnCourseList
   );
+  const courseMeta = useSelector(
+    (state) => state.get(REDUCER_NAME).selectCourseMeta
+  );
+
   const selectedAttendId = useSelector(
     (state) => state.get(REDUCER_NAME).selectedAttendanceId
   );
@@ -37,55 +41,87 @@ function AttendancesHeader() {
   };
 
   const takeAttendancesHandler = () => {
-    alert("Are you sure to save the Attendances? ");
+    const ok = confirm("Are you sure to save the Attendances?");
 
-    let attdDate = {};
+    if (ok) {
+      let attdDate = {};
 
-    console.log("date 1111:", date);
-    if (date?._isAMomentObject && date?._isValid) {
-      attdDate = date?._d;
-    } else {
-      date;
-    }
+      if (date?._isAMomentObject && date?._isValid) {
+        attdDate = date?._d;
+      } else {
+        date;
+      }
 
-    const obj = {
-      Date: attdDate,
-      course,
-      studentAttendance: attendance,
-    };
+      const obj = {
+        Date: attdDate,
+        course,
+        studentAttendance: attendance,
+      };
 
-    takeAttendances(obj)
-      .then(() => {
-        dispatch({
-          type: CLEAR_TAKE_ATTENDANCES,
-          clear_take_attendance: true,
+      // meta: finished: false;
+      // lecturesTotal: null;
+      // numberOfLecture: 8;
+
+      takeAttendances(obj)
+        .then(() => {
+          dispatch({
+            type: CLEAR_TAKE_ATTENDANCES,
+            clear_take_attendance: true,
+          });
+        })
+        .then(async () => {
+          // update  lecturesTotal and finish status for course
+          if (courseMeta?.meta) {
+            const { lecturesTotal, numberOfLecture, finished } =
+              courseMeta?.meta;
+
+            const _lecturesTotal = !lecturesTotal ? 0 : parseInt(lecturesTotal);
+            const _numberOfLecture = !numberOfLecture
+              ? 0
+              : parseInt(numberOfLecture);
+
+            // check if valus is numebr to update the lectures total
+            if (
+              isNaN(_lecturesTotal) === false &&
+              isNaN(_numberOfLecture) === false &&
+              _numberOfLecture > 0
+            ) {
+              const newTotal = _lecturesTotal + 1;
+              const obj = {
+                lecturesTotal: newTotal,
+                finished: _numberOfLecture === newTotal,
+              };
+              console.log("obj to updar : ", obj);
+              await edit(`/courses/${course}`, obj);
+            }
+          }
+        })
+        .catch((err) => {
+          console.log("Error in Save  student Attendance");
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log("Error in Save  student Attendance");
-        console.log(err);
-      });
+    }
   };
 
   const editAttendancesHandler = () => {
-    alert("Are you sure to update the Attendances? ");
+    const ok = confirm("Are you sure to update the Attendances? ");
+    if (ok) {
+      const obj = {
+        studentAttendance: updateAttend,
+      };
 
-    const obj = {
-      studentAttendance: updateAttend,
-    };
-
-    console.log("Staet Edit Attend obj : ", obj);
-    editAttendances(selectedAttendId, obj)
-      .then(() => {
-        dispatch({
-          type: CLEAR_TAKE_ATTENDANCES,
-          clear_take_attendance: true,
+      edit(`/attendances/${selectedAttendId}`, obj)
+        .then(() => {
+          dispatch({
+            type: CLEAR_TAKE_ATTENDANCES,
+            clear_take_attendance: true,
+          });
+        })
+        .catch((err) => {
+          console.log("Error in Save  student Attendance");
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log("Error in Save  student Attendance");
-        console.log(err);
-      });
+    }
   };
 
   return (

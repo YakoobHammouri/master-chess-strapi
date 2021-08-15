@@ -28,7 +28,10 @@
       "type": "string"
     },
     "lichess": {
-      "type": "string"
+      "type": "uid"
+    },
+    "fideId": {
+      "type": "uid"
     },
     "name": {
       "type": "string"

@@ -11,6 +11,7 @@ export const UPDATE_ATTENDANCES = `${pluginId}/UpdateAttendances`;
 export const CLEAR_TAKE_ATTENDANCES = `${pluginId}/ClearTakeAttendances`;
 export const SELECT_CENTER_ID = `${pluginId}/selectCenterid`;
 export const SELECT_COURSE_ID = `${pluginId}/selectCourseid`;
+export const SELECT_COURSE_META = `${pluginId}/selectCourseMeta`;
 export const SELECT_ATTENDANCE_DATE = `${pluginId}/selectAttendanceDate`;
 export const SELECT_ATTENDANCE_ID = `${pluginId}/selectAttendanceId`;
 export const ATTENDANCE_LEST = `${pluginId}/AttendanceLest`;

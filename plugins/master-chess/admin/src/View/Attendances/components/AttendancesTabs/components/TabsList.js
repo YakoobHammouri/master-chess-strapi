@@ -5,35 +5,22 @@ import { TitleTabWrapper } from "../../general/styles";
 
 const TabsLsit = () => (
   <Tabs position="left">
-    <Tab
-      onSelect={() => {
-        alert("jhjskdf");
-      }}
-    >
-      <TitleTabWrapper
-        type={"take"}
-        onSelect={() => {
-          alert("lskdjfksd");
-        }}
-      >
+    <Tab key={"take"}>
+      <TitleTabWrapper type={"take"}>
         {T("models.attendance.take.Attendance")}
       </TitleTabWrapper>
     </Tab>
-    <Tab
-      onSelect={() => {
-        alert("jhjskdf");
-      }}
-    >
+    <Tab key={"edit"}>
       <TitleTabWrapper type={"edit"}>
         {T("models.attendance.edit.Attendance")}
       </TitleTabWrapper>
     </Tab>
-    <Tab>
+    <Tab key={"stdsearch"}>
       <TitleTabWrapper type={"stdsearch"}>
         {T("models.attendance.search.by.student.Attendance")}
       </TitleTabWrapper>
     </Tab>
-    <Tab>
+    <Tab key={"cousearch"}>
       <TitleTabWrapper type={"cousearch"}>
         {T("models.attendance.search.by.course.Attendance")}
       </TitleTabWrapper>
