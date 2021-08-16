@@ -12,6 +12,9 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "html-pdf": "^3.0.1",
+    "html2canvas": "^1.3.2",
+    "jspdf": "^2.3.1",
     "knex": "0.21.18",
     "moment": "^2.29.1",
     "pdfkit": "^0.12.3",

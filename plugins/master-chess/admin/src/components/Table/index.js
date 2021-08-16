@@ -2,11 +2,11 @@ import React from "react";
 import { Table, TableRowEmpty } from "./StyledTable";
 import TableHeader from "./TableHeader";
 import { T } from "../../utils";
-const index = ({ headers, className, rows, style }) => {
+const index = ({ headers, className, rows, style, id }) => {
   // console.log("fdsfsd rows : ", rows);
   return (
     <Table className={className} style={style}>
-      <table className="">
+      <table className="table table-hover" id={id}>
         <TableHeader headers={headers} />
         <tbody>
           {rows && Array.isArray(rows) && rows.length > 0 ? (
@@ -15,8 +15,8 @@ const index = ({ headers, className, rows, style }) => {
                 <tr>
                   {row?.map((r) => {
                     return (
-                      <td>
-                        <div style={{ textAlign: "center" }}>{`${r}`}</div>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <p style={{ textAlign: "center" }}>{`${r}`}</p>
                       </td>
                     );
                   })}
