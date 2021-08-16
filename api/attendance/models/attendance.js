@@ -32,7 +32,6 @@ module.exports = {
       try {
         // locl code to update
         if (isLoack === false) {
-          console.log(" isLoack 1111111111 : ", isLoack);
           result?.studentAttendance?.forEach((std) => {
             if (!std.studentName) {
               isLoack = true;
