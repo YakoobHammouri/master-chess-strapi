@@ -1,7 +1,7 @@
 {
   "routes": [
     {
-      "method": "GET",
+      "method": "POST",
       "path": "/",
       "handler": "master-chess.index",
       "config": {
@@ -10,8 +10,16 @@
     },
     {
       "method": "POST",
-      "path": "/to-pdf",
-      "handler": "master-chess.ToPDF",
+      "path": "/attend-pdf",
+      "handler": "master-chess.attendToPDF",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/attend-word",
+      "handler": "master-chess.attendToWord",
       "config": {
         "policies": []
       }

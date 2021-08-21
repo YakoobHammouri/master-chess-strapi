@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { Padded } from "@buffetjs/core";
 import { Col, Row } from "reactstrap";
 import { T } from "../../../../../utils";
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+import { Flex, Padded } from "@buffetjs/core";
+
 import {
   useGetCenter,
   useGetCourse,
   useGetAttendancesById,
 } from "../../../../../hooks";
-import { Dropdowns, Table } from "../../../../../components";
+import { Dropdowns, Table, PrintPDF } from "../../../../../components";
 
 import {
   SELECT_COURSE_ID,
@@ -37,11 +36,11 @@ const EditAttendance = () => {
   const { getCourseList } = useGetCourse();
   const { getAttendancesById } = useGetAttendancesById();
 
+  const [isRuning, setIsRuning] = useState(false);
   const [selectcenter, setSelectCenter] = useState({});
   const [selectCourse, setSelectCourse] = useState({});
   const [headerAttendList, setHeaderAttendList] = useState([]);
   const [courseAttendList, setCourseAttendList] = useState([]);
-  const [can, setcan] = useState(null);
 
   const numText = T("table.tableHeader.RowON");
   const stdName = T("table.tableHeaer.stdName");
@@ -150,6 +149,9 @@ const EditAttendance = () => {
     dispatch({ type: SELECT_COURSE_ID, courseId: selected.value });
   };
 
+  const isRuningHandler = (status) => {
+    setIsRuning(status);
+  };
   return (
     <>
       <Row>
@@ -178,35 +180,30 @@ const EditAttendance = () => {
           <Padded top bottom size="smd">
             {headerAttendList.length > 0 && courseAttendList.length > 0 ? (
               <div>
+                <Flex justifyContent="flex-end">
+                  <Padded top bottom size="sm">
+                    <PrintPDF
+                      color={"primary"}
+                      printId={"pdfstd"}
+                      obj={{
+                        center: selectcenter?.label ?? "---",
+                        course: selectCourse?.meta?.name ?? "---",
+                        sdate: selectCourse?.meta?.start ?? "----",
+                        edate: selectCourse?.meta?.end ?? "----",
+                        headers: headerAttendList,
+                        atted: courseAttendList,
+                      }}
+                      isLoading={isRuning}
+                      LoadingHandler={isRuningHandler}
+                    />
+                  </Padded>
+                </Flex>
                 <Table
                   headers={headerAttendList}
                   rows={courseAttendList}
                   style={{ direction: "rtl" }}
                   id={"pdfstd"}
                 />
-                <button
-                  onClick={(e) => {
-                    try {
-                      const input = document.getElementById("pdfstd");
-                      console.log("inputtt1111 : ", input);
-                      // html2canvas(input).then((canvas) => {
-                      //   console.log("canvas 111 : ", canvas);
-                      //   // setcan(canvas);
-                      //   document.getElementById("ttt").appendChild(canvas);
-                      //   const imgData = canvas.toDataURL("image/png");
-                      //   const pdf = new jsPDF();
-                      //   pdf.addImage(imgData, "JPEG", 0, 0);
-                      //   // pdf.output('dataurlnewwindow');
-                      //   // pdf.save("download.pdf");
-                      // });
-                    } catch (err) {
-                      console.log("erro in convert to pdf : ", err);
-                    }
-                  }}
-                >
-                  pdf
-                </button>
-                <div id={"ttt"}></div>
               </div>
             ) : (
               ""
