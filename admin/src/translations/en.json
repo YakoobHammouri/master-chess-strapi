@@ -180,6 +180,7 @@
   "app.components.BlockLink.code.content": "Learn by testing real projects developed the community.",
   "app.components.plugins.master.chess.service": "Master Chess",
   "app.components.plugins.master.chess.service.content": "Take Attendance",
+  "app.components.plugins.master.chess.service.payment.content": "Payment",
   "app.components.Button.cancel": "Cancel",
   "app.components.Button.reset": "Reset",
   "app.components.Button.save": "Save",

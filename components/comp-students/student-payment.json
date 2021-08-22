@@ -18,6 +18,9 @@
     },
     "courseName": {
       "type": "string"
+    },
+    "month": {
+      "type": "integer"
     }
   }
 }
