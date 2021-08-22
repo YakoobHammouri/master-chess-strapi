@@ -1,14 +1,21 @@
-import styled from 'styled-components';
-
-import { colors, sizes } from 'strapi-helper-plugin';
-
+import styled from "styled-components";
+import { colors, sizes } from "strapi-helper-plugin";
 const Wrapper = styled.div`
   width: 100%;
-  min-height: calc(100vh - ${sizes.header.height});
+  padding: 4rem 4rem 4rem;
   background-color: ${colors.leftMenu.mediumGrey};
-  padding-top: 3.1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  ul {
+    list-style: none;
+    padding-top: 2px;
+    display: flex;
+    padding: 10px;
+    li {
+      a {
+        padding-right: 30px;
+        text-transform: capitalize;
+      }
+    }
+  }
 `;
 
 export default Wrapper;

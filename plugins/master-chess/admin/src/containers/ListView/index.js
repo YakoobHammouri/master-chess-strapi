@@ -1,12 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { get, has, isEqual } from "lodash";
-import { Header } from "@buffetjs/custom";
 import { Prompt, useHistory, useLocation } from "react-router-dom";
-import {
-  BackHeader,
-  ListWrapper,
-  useGlobalContext,
-} from "strapi-helper-plugin";
+import { ListWrapper, useGlobalContext } from "strapi-helper-plugin";
 import { Attendances, Payments } from "../../View";
 import getTrad from "../../utils/getTrad";
 import LeftMenu from "../LeftMenu";
@@ -44,11 +39,11 @@ const ListView = ({ componentUid }) => {
       <div className="container-fluid">
         <div className="row">
           <LeftMenu wait={wait} />
+
           <div
-            className="col-md-10 content"
+            className="col-md-12 content"
             style={{ paddingLeft: "30px", paddingRight: "30px" }}
           >
-            {/* <Header {...headerProps} /> */}
             <ListWrapper style={{ marginBottom: 80 }}>
               {getComponent(componentUid)}
             </ListWrapper>

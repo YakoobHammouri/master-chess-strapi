@@ -8,7 +8,7 @@ import {
   List,
   LeftMenuHeader,
 } from "strapi-helper-plugin";
-import { Text } from "@buffetjs/core";
+import { Separator } from "@buffetjs/core";
 import pluginId from "../../pluginId";
 import getTrad from "../../utils/getTrad";
 
@@ -40,10 +40,11 @@ function LeftMenu({ wait }) {
   ];
 
   return (
-    <Wrapper className="col-md-2">
+    <Wrapper className="col-md-12">
       {data.map((list) => {
         return <LeftMenuList {...list} key={list.name} />;
       })}
+      <Separator />
     </Wrapper>
   );
 }
