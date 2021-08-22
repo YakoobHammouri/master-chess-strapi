@@ -13,7 +13,7 @@
       "path": "/attend-pdf",
       "handler": "master-chess.attendToPDF",
       "config": {
-        "policies": []
+        "policies": ["admin::isAuthenticatedAdmin"]
       }
     },
     {
@@ -21,7 +21,7 @@
       "path": "/attend-word",
       "handler": "master-chess.attendToWord",
       "config": {
-        "policies": []
+        "policies": ["admin::isAuthenticatedAdmin"]
       }
     }
   ]

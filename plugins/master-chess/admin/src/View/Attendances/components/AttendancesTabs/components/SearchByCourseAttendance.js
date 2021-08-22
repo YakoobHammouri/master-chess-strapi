@@ -10,7 +10,7 @@ import {
   useGetCourse,
   useGetAttendancesById,
 } from "../../../../../hooks";
-import { Dropdowns, Table, PrintPDF } from "../../../../../components";
+import { Dropdowns, Table, Print } from "../../../../../components";
 
 import {
   SELECT_COURSE_ID,
@@ -181,8 +181,8 @@ const EditAttendance = () => {
             {headerAttendList.length > 0 && courseAttendList.length > 0 ? (
               <div>
                 <Flex justifyContent="flex-end">
-                  <Padded top bottom size="sm">
-                    <PrintPDF
+                  <Padded left right top bottom size="sm">
+                    <Print
                       color={"primary"}
                       printId={"pdfstd"}
                       obj={{
@@ -195,6 +195,24 @@ const EditAttendance = () => {
                       }}
                       isLoading={isRuning}
                       LoadingHandler={isRuningHandler}
+                      isDocx={false}
+                    />
+                  </Padded>
+                  <Padded left right top bottom size="sm">
+                    <Print
+                      color={"primary"}
+                      printId={"pdfstd"}
+                      obj={{
+                        center: selectcenter?.label ?? "---",
+                        course: selectCourse?.meta?.name ?? "---",
+                        sdate: selectCourse?.meta?.start ?? "----",
+                        edate: selectCourse?.meta?.end ?? "----",
+                        headers: headerAttendList,
+                        atted: courseAttendList,
+                      }}
+                      isLoading={isRuning}
+                      LoadingHandler={isRuningHandler}
+                      isDocx={true}
                     />
                   </Padded>
                 </Flex>
