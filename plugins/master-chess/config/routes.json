@@ -1,3 +1,28 @@
 {
-  "routes": []
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/",
+      "handler": "master-chess.index",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/attend-pdf",
+      "handler": "master-chess.attendToPDF",
+      "config": {
+        "policies": ["admin::isAuthenticatedAdmin"]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/attend-word",
+      "handler": "master-chess.attendToWord",
+      "config": {
+        "policies": ["admin::isAuthenticatedAdmin"]
+      }
+    }
+  ]
 }

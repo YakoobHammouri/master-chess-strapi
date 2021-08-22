@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { Padded } from "@buffetjs/core";
 import { Col, Row } from "reactstrap";
 import { T } from "../../../../../utils";
+import { Flex, Padded } from "@buffetjs/core";
+
 import {
   useGetCenter,
   useGetCourse,
   useGetAttendancesById,
 } from "../../../../../hooks";
-import { Dropdowns, Table } from "../../../../../components";
+import { Dropdowns, Table, Print } from "../../../../../components";
 
 import {
   SELECT_COURSE_ID,
@@ -35,6 +36,7 @@ const EditAttendance = () => {
   const { getCourseList } = useGetCourse();
   const { getAttendancesById } = useGetAttendancesById();
 
+  const [isRuning, setIsRuning] = useState(false);
   const [selectcenter, setSelectCenter] = useState({});
   const [selectCourse, setSelectCourse] = useState({});
   const [headerAttendList, setHeaderAttendList] = useState([]);
@@ -147,6 +149,9 @@ const EditAttendance = () => {
     dispatch({ type: SELECT_COURSE_ID, courseId: selected.value });
   };
 
+  const isRuningHandler = (status) => {
+    setIsRuning(status);
+  };
   return (
     <>
       <Row>
@@ -174,17 +179,52 @@ const EditAttendance = () => {
         <Col>
           <Padded top bottom size="smd">
             {headerAttendList.length > 0 && courseAttendList.length > 0 ? (
-              <Table
-                headers={headerAttendList}
-                rows={courseAttendList}
-                style={{ direction: "rtl" }}
-              />
+              <div>
+                <Flex justifyContent="flex-end">
+                  <Padded left right top bottom size="sm">
+                    <Print
+                      color={"primary"}
+                      printId={"pdfstd"}
+                      obj={{
+                        center: selectcenter?.label ?? "---",
+                        course: selectCourse?.meta?.name ?? "---",
+                        sdate: selectCourse?.meta?.start ?? "----",
+                        edate: selectCourse?.meta?.end ?? "----",
+                        headers: headerAttendList,
+                        atted: courseAttendList,
+                      }}
+                      isLoading={isRuning}
+                      LoadingHandler={isRuningHandler}
+                      isDocx={false}
+                    />
+                  </Padded>
+                  <Padded left right top bottom size="sm">
+                    <Print
+                      color={"primary"}
+                      printId={"pdfstd"}
+                      obj={{
+                        center: selectcenter?.label ?? "---",
+                        course: selectCourse?.meta?.name ?? "---",
+                        sdate: selectCourse?.meta?.start ?? "----",
+                        edate: selectCourse?.meta?.end ?? "----",
+                        headers: headerAttendList,
+                        atted: courseAttendList,
+                      }}
+                      isLoading={isRuning}
+                      LoadingHandler={isRuningHandler}
+                      isDocx={true}
+                    />
+                  </Padded>
+                </Flex>
+                <Table
+                  headers={headerAttendList}
+                  rows={courseAttendList}
+                  style={{ direction: "rtl" }}
+                  id={"pdfstd"}
+                />
+              </div>
             ) : (
-              <Table
-                headers={headerAttendList}
-                rows={courseAttendList}
-                style={{ direction: "rtl" }}
-              />
+              ""
             )}
           </Padded>
         </Col>

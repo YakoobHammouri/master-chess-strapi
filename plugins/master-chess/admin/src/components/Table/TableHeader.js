@@ -8,7 +8,12 @@ const TableHeader = ({ headers }) => {
           headers.map((header, i) => {
             return (
               <th key={i}>
-                <p className={""}>{header}</p>
+                <p
+                  style={{ textAlign: "center", verticalAlign: "middle" }}
+                  className={""}
+                >
+                  {header}
+                </p>
               </th>
             );
           })

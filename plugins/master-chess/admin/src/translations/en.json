@@ -22,5 +22,6 @@
   "table.tableHeader.RowON": "#",
   "table.tableHeaer.stdName": "Student Name",
   "attendances.text.NO": "غ",
-  "attendances.text.Yes": "حاضر"
+  "attendances.text.Yes": "حاضر",
+  "attend.text.print": "print"
 }

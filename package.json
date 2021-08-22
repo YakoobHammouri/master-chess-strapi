@@ -12,9 +12,11 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "axios": "^0.21.1",
+    "html-pdf": "^3.0.1",
+    "html-to-docx": "^1.2.2",
     "knex": "0.21.18",
     "moment": "^2.29.1",
-    "pdfkit": "^0.12.3",
     "sqlite3": "5.0.0",
     "strapi": "3.6.6",
     "strapi-admin": "3.6.6",

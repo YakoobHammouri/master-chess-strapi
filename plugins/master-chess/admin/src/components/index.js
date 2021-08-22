@@ -5,6 +5,7 @@ import AttendanceList from "./AttendanceList";
 import DatePicker from "./DatePicker";
 import Accordion from "./Accordion";
 import Table from "./Table";
+import Print from "./Print";
 
 export {
   LoadingProgress,
@@ -14,4 +15,5 @@ export {
   AttendanceList,
   Accordion,
   Table,
+  Print,
 };
