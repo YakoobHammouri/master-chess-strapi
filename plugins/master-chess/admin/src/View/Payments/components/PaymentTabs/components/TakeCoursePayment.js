@@ -12,9 +12,8 @@ import { Dropdowns } from "../../../../../components";
 
 import {
   CLEAR_TAKE_ATTENDANCES,
-  STUDENT_ATTENDANCES_LIST,
   REDUCER_NAME,
-} from "../../../../../hooks/constants";
+} from "../../../../../containers/Context/Attendances/constants";
 
 import { TakeCoursePaymentForm } from "../../PaymentForm";
 const TakeCoursePayment = () => {

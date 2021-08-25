@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { request } from "strapi-helper-plugin";
 import getTrad from "../../utils/getTrad";
-import { SELECT_STUDENT_By_ID } from "../constants";
+import { SELECT_STUDENT_By_ID } from "../../containers/Context/Attendances/constants";
 import { useDispatch, useSelector } from "react-redux";
 
 const fetchStudentList = async (stdId) => {

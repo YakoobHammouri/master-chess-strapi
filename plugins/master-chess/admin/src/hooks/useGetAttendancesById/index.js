@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { request } from "strapi-helper-plugin";
 import getTrad from "../../utils/getTrad";
-import { ATTENDANCE_LEST, REDUCER_NAME } from "../constants";
+
 import { useDispatch, useSelector } from "react-redux";
 
 const fetchGetAttendancesById = async (byId, byQuery) => {

@@ -14,7 +14,7 @@ import {
   CLEAR_TAKE_ATTENDANCES,
   STUDENT_ATTENDANCES_LIST,
   REDUCER_NAME,
-} from "../../../../../hooks/constants";
+} from "../../../../../containers/Context/Attendances/constants";
 
 const SearchByStdAttendance = () => {
   const dispatch = useDispatch();

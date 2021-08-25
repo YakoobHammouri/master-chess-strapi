@@ -4,7 +4,7 @@ import {
   UPDATE_ATTENDANCES,
   REDUCER_NAME,
   ATTENDANCES_TYPE,
-} from "../../../../hooks/constants";
+} from "../../../../containers/Context/Attendances/constants";
 import { CustomRow as Row } from "@buffetjs/styles";
 import ToggleAttendances from "./ToggleAttendances";
 import { useDispatch, useSelector } from "react-redux";

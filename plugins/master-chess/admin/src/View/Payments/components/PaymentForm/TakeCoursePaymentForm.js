@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import moment from "moment";
 import { Inputs } from "@buffetjs/custom";
 import { Table as Wapper } from "@buffetjs/styles";
-import { Padded } from "@buffetjs/core";
-
+import { Padded, Button, Flex } from "@buffetjs/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const getCourseMonth = (date) => {
   if (!date) {
     return [];
@@ -77,6 +78,21 @@ function TakeCoursePayment({ course }) {
                 />
               </div>
             ))}
+          </div>
+          <div className="row">
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button
+                color="success"
+                icon={<FontAwesomeIcon icon={faPlus} />}
+                label="Save"
+              />
+            </div>
           </div>
         </form>
       </Padded>

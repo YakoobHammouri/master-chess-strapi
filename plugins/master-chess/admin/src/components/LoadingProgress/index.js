@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { LoadingBar, LoadingIndicator } from "@buffetjs/styles";
 
-import { REDUCER_NAME } from "../../hooks/constants";
+import { REDUCER_NAME } from "../../containers/Context/Attendances/constants";
 
 function LoadingStatusa({ indicator }) {
   const isLoading = useSelector((state) => state.get(REDUCER_NAME).isLoading);

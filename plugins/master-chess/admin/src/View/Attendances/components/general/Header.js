@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   REDUCER_NAME,
   CLEAR_TAKE_ATTENDANCES,
-} from "../../../../hooks/constants";
+} from "../../../../containers/Context/Attendances/constants";
 import { useTakeAttendances, useEdit } from "../../../../hooks";
 
 function AttendancesHeader() {

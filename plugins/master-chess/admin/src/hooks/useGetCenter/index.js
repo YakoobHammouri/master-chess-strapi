@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { request } from "strapi-helper-plugin";
 import getTrad from "../../utils/getTrad";
-import { CENTER_LIST, REDUCER_NAME, IS_LOADING } from "../constants";
+import {
+  CENTER_LIST,
+  REDUCER_NAME,
+  IS_LOADING,
+} from "../../containers/Context/Attendances/constants";
 import { useGlobalContext } from "strapi-helper-plugin";
 import { useDispatch, useSelector } from "react-redux";
 

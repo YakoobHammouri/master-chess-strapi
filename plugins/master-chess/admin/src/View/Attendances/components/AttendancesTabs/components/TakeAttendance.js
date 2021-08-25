@@ -18,7 +18,7 @@ import {
   CLEAR_TAKE_ATTENDANCES,
   SELECT_COURSE_META,
   REDUCER_NAME,
-} from "../../../../../hooks/constants";
+} from "../../../../../containers/Context/Attendances/constants";
 const TakeAttendance = () => {
   const dispatch = useDispatch();
 

@@ -6,9 +6,15 @@ import { TitleTabWrapper } from "../../general/styles";
 const TabsLsit = () => (
   <Tabs position={"right"}>
     <Tab key={"take"}>
-      <TitleTabWrapper type={"coursePayment"}>
-        {T("models.paymetn.take.payment")}
-      </TitleTabWrapper>
+      <div
+        onClick={() => {
+          alert(";dskfldsk");
+        }}
+      >
+        <TitleTabWrapper type={"coursePayment"}>
+          {T("models.paymetn.take.payment")}
+        </TitleTabWrapper>
+      </div>
     </Tab>
   </Tabs>
 );

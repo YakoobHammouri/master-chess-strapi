@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   REDUCER_NAME,
   CLEAR_TAKE_ATTENDANCES,
-} from "../../../../hooks/constants";
+} from "../../../../containers/Context/Attendances/constants";
 
 function PaymentHeader() {
   const dispatch = useDispatch();
