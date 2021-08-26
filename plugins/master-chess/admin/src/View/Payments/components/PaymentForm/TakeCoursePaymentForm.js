@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 import moment from "moment";
+import { isNumber } from "lodash";
+import { useDispatch } from "react-redux";
 import { Inputs } from "@buffetjs/custom";
-import { Table as Wapper } from "@buffetjs/styles";
-import { Padded, Button, Flex } from "@buffetjs/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Padded } from "@buffetjs/core";
+import {
+  SAVE_PAYMENT,
+  SAVE_PAYMENT_LOADING,
+} from "../../../../containers/Context/Payment/constants";
+
+import { useGet } from "../../../../hooks";
+import { T } from "../../../../utils";
+import { Col, Row } from "reactstrap";
+
 const getCourseMonth = (date) => {
   if (!date) {
     return [];
@@ -19,84 +28,121 @@ const getCourseMonth = (date) => {
   return temp.month();
 };
 
-function TakeCoursePayment({ course }) {
-  const [state, setState] = useState({
-    select: getCourseMonth(course?.meta.start),
-    number: 0,
+function TakeCoursePayment({ stdId, course }) {
+  const dispatch = useDispatch();
+  const { get } = useGet();
+  const requiredText = T("paymetn.save.Required");
+  const ampuntNumberText = T("paymetn.save.amount.must.number");
+
+  const [paymentMonth, setPaymentMonth] = useState({
+    value: getCourseMonth(course?.meta.start),
+    error: "",
   });
-  const handleChange = ({ target: { name, value } }) => {
-    console.log(`state 11111`, state);
-    setState((prevState) => ({ ...prevState, [name]: value }));
+  const [paymentAmount, setPaymentAmount] = useState({
+    value: null,
+    error: "",
+  });
+
+  const monthRef = useRef(paymentMonth);
+  const amountRef = useRef(paymentAmount);
+  const onSubmitHandler = async (e) => {
+    const ok = confirm("Are you sure to save the Payment?");
+
+    if (ok) {
+      let isValid = true;
+
+      if (!paymentAmount.value) {
+        setPaymentAmount((prev) => ({ ...prev, error: requiredText }));
+        isValid = false;
+      }
+
+      if (!paymentMonth.value) {
+        setPaymentMonth((prev) => ({ ...prev, error: requiredText }));
+        isValid = false;
+      }
+
+      if (!isNumber(paymentAmount.value)) {
+        setPaymentAmount((prev) => ({ ...prev, error: ampuntNumberText }));
+        isValid = false;
+      }
+
+      if (isValid === true) {
+        dispatch({
+          type: SAVE_PAYMENT_LOADING,
+          saveLoading: true,
+        });
+
+        console.log(`stdId 11111`, stdId);
+        const tempStdPayment = await get(`/student-payments?student=${stdId}`);
+        console.log("tempStdPayment 111 : ", tempStdPayment);
+      }
+    }
   };
 
-  const form = {
-    select: {
-      styleName: "col-6",
-      description: "",
-      label: "Month",
-      type: "select",
-      options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-
-      value: "User",
-    },
-    number: {
-      styleName: "col-6",
-      description: "",
-      label: "Amount",
-      placeholder: "$",
-      type: "number",
-      validations: {
-        required: true,
-        max: 99,
-      },
-    },
+  const onPaymentMonthChange = ({ target: { value } }) => {
+    setPaymentMonth((prev) => ({ ...prev, value }));
+    monthRef.current.value = value;
   };
+
+  const onPaymentAmountChange = ({ target: { value } }) => {
+    setPaymentAmount((prev) => ({ ...prev, value }));
+    amountRef.current.value = value;
+  };
+
+  // set  onSubmitHandler on save payment
+  useEffect(() => {
+    dispatch({
+      type: SAVE_PAYMENT,
+      savePament: onSubmitHandler,
+    });
+  }, []);
 
   return (
-    <Wapper>
+    <div
+      style={{
+        borderRadius: "3px",
+        // "box-shadow": "0 2px 4px #e3e9f3",
+        background: "white",
+        minHeight: 150,
+      }}
+    >
       <Padded top bottom right left size="md">
-        <form onSubmit={() => {}}>
-          <div className="row">
-            {Object.keys(form).map((input) => (
-              <div className={form[input].styleName} key={input}>
-                <Inputs
-                  name={input}
-                  {...form[input]}
-                  onChange={handleChange}
-                  translatedErrors={{
-                    date: "This is not a date",
-
-                    number: "This is not a number",
-
-                    max: "This is too high",
-                    maxLength: "This is too long",
-                    min: "This is too small",
-                    minLength: "This is too short",
-                    required: "This value is required",
-                  }}
-                  value={state[input] || form[input].value}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="row">
-            <div
-              style={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "flex-end",
+        <Row>
+          <Col>
+            <Inputs
+              ref={monthRef}
+              label={T("models.paymetn.take.payment.Month.Text")}
+              name={"paymentMonth"}
+              onChange={onPaymentMonthChange}
+              description={""}
+              value={paymentMonth.value}
+              error={paymentMonth.error}
+              type={"select"}
+              options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+              validations={{
+                required: true,
               }}
-            >
-              <Button
-                color="success"
-                icon={<FontAwesomeIcon icon={faPlus} />}
-                label="Save"
-              />
-            </div>
-          </div>
-        </form>
+            />
+          </Col>
+          <Col>
+            <Inputs
+              ref={amountRef}
+              label={T("models.paymetn.take.payment.Amount.Text")}
+              name={"paymentAmount"}
+              description={""}
+              placeholder={"₪"}
+              onChange={onPaymentAmountChange}
+              value={paymentAmount.value}
+              error={paymentAmount.error}
+              type={"number"}
+              validations={{
+                required: true,
+              }}
+            />
+          </Col>
+        </Row>
       </Padded>
-    </Wapper>
+    </div>
   );
 }
 

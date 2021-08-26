@@ -6,14 +6,10 @@
   "models.attendance.edit.Attendance": "Eite Attendance",
   "models.attendance.search.by.student.Attendance": "search by student",
   "models.attendance.search.by.course.Attendance": "search by course",
-
-  "models.paymetn.take.payment": "Course Payment",
-
   "Attendances.TakeDate": " Date",
   "AttandeList.label": "The Attendance",
   "CenterList.label": "The Center ",
   "CourseList.label": " The Course",
-
   "StudentList.label": "The Student",
   "CourseList.load.defualt": "Select ...",
   "CenterList.error.onload": "Error in load Center List",
@@ -21,12 +17,17 @@
   "takeAttendances.error": "Error in Take Attendances",
   "edit.error": "Error in update Data",
   "edit.success": "The data successfully updated",
-
   "table.tableEmptyText": "There is no data",
   "table.tableHeaderEmptyText": "Loading Header ...",
   "table.tableHeader.RowON": "#",
   "table.tableHeaer.stdName": "Student Name",
   "attendances.text.NO": "غ",
   "attendances.text.Yes": "حاضر",
-  "attend.text.print": "print"
+  "attend.text.print": "print",
+
+  "models.paymetn.take.payment": "Course Payment",
+  "models.paymetn.take.payment.Amount.Text": "Amount",
+  "models.paymetn.take.payment.Month.Text": "Payment Month",
+  "paymetn.save.Required": "The Field is Required",
+  "paymetn.save.amount.must.number": "The Amount is must be number"
 }

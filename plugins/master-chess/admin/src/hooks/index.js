@@ -9,6 +9,7 @@ import useEdit from "./useEdit";
 import useGetStudent from "./useGetStudent";
 import useGetStudentById from "./useGetStudentById";
 import useGetCourseById from "./useGetCourseById";
+import useGet from "./useGet";
 
 export {
   reducers,
@@ -19,6 +20,7 @@ export {
   useGetStudentByCourse,
   useTakeAttendances,
   useEdit,
+  useGet,
   useGetStudent,
   useGetStudentById,
   useGetCourseById,

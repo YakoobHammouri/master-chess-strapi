@@ -1,18 +1,22 @@
 import React from "react";
 import { Header } from "@buffetjs/custom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  REDUCER_NAME,
-  CLEAR_TAKE_ATTENDANCES,
-} from "../../../../containers/Context/Attendances/constants";
+import { REDUCER_NAME } from "../../../../containers/Context/Payment/constants";
 
 function PaymentHeader() {
   const dispatch = useDispatch();
 
-  const type = useSelector((state) => state.get(REDUCER_NAME).attendanceType);
+  const loading = useSelector(
+    (state) => state.get(REDUCER_NAME).savePamentLoading
+  );
+  const savePament = useSelector(
+    (state) => state.get(REDUCER_NAME).funSavePament
+  );
 
   const onClickSaveHandler = () => {
-    console.log("Save 1111", type);
+    if (savePament) {
+      savePament();
+    }
   };
 
   return (
@@ -34,12 +38,14 @@ function PaymentHeader() {
           onClick: onClickSaveHandler,
           color: "success",
           type: "submit",
+          isLoading: loading,
         },
       ]}
       title={{
         label: "Payments",
       }}
       content="Student Courses Payment"
+      stickable={true}
     />
   );
 }

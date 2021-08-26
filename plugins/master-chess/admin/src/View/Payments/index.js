@@ -15,7 +15,7 @@ import Header from "./components/general/Header";
 
 function index() {
   return (
-    <ContainerFluid style={{ marginBottom: 80 }}>
+    <ContainerFluid style={{ marginBottom: 300 }}>
       <Header />
       <Padded top bottom size="sm">
         <Padded top bottom size="sm">

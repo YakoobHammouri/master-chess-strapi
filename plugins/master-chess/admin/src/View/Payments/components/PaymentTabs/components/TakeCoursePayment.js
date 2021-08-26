@@ -135,7 +135,10 @@ const TakeCoursePayment = () => {
         <Col>
           <Padded top bottom size="smd">
             {selectCourse?.value ? (
-              <TakeCoursePaymentForm course={selectCourse} />
+              <TakeCoursePaymentForm
+                stdId={selectStudent?.value}
+                course={selectCourse}
+              />
             ) : null}
           </Padded>
         </Col>
