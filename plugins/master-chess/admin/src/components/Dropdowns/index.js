@@ -6,7 +6,15 @@ import Label from "../Label";
 import T from "../../utils/T";
 import { BaselineAlignment } from "strapi-helper-plugin";
 
-const index = ({ name, lableTxt, lsit, value, onValChange, isDisabled }) => {
+const index = ({
+  name,
+  lableTxt,
+  lsit,
+  value,
+  onValChange,
+  isDisabled,
+  defaultValue,
+}) => {
   return (
     <Wrapper>
       <span id="locale-code">
@@ -24,6 +32,7 @@ const index = ({ name, lableTxt, lsit, value, onValChange, isDisabled }) => {
         value={value}
         onChange={onValChange}
         isDisabled={isDisabled}
+        defaultValue={defaultValue}
       />
     </Wrapper>
   );

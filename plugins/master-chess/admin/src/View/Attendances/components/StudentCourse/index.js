@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "@buffetjs/core";
 import { useSelector } from "react-redux";
-import { REDUCER_NAME } from "../../../../hooks/constants";
+import { REDUCER_NAME } from "../../../../containers/Context/Attendances/constants";
 import Wrapper from "./Wrapper";
 import CustomRow from "./CustomRow";
 import { TakeHeader, EditHeader, SerarchHeader } from "./CustomHeaders";

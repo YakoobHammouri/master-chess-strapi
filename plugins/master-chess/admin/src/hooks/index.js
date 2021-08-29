@@ -4,11 +4,12 @@ import useGetAttendancesList from "./useGetAttendancesList";
 import useGetCenter from "./useGetCenter";
 import useGetCourse from "./useGetCourse";
 import useGetStudentByCourse from "./useGetStudentByCourse";
-import useTakeAttendances from "./useTakeAttendances";
-import useEdit from "./useEdit";
 import useGetStudent from "./useGetStudent";
 import useGetStudentById from "./useGetStudentById";
 import useGetCourseById from "./useGetCourseById";
+import useCRUD from "./useCRUD";
+import useSaveNewPayment from "./useSaveNewPayment";
+import * as endPoint from "./endPoint";
 
 export {
   reducers,
@@ -17,9 +18,10 @@ export {
   useGetCenter,
   useGetCourse,
   useGetStudentByCourse,
-  useTakeAttendances,
-  useEdit,
+  useCRUD,
   useGetStudent,
   useGetStudentById,
   useGetCourseById,
+  useSaveNewPayment,
+  endPoint,
 };

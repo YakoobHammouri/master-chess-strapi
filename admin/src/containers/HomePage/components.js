@@ -177,7 +177,7 @@ const LinkWrapper = styled.a`
   height: auto;
   line-height: 18px;
   background-color: #f7f8f8;
-
+  /* margin: 0 30px 30px; */
   &:hover,
   :focus,
   :active {
@@ -203,6 +203,12 @@ const LinkWrapper = styled.a`
       if (type === "chess") {
         return css`
           content: "\f439";
+          color: #42b88e;
+        `;
+      }
+      if (type === "payment") {
+        return css`
+          content: "\f571";
           color: #42b88e;
         `;
       }

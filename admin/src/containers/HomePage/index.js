@@ -21,21 +21,6 @@ import {
   Wave,
   Separator,
 } from "./components";
-import BlogPost from "./BlogPost";
-import SocialLink from "./SocialLink";
-
-// const FIRST_BLOCK_LINKS = [
-//   {
-//     link: "https://strapi.io/documentation/developer-docs/latest/getting-started/quick-start.html#_4-create-a-category-content-type",
-//     contentId: "app.components.plugins.master.chess.service.content",
-//     titleId: "app.components.plugins.master.chess.service",
-//   },
-//   {
-//     link: "https://github.com/strapi/foodadvisor",
-//     contentId: "app.components.BlockLink.code.content",
-//     titleId: "app.components.BlockLink.code",
-//   },
-// ];
 
 const HomePage = ({ history: { push } }) => {
   const { error, isLoading, posts } = useFetch();
@@ -72,20 +57,6 @@ const HomePage = ({ history: { push } }) => {
     ? "HomePage.greetings"
     : "app.components.HomePage.welcome";
   const username = get(auth.getUserInfo(), "firstname", "");
-  const linkProps = hasAlreadyCreatedContentTypes
-    ? {
-        id: "app.components.HomePage.button.blog",
-        href: "https://strapi.io/blog/",
-        onClick: () => {},
-        type: "blog",
-        target: "_blank",
-      }
-    : {
-        id: "app.components.HomePage.create",
-        href: "",
-        onClick: handleClick,
-        type: "documentation",
-      };
 
   return (
     <>
@@ -107,7 +78,7 @@ const HomePage = ({ history: { push } }) => {
               </FormattedMessage>
 
               <Separator style={{ marginTop: 37, marginBottom: 36 }} />
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <LinkWrapper
                   href={"/admin/plugins/master-chess/service/Attendances"}
                   // target="_blank"
@@ -123,11 +94,24 @@ const HomePage = ({ history: { push } }) => {
                       </p>
                     )}
                   </FormattedMessage>
-                  {/* <FormattedMessage
-                    id={"app.components.plugins.master.chess.service.content"}
+                </LinkWrapper>
+                <LinkWrapper
+                  href={"/admin/plugins/master-chess/service/Payments"}
+                  // target="_blank"
+                  key={"/admin/plugins/master-chess/service/Payments"}
+                  type={"payment"}
+                >
+                  <FormattedMessage
+                    id={
+                      "app.components.plugins.master.chess.service.payment.content"
+                    }
                   >
-                    {(content) => <p>{content}</p>}
-                  </FormattedMessage> */}
+                    {(title) => (
+                      <p className="bold" style={{ paddingTop: 10 }}>
+                        {title}
+                      </p>
+                    )}
+                  </FormattedMessage>
                 </LinkWrapper>
               </div>
             </Block>

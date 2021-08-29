@@ -8,18 +8,17 @@
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "student": {
-      "via": "student_payments",
-      "model": "students"
-    },
     "Payments": {
       "type": "component",
       "repeatable": true,
       "component": "comp-students.student-payment"
+    },
+    "student": {
+      "model": "students"
     }
   }
 }

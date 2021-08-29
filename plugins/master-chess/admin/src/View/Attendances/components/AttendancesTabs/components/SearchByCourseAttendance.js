@@ -19,7 +19,7 @@ import {
   CLEAR_TAKE_ATTENDANCES,
   ATTENDANCES_TYPE,
   REDUCER_NAME,
-} from "../../../../../hooks/constants";
+} from "../../../../../containers/Context/Attendances/constants";
 
 const EditAttendance = () => {
   const dispatch = useDispatch();

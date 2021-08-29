@@ -2,7 +2,7 @@ import pluginPkg from "../../package.json";
 import pluginId from "./pluginId";
 import App from "./containers/App";
 import Initializer from "./containers/Initializer";
-import chessReducers from "./hooks/reducers";
+import reducers from "./hooks/reducers";
 import pluginPermissions from "./permissions";
 import lifecycles from "./lifecycles";
 import trads from "./translations";
@@ -27,7 +27,7 @@ export default (strapi) => {
     lifecycles,
     mainComponent: App,
     name,
-    reducers: chessReducers,
+    reducers: reducers,
     preventComponentRendering: false,
     trads,
     menu: {

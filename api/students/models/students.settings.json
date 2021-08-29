@@ -36,10 +36,6 @@
     "name": {
       "type": "string"
     },
-    "student_payments": {
-      "via": "student",
-      "collection": "student-payment"
-    },
     "courses": {
       "via": "students",
       "collection": "courses"

@@ -5,7 +5,7 @@ import {
   REDUCER_NAME,
   STUDENT_ATTENDANCE_LEST,
   SELECT_ATTENDANCE_ID,
-} from "../../hooks/constants";
+} from "../../containers/Context/Attendances/constants";
 
 import Select from "react-select";
 import Wrapper from "./Wrapper";

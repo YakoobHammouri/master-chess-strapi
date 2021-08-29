@@ -4,7 +4,7 @@ import { Tabs, Tab } from "strapi-helper-plugin";
 import { TitleTabWrapper } from "../../general/styles";
 
 const TabsLsit = () => (
-  <Tabs position="left">
+  <Tabs position={"right"}>
     <Tab key={"take"}>
       <TitleTabWrapper type={"take"}>
         {T("models.attendance.take.Attendance")}
