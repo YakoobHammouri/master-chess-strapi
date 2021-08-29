@@ -7,7 +7,11 @@ import {
 } from "strapi-helper-plugin";
 import { LoadingProgress } from "../../components";
 
-import { TabsList, TakeCoursePayment } from "./components/PaymentTabs";
+import {
+  TabsList,
+  TakeCoursePayment,
+  EditCoursePayment,
+} from "./components/PaymentTabs";
 
 import { Padded, Separator } from "@buffetjs/core";
 
@@ -30,7 +34,9 @@ function index() {
             <TabPanel>
               <TakeCoursePayment />
             </TabPanel>
-            <TabPanel>{/* <EditAttendance /> */}</TabPanel>
+            <TabPanel>
+              <EditCoursePayment />
+            </TabPanel>
             <TabPanel>{/* <SearchByStdAttendance /> */}</TabPanel>
             <TabPanel>{/* <SearchByCourseAttendance /> */}</TabPanel>
           </TabsPanel>

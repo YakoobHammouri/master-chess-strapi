@@ -3,35 +3,58 @@ import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { Padded } from "@buffetjs/core";
 import { Col, Row } from "reactstrap";
+import { Dropdowns } from "../../../../../components";
+import { EditCoursePaymentTable } from "../../PaymentForm";
+import { getTrad } from "../../../../../utils";
 import {
   useGetStudent,
   useGetStudentById,
-  useGetCourseById,
+  useCRUD,
+  endPoint,
 } from "../../../../../hooks";
-import { Dropdowns } from "../../../../../components";
-
 import {
   CLEAR_PAYMENT,
   REDUCER_NAME,
+  UPDATE_EDIT_PAYMENT_Table,
 } from "../../../../../containers/Context/Payment/constants";
 
-import { TakeCoursePaymentForm } from "../../PaymentForm";
-const TakeCoursePayment = () => {
+const EditCoursePayment = () => {
   const dispatch = useDispatch();
   const { studentList } = useGetStudent();
   const { getStudentById } = useGetStudentById();
-  const { getCourseById } = useGetCourseById();
-
+  const { get } = useCRUD();
   const clear = useSelector((state) => state.get(REDUCER_NAME).clear_Payment);
+  const updateTable = useSelector(
+    (state) => state.get(REDUCER_NAME).update_eite_Payment_table
+  );
 
   const [selectCourse, setSelectCourse] = useState({});
-  const [courseList, setCourseList] = useState([]);
   const [selectStudent, setSelectStudent] = useState(null);
+  const [courseList, setCourseList] = useState([]);
+  const [paymentList, setPaymentList] = useState([]);
 
-  // select Student
+  const getStudentCourse = () => {
+    setPaymentList([]);
+    get(
+      `${endPoint.StudentPayment}/student-course/${selectStudent?.value}/${selectCourse?.value}`
+    )
+      .then((stdPayment) => {
+        setPaymentList(stdPayment);
+      })
+      .catch((err) => {
+        console.log(`Error in get Student Payment`, err);
+        strapi.notification.toggle({
+          type: "warning",
+          message: { id: getTrad("payment.get.student.payment.error") },
+        });
+      });
+  };
+
+  // select Studeent
   useEffect(() => {
     if (selectStudent?.value) {
       setSelectCourse({});
+      setPaymentList([]);
       getStudentById(selectStudent.value)
         .then((std) => {
           const temp = [];
@@ -62,12 +85,33 @@ const TakeCoursePayment = () => {
     }
   }, [selectStudent]);
 
-  clear;
+  // select Course
+  useEffect(() => {
+    if (selectCourse?.value) {
+      getStudentCourse();
+    }
+  }, [selectCourse]);
+
+  // clear
   useEffect(() => {
     setSelectStudent({});
     setSelectCourse({});
+    setPaymentList([]);
     dispatch({ type: CLEAR_PAYMENT, clear_Payment: false });
   }, [clear]);
+
+  // update Table
+  useEffect(() => {
+    if (updateTable) {
+      getStudentCourse();
+
+      // reset value to false
+      dispatch({
+        type: UPDATE_EDIT_PAYMENT_Table,
+        updateTable: false,
+      });
+    }
+  }, [updateTable]);
 
   const onStudentChange = (selected) => {
     setSelectStudent(selected);
@@ -103,8 +147,9 @@ const TakeCoursePayment = () => {
       <Row>
         <Col>
           <Padded top bottom size="smd">
-            {selectCourse?.value ? (
-              <TakeCoursePaymentForm
+            {paymentList?.length ? (
+              <EditCoursePaymentTable
+                rows={paymentList}
                 stdId={selectStudent?.value}
                 course={selectCourse}
               />
@@ -116,4 +161,4 @@ const TakeCoursePayment = () => {
   );
 };
 
-export default TakeCoursePayment;
+export default EditCoursePayment;

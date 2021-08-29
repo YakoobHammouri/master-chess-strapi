@@ -6,7 +6,7 @@ import { Inputs } from "@buffetjs/custom";
 import { Padded } from "@buffetjs/core";
 import { SAVE_PAYMENT } from "../../../../containers/Context/Payment/constants";
 import { T } from "../../../../utils";
-import { useSaveNewPayment } from "../../../../hooks";
+import { useSavePayment } from "../../../../hooks";
 
 import { Col, Row } from "reactstrap";
 
@@ -24,19 +24,27 @@ const getCourseMonth = (date) => {
   return temp.month();
 };
 
-function TakeCoursePayment({ stdId, course }) {
+function TakeCoursePaymentForm({
+  stdId,
+  course,
+  amount,
+  month,
+  paymentId,
+  isEdit,
+  onClose,
+}) {
   const dispatch = useDispatch();
 
-  const { onSubmitHandler } = useSaveNewPayment();
+  const { onSaveHandler, onEditHandler } = useSavePayment();
   const requiredText = T("paymetn.save.Required");
   const ampuntNumberText = T("paymetn.save.amount.must.number");
 
   const [paymentMonth, setPaymentMonth] = useState({
-    value: getCourseMonth(course?.meta.start),
+    value: isEdit ? month : getCourseMonth(course?.meta.start),
     error: "",
   });
   const [paymentAmount, setPaymentAmount] = useState({
-    value: null,
+    value: amount ?? null,
     error: "",
   });
 
@@ -73,13 +81,29 @@ function TakeCoursePayment({ stdId, course }) {
 
     if (isValid === true) {
       try {
-        await onSubmitHandler(paymentAmount, paymentMonth, stdId, course);
-        setPaymentAmount({
-          value: null,
-          error: "",
-        });
+        if (isEdit) {
+          await onEditHandler(
+            paymentAmount,
+            paymentMonth,
+            stdId,
+            course,
+            paymentId
+          );
+          if (onClose) {
+            onClose(false);
+          }
+        } else {
+          await onSaveHandler(paymentAmount, paymentMonth, stdId, course);
+          setPaymentAmount({
+            value: null,
+            error: "",
+          });
+        }
       } catch (err) {
         console.log("Error in Take Course Payment From :", err);
+        if (onClose) {
+          onClose(false);
+        }
       }
     }
   };
@@ -89,7 +113,10 @@ function TakeCoursePayment({ stdId, course }) {
       type: SAVE_PAYMENT,
       savePament: validateDate,
     });
-  }, []);
+    return () => {
+      console.log(`clean TakeCoursePaymentForm 111111111 `);
+    };
+  }, [dispatch]);
 
   return (
     <div
@@ -112,7 +139,7 @@ function TakeCoursePayment({ stdId, course }) {
               value={paymentMonth.value}
               error={paymentMonth.error}
               type={"select"}
-              options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+              options={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
               validations={{
                 required: true,
               }}
@@ -140,4 +167,4 @@ function TakeCoursePayment({ stdId, course }) {
   );
 }
 
-export default TakeCoursePayment;
+export default TakeCoursePaymentForm;

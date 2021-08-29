@@ -1,6 +1,7 @@
 {
   "menu.section.models.name.": "Master Chess Service",
   "prompt.unsaved": "unsaved",
+  "Save": "Save",
   "menu.section.models.attendance": "Attendance",
   "models.attendance.take.Attendance": "Take Attendance",
   "models.attendance.edit.Attendance": "Eite Attendance",
@@ -22,10 +23,14 @@
   "table.tableHeaderEmptyText": "Loading Header ...",
   "table.tableHeader.RowON": "#",
   "table.tableHeaer.stdName": "Student Name",
+  "table.tableHeaer.courseName": "Course Name",
+  "table.tableHeaer.amount": "Amount",
+  "table.tableHeaer.month": "Month",
+  "table.tableHeaer.paymentDate": "Payment Date",
   "attendances.text.NO": "غ",
   "attendances.text.Yes": "حاضر",
   "attend.text.print": "print",
-
+  "app.components.Button.cancel": "Cancel",
   "models.paymetn.take.payment": "Course Payment",
   "models.paymetn.edit.payment": "Edit Payment",
 
@@ -34,5 +39,6 @@
   "paymetn.save.Required": "The Field is Required",
   "paymetn.save.amount.must.number": "The Amount is must be number",
   "payment.get.student.payment.error": "Error in get Student Payment",
-  "takePayment.success": "The Payment successfully saved"
+  "takePayment.success": "The Payment successfully saved",
+  "payment.student.no.have.record": "The Student does not have a Payment Record, Add one"
 }
