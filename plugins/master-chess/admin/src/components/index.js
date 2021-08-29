@@ -6,6 +6,7 @@ import DatePicker from "./DatePicker";
 import Accordion from "./Accordion";
 import Table from "./Table";
 import Print from "./Print";
+import Banner from "./Banner";
 
 export {
   LoadingProgress,
@@ -16,4 +17,5 @@ export {
   Accordion,
   Table,
   Print,
+  Banner,
 };

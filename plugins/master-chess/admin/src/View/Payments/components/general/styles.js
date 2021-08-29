@@ -47,6 +47,17 @@ const TitleTabWrapper = styled.div`
         `;
       }
 
+      if (type === "searchstdPayment") {
+        return css`
+          content: "\f688";
+        `;
+      }
+      if (type === "searchcoursePayment") {
+        return css`
+          content: "\f662";
+        `;
+      }
+
       return css`
         content: "\f121";
         color: #f0811e;

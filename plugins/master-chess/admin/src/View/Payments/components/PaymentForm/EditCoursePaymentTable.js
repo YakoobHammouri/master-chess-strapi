@@ -3,7 +3,7 @@ import { Table } from "@buffetjs/core";
 import EditModel from "./EditModel";
 import { T } from "../../../../utils";
 
-function EditCoursePaymentTable({ rows, stdId, course }) {
+function EditCoursePaymentTable({ rows, stdId, course, isSearch }) {
   const headers = [
     {
       name: T("table.tableHeader.RowON"),
@@ -27,6 +27,10 @@ function EditCoursePaymentTable({ rows, stdId, course }) {
     },
   ];
 
+  if (isSearch) {
+    headers.splice(0, 2);
+  }
+
   const [isOpenedCreateModal, setIsOpenedCreateModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState({});
   const handleToggleModalCreate = () => setIsOpenedCreateModal((s) => !s);
@@ -35,21 +39,25 @@ function EditCoursePaymentTable({ rows, stdId, course }) {
     <>
       <Table
         onClickRow={(e, data) => {
-          setSelectedPayment(data);
-          setIsOpenedCreateModal(true);
+          if (!isSearch) {
+            setSelectedPayment(data);
+            setIsOpenedCreateModal(true);
+          }
         }}
         headers={headers}
         rows={rows}
       />
-      <EditModel
-        onClose={handleToggleModalCreate}
-        isOpened={isOpenedCreateModal}
-        stdId={stdId}
-        course={course}
-        amount={selectedPayment?.amount}
-        month={selectedPayment?.month}
-        paymentId={selectedPayment?.payment_id}
-      />
+      {!isSearch ? (
+        <EditModel
+          onClose={handleToggleModalCreate}
+          isOpened={isOpenedCreateModal}
+          stdId={stdId}
+          course={course}
+          amount={selectedPayment?.amount}
+          month={selectedPayment?.month}
+          paymentId={selectedPayment?.payment_id}
+        />
+      ) : null}
     </>
   );
 }
