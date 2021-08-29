@@ -6,12 +6,12 @@ import {
   REDUCER_NAME,
   CLEAR_TAKE_ATTENDANCES,
 } from "../../../../containers/Context/Attendances/constants";
-import { useTakeAttendances, useEdit } from "../../../../hooks";
+import { useCRUD, endPoint } from "../../../../hooks";
 
+import { getTrad } from "../../../../utils";
 function AttendancesHeader() {
   const dispatch = useDispatch();
-  const { takeAttendances } = useTakeAttendances();
-  const { edit } = useEdit();
+  const { add, edit } = useCRUD();
 
   const type = useSelector((state) => state.get(REDUCER_NAME).attendanceType);
   const course = useSelector((state) => state.get(REDUCER_NAME).courseid);
@@ -58,15 +58,15 @@ function AttendancesHeader() {
         studentAttendance: attendance,
       };
 
-      // meta: finished: false;
-      // lecturesTotal: null;
-      // numberOfLecture: 8;
-
-      takeAttendances(obj)
+      add(endPoint.Attendances, obj)
         .then(() => {
           dispatch({
             type: CLEAR_TAKE_ATTENDANCES,
             clear_take_attendance: true,
+          });
+          strapi.notification.toggle({
+            type: "success",
+            message: { id: getTrad("takeAttendances.success") },
           });
         })
         .then(async () => {
@@ -92,13 +92,21 @@ function AttendancesHeader() {
                 finished: _numberOfLecture === newTotal,
               };
               console.log("obj to updar : ", obj);
-              await edit(`/courses/${course}`, obj);
+              await edit(`${endPoint.Courses}/${course}`, obj);
+              strapi.notification.toggle({
+                type: "success",
+                message: { id: getTrad("edit.success") },
+              });
             }
           }
         })
         .catch((err) => {
           console.log("Error in Save  student Attendance");
           console.log(err);
+          strapi.notification.toggle({
+            type: "warning",
+            message: { id: getTrad("takeAttendances.error") },
+          });
         });
     }
   };
@@ -110,16 +118,24 @@ function AttendancesHeader() {
         studentAttendance: updateAttend,
       };
 
-      edit(`/attendances/${selectedAttendId}`, obj)
+      edit(`${endPoint.Attendances}/${selectedAttendId}`, obj)
         .then(() => {
           dispatch({
             type: CLEAR_TAKE_ATTENDANCES,
             clear_take_attendance: true,
           });
+          strapi.notification.toggle({
+            type: "success",
+            message: { id: getTrad("attendances.update.success") },
+          });
         })
         .catch((err) => {
           console.log("Error in Save  student Attendance");
           console.log(err);
+          strapi.notification.toggle({
+            type: "warning",
+            message: { id: getTrad("edit.error") },
+          });
         });
     }
   };

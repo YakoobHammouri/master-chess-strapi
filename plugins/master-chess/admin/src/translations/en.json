@@ -14,6 +14,7 @@
   "CourseList.load.defualt": "Select ...",
   "CenterList.error.onload": "Error in load Center List",
   "takeAttendances.success": "The attendances successfully saved",
+  "attendances.update.success": "The attendances successfully updated",
   "takeAttendances.error": "Error in Take Attendances",
   "edit.error": "Error in update Data",
   "edit.success": "The data successfully updated",
@@ -26,8 +27,12 @@
   "attend.text.print": "print",
 
   "models.paymetn.take.payment": "Course Payment",
+  "models.paymetn.edit.payment": "Edit Payment",
+
   "models.paymetn.take.payment.Amount.Text": "Amount",
   "models.paymetn.take.payment.Month.Text": "Payment Month",
   "paymetn.save.Required": "The Field is Required",
-  "paymetn.save.amount.must.number": "The Amount is must be number"
+  "paymetn.save.amount.must.number": "The Amount is must be number",
+  "payment.get.student.payment.error": "Error in get Student Payment",
+  "takePayment.success": "The Payment successfully saved"
 }

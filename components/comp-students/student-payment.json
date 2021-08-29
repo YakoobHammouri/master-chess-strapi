@@ -14,7 +14,7 @@
       "model": "courses"
     },
     "date": {
-      "type": "datetime"
+      "type": "date"
     },
     "courseName": {
       "type": "string"

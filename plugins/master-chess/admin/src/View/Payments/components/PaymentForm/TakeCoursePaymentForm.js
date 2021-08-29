@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import moment from "moment";
 import { isNumber } from "lodash";
 import { useDispatch } from "react-redux";
 import { Inputs } from "@buffetjs/custom";
 import { Padded } from "@buffetjs/core";
-import {
-  SAVE_PAYMENT,
-  SAVE_PAYMENT_LOADING,
-} from "../../../../containers/Context/Payment/constants";
-
-import { useGet } from "../../../../hooks";
+import { SAVE_PAYMENT } from "../../../../containers/Context/Payment/constants";
 import { T } from "../../../../utils";
+import { useSaveNewPayment } from "../../../../hooks";
+
 import { Col, Row } from "reactstrap";
 
 const getCourseMonth = (date) => {
@@ -30,7 +26,8 @@ const getCourseMonth = (date) => {
 
 function TakeCoursePayment({ stdId, course }) {
   const dispatch = useDispatch();
-  const { get } = useGet();
+
+  const { onSubmitHandler } = useSaveNewPayment();
   const requiredText = T("paymetn.save.Required");
   const ampuntNumberText = T("paymetn.save.amount.must.number");
 
@@ -45,39 +42,6 @@ function TakeCoursePayment({ stdId, course }) {
 
   const monthRef = useRef(paymentMonth);
   const amountRef = useRef(paymentAmount);
-  const onSubmitHandler = async (e) => {
-    const ok = confirm("Are you sure to save the Payment?");
-
-    if (ok) {
-      let isValid = true;
-
-      if (!paymentAmount.value) {
-        setPaymentAmount((prev) => ({ ...prev, error: requiredText }));
-        isValid = false;
-      }
-
-      if (!paymentMonth.value) {
-        setPaymentMonth((prev) => ({ ...prev, error: requiredText }));
-        isValid = false;
-      }
-
-      if (!isNumber(paymentAmount.value)) {
-        setPaymentAmount((prev) => ({ ...prev, error: ampuntNumberText }));
-        isValid = false;
-      }
-
-      if (isValid === true) {
-        dispatch({
-          type: SAVE_PAYMENT_LOADING,
-          saveLoading: true,
-        });
-
-        console.log(`stdId 11111`, stdId);
-        const tempStdPayment = await get(`/student-payments?student=${stdId}`);
-        console.log("tempStdPayment 111 : ", tempStdPayment);
-      }
-    }
-  };
 
   const onPaymentMonthChange = ({ target: { value } }) => {
     setPaymentMonth((prev) => ({ ...prev, value }));
@@ -89,11 +53,41 @@ function TakeCoursePayment({ stdId, course }) {
     amountRef.current.value = value;
   };
 
+  const validateDate = async () => {
+    let isValid = true;
+
+    if (!paymentAmount.value) {
+      setPaymentAmount((prev) => ({ ...prev, error: requiredText }));
+      isValid = false;
+    }
+
+    if (!paymentMonth.value) {
+      setPaymentMonth((prev) => ({ ...prev, error: requiredText }));
+      isValid = false;
+    }
+
+    if (!isNumber(paymentAmount.value)) {
+      setPaymentAmount((prev) => ({ ...prev, error: ampuntNumberText }));
+      isValid = false;
+    }
+
+    if (isValid === true) {
+      try {
+        await onSubmitHandler(paymentAmount, paymentMonth, stdId, course);
+        setPaymentAmount({
+          value: null,
+          error: "",
+        });
+      } catch (err) {
+        console.log("Error in Take Course Payment From :", err);
+      }
+    }
+  };
   // set  onSubmitHandler on save payment
   useEffect(() => {
     dispatch({
       type: SAVE_PAYMENT,
-      savePament: onSubmitHandler,
+      savePament: validateDate,
     });
   }, []);
 

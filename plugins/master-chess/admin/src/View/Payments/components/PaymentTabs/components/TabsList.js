@@ -33,8 +33,8 @@ const TabsLsit = () => {
             });
           }}
         >
-          <TitleTabWrapper type={"coursePayment"}>
-            {T("models.paymetn.take.payment")}
+          <TitleTabWrapper type={"edit"}>
+            {T("models.paymetn.edit.payment")}
           </TitleTabWrapper>
         </div>
       </Tab>
