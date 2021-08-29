@@ -11,8 +11,6 @@ let needUpdate = false;
 module.exports = {
   lifecycles: {
     async beforeCreate(data) {
-      console.log(`data 111`, data);
-
       /*
       if std Temp is null, meaning the student does not have payment Record  so the payment Student  can creating , otherwise throw Error
      */

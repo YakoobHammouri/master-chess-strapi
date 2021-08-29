@@ -8,7 +8,7 @@ import useGetStudent from "./useGetStudent";
 import useGetStudentById from "./useGetStudentById";
 import useGetCourseById from "./useGetCourseById";
 import useCRUD from "./useCRUD";
-import useSaveNewPayment from "./useSaveNewPayment";
+import useSavePayment from "./useSavePayment";
 import * as endPoint from "./endPoint";
 
 export {
@@ -22,6 +22,6 @@ export {
   useGetStudent,
   useGetStudentById,
   useGetCourseById,
-  useSaveNewPayment,
+  useSavePayment,
   endPoint,
 };

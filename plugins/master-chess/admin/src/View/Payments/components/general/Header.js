@@ -1,7 +1,10 @@
 import React from "react";
 import { Header } from "@buffetjs/custom";
 import { useDispatch, useSelector } from "react-redux";
-import { REDUCER_NAME } from "../../../../containers/Context/Payment/constants";
+import {
+  REDUCER_NAME,
+  CLEAR_PAYMENT,
+} from "../../../../containers/Context/Payment/constants";
 
 function PaymentHeader() {
   const dispatch = useDispatch();
@@ -25,10 +28,7 @@ function PaymentHeader() {
         {
           label: "Clear",
           onClick: () => {
-            // dispatch({
-            //   type: CLEAR_TAKE_ATTENDANCES,
-            //   clear_take_attendance: true,
-            // });
+            dispatch({ type: CLEAR_PAYMENT, clear_Payment: true });
           },
           color: "cancel",
           type: "button",

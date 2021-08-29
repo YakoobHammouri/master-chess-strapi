@@ -10,6 +10,22 @@
     },
     {
       "method": "GET",
+      "path": "/student-payments/student/:id",
+      "handler": "student-payment.findStudentPayments",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/student-payments/student-course/:stdid/:cid",
+      "handler": "student-payment.findStudentPaymentByCourse",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/student-payments/count",
       "handler": "student-payment.count",
       "config": {
