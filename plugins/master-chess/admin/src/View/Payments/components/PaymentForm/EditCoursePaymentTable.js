@@ -37,19 +37,6 @@ function EditCoursePaymentTable({ rows, stdId, course }) {
         onClickRow={(e, data) => {
           setSelectedPayment(data);
           setIsOpenedCreateModal(true);
-
-          /*
-        
-          amount: 150
-course: 4
-courseName: "المستوى التقدم"
-date: "2021-08-28"
-month: null
-payment_id: 11
-student: 2
-student_payment_id: 7
-
-          */
         }}
         headers={headers}
         rows={rows}

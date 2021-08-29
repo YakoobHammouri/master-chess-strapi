@@ -18,7 +18,7 @@ import {
   UPDATE_EDIT_PAYMENT_Table,
 } from "../../../../../containers/Context/Payment/constants";
 
-const TakeCoursePayment = () => {
+const EditCoursePayment = () => {
   const dispatch = useDispatch();
   const { studentList } = useGetStudent();
   const { getStudentById } = useGetStudentById();
@@ -161,4 +161,4 @@ const TakeCoursePayment = () => {
   );
 };
 
-export default TakeCoursePayment;
+export default EditCoursePayment;

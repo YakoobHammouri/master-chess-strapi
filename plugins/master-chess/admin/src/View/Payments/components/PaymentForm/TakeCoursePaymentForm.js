@@ -24,7 +24,7 @@ const getCourseMonth = (date) => {
   return temp.month();
 };
 
-function TakeCoursePayment({
+function TakeCoursePaymentForm({
   stdId,
   course,
   amount,
@@ -113,7 +113,10 @@ function TakeCoursePayment({
       type: SAVE_PAYMENT,
       savePament: validateDate,
     });
-  }, []);
+    return () => {
+      console.log(`clean TakeCoursePaymentForm 111111111 `);
+    };
+  }, [dispatch]);
 
   return (
     <div
@@ -164,4 +167,4 @@ function TakeCoursePayment({
   );
 }
 
-export default TakeCoursePayment;
+export default TakeCoursePaymentForm;
