@@ -6,7 +6,7 @@ import { faFilePdf, faFileWord } from "@fortawesome/free-solid-svg-icons";
 import { T } from "../../utils";
 import { getTrad } from "../../utils";
 
-const Print = async (url, obj, LoadingHandler) => {
+const Print = async (url, obj, LoadingHandler, type) => {
   LoadingHandler(true);
   axios
     .post(url, obj, {
@@ -18,7 +18,7 @@ const Print = async (url, obj, LoadingHandler) => {
       link.href = url;
       link.setAttribute(
         "download",
-        `${obj.center}-${obj.course}-${obj.sdate}-${respones?.headers?.["content-disposition"]}`
+        `${obj.center}-${obj.course}-${obj.sdate}-${type}-${respones?.headers?.["content-disposition"]}`
       );
       document.body.appendChild(link);
       link.click();
@@ -33,7 +33,15 @@ const Print = async (url, obj, LoadingHandler) => {
     });
 };
 
-function index({ color, obj, isLoading, LoadingHandler, isDocx }) {
+function index({
+  color,
+  obj,
+  isLoading,
+  LoadingHandler,
+  isDocx,
+  isPayment,
+  type,
+}) {
   return (
     <Button
       color={color ?? "secondary"}
@@ -42,9 +50,11 @@ function index({ color, obj, isLoading, LoadingHandler, isDocx }) {
       isLoading={isLoading}
       onClick={async () => {
         if (isDocx) {
-          await Print("/master-chess/attend-word", obj, LoadingHandler);
+          await Print("/master-chess/attend-word", obj, LoadingHandler, type);
+        } else if (isPayment) {
+          await Print("/master-chess/payment-pdf", obj, LoadingHandler, type);
         } else {
-          await Print("/master-chess/attend-pdf", obj, LoadingHandler);
+          await Print("/master-chess/attend-pdf", obj, LoadingHandler, type);
         }
       }}
     />

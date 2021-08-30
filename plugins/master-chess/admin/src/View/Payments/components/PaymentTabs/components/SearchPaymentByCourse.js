@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Padded } from "@buffetjs/core";
+import { Padded, Flex } from "@buffetjs/core";
 import { Col, Row } from "reactstrap";
-import { Dropdowns } from "../../../../../components";
+import { Dropdowns, Print } from "../../../../../components";
 import { EditCoursePaymentTable } from "../../PaymentForm";
-import { getTrad } from "../../../../../utils";
+import { T } from "../../../../../utils";
 import { useCRUD, endPoint } from "../../../../../hooks";
 import {
   CLEAR_PAYMENT,
@@ -23,7 +23,7 @@ const EditCoursePayment = () => {
   const [selectCourse, setSelectCourse] = useState({});
   const [courseList, setCourseList] = useState([]);
   const [paymentList, setPaymentList] = useState([]);
-
+  const [isRuning, setIsRuning] = useState(false);
   // select Studeent
   useEffect(() => {
     get(endPoint.Courses)
@@ -42,6 +42,7 @@ const EditCoursePayment = () => {
               finished: i.finished,
               start: i.start,
               end: i.end,
+              center: i?.center?.name,
             },
           });
         });
@@ -88,6 +89,9 @@ const EditCoursePayment = () => {
     setSelectCourse(selected);
   };
 
+  const isRuningHandler = (status) => {
+    setIsRuning(status);
+  };
   return (
     <>
       <Row>
@@ -112,10 +116,39 @@ const EditCoursePayment = () => {
         <Col>
           <Padded top bottom size="smd">
             {paymentList?.length ? (
-              <EditCoursePaymentTable
-                isSearchByCourse={true}
-                rows={paymentList}
-              />
+              <>
+                <Flex justifyContent="flex-end">
+                  <Padded left right top bottom size="sm">
+                    <Print
+                      color={"primary"}
+                      printId={"pdfstd"}
+                      obj={{
+                        center: selectCourse?.meta?.center ?? "---",
+                        course: selectCourse?.meta?.name ?? "---",
+                        sdate: selectCourse?.meta?.start ?? "----",
+                        edate: selectCourse?.meta?.end ?? "----",
+                        headers: [
+                          T("table.tableHeader.RowON"),
+                          "Student Name",
+                          T("table.tableHeaer.courseName"),
+                          T("table.tableHeaer.amount"),
+                          T("table.tableHeaer.month"),
+                          T("table.tableHeaer.paymentDate"),
+                        ],
+                        atted: paymentList,
+                      }}
+                      isLoading={isRuning}
+                      LoadingHandler={isRuningHandler}
+                      isPayment={true}
+                      type={"payment"}
+                    />
+                  </Padded>
+                </Flex>
+                <EditCoursePaymentTable
+                  isSearchByCourse={true}
+                  rows={paymentList}
+                />
+              </>
             ) : null}
           </Padded>
         </Col>

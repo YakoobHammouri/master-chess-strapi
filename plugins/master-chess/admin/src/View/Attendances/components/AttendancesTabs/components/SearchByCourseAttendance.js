@@ -196,6 +196,7 @@ const EditAttendance = () => {
                       isLoading={isRuning}
                       LoadingHandler={isRuningHandler}
                       isDocx={false}
+                      type={"attendance"}
                     />
                   </Padded>
                   <Padded left right top bottom size="sm">
@@ -213,6 +214,7 @@ const EditAttendance = () => {
                       isLoading={isRuning}
                       LoadingHandler={isRuningHandler}
                       isDocx={true}
+                      type={"attendance"}
                     />
                   </Padded>
                 </Flex>
