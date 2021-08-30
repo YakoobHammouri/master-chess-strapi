@@ -140,6 +140,7 @@ const EditCoursePayment = () => {
                       isLoading={isRuning}
                       LoadingHandler={isRuningHandler}
                       isPayment={true}
+                      type={"payment"}
                     />
                   </Padded>
                 </Flex>

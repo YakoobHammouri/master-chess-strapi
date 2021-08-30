@@ -149,7 +149,6 @@ const EditAttendance = () => {
     dispatch({ type: SELECT_COURSE_ID, courseId: selected.value });
   };
 
-  
   const isRuningHandler = (status) => {
     setIsRuning(status);
   };
@@ -197,6 +196,7 @@ const EditAttendance = () => {
                       isLoading={isRuning}
                       LoadingHandler={isRuningHandler}
                       isDocx={false}
+                      type={"attendance"}
                     />
                   </Padded>
                   <Padded left right top bottom size="sm">
@@ -214,6 +214,7 @@ const EditAttendance = () => {
                       isLoading={isRuning}
                       LoadingHandler={isRuningHandler}
                       isDocx={true}
+                      type={"attendance"}
                     />
                   </Padded>
                 </Flex>
