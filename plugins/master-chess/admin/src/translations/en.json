@@ -33,6 +33,8 @@
   "app.components.Button.cancel": "Cancel",
   "models.paymetn.take.payment": "Course Payment",
   "models.paymetn.edit.payment": "Edit Payment",
+  "models.paymetn.search.payment.student": "search by student",
+  "models.paymetn.search.payment.course": "search by Course",
 
   "models.paymetn.take.payment.Amount.Text": "Amount",
   "models.paymetn.take.payment.Month.Text": "Payment Month",

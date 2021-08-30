@@ -38,6 +38,34 @@ const TabsLsit = () => {
           </TitleTabWrapper>
         </div>
       </Tab>
+      <Tab key={"searchstdPayment"}>
+        <div
+          onClick={() => {
+            dispatch({
+              type: SAVE_PAYMENT,
+              savePament: null,
+            });
+          }}
+        >
+          <TitleTabWrapper type={"searchstdPayment"}>
+            {T("models.paymetn.search.payment.student")}
+          </TitleTabWrapper>
+        </div>
+      </Tab>
+      <Tab key={"searchcoursePayment"}>
+        <div
+          onClick={() => {
+            dispatch({
+              type: SAVE_PAYMENT,
+              savePament: null,
+            });
+          }}
+        >
+          <TitleTabWrapper type={"searchcoursePayment"}>
+            {T("models.paymetn.search.payment.course")}
+          </TitleTabWrapper>
+        </div>
+      </Tab>
     </Tabs>
   );
 };
