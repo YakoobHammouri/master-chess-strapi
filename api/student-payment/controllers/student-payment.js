@@ -88,8 +88,6 @@ module.exports = {
     }
 
     const knex = strapi.connections.default;
-
-    // JOIN students on student_payments.student = students.id
     const result = await knex
       .select("*")
       .from("student_payments")
@@ -109,9 +107,6 @@ module.exports = {
       .where("course", cid)
       .orderBy("student_payments.student", "asc");
 
-    console.log(`result`, result);
-
-    
     const temp = result?.map((row) => {
       return {
         student_payment_id: row.student_payment_id,
