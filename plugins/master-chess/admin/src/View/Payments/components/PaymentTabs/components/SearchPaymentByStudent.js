@@ -100,16 +100,6 @@ const SearchPaymentByStudent = () => {
             </Padded>
           </Padded>
         </Col>
-        {/* <Col>
-          <Dropdowns
-            name={"CourseList"}
-            lableTxt={"CourseList.label"}
-            value={selectCourse}
-            onValChange={onCourseChange}
-            lsit={courseList}
-            isDisabled={courseList.length === 0 ? true : false}
-          />
-        </Col> */}
       </Row>
       <Row>
         <Col>
@@ -123,58 +113,3 @@ const SearchPaymentByStudent = () => {
 };
 
 export default SearchPaymentByStudent;
-
-{
-  /* <Banner
-              category={"ttttt"}
-              isFirst={true}
-              isOpen={isOpen}
-              onToggle={(cat) => {
-                setIsOpen((prev) => !prev);
-              }}
-            />
-            <Collapse
-              isOpen={isOpen}
-              onExited={() => {
-                alert("onExited");
-              }}
-            >
-              <EditCoursePaymentTable
-                rows={paymentList}
-                stdId={selectStudent?.value}
-                course={selectCourse}
-              />
-            </Collapse> */
-}
-
-{
-  /* <Banner
-              category={"ttttt"}
-              isFirst={true}
-              isOpen={isOpen}
-              onToggle={(cat) => {
-                setIsOpen((prev) => !prev);
-              }}
-            />
-            <Collapse
-              isOpen={isOpen}
-              onExited={() => {
-                alert("onExited");
-              }}
-            >
-              <EditCoursePaymentTable
-                rows={paymentList}
-                stdId={selectStudent?.value}
-                course={selectCourse}
-              />
-            </Collapse> */
-}
-{
-  /* {paymentList?.length ? (
-              <EditCoursePaymentTable
-                rows={paymentList}
-                stdId={selectStudent?.value}
-                course={selectCourse}
-              />
-            ) : null} */
-}
