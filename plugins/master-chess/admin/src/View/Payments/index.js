@@ -12,6 +12,7 @@ import {
   TakeCoursePayment,
   EditCoursePayment,
   SearchPaymentByStudent,
+  SearchPaymentByCourse,
 } from "./components/PaymentTabs";
 
 import { Padded, Separator } from "@buffetjs/core";
@@ -41,7 +42,9 @@ function index() {
             <TabPanel>
               <SearchPaymentByStudent />
             </TabPanel>
-            <TabPanel>{/* <SearchByCourseAttendance /> */}</TabPanel>
+            <TabPanel>
+              <SearchPaymentByCourse />
+            </TabPanel>
           </TabsPanel>
         </TabsNav>
       </Padded>

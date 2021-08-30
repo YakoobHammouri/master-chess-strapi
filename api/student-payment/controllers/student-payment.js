@@ -77,4 +77,55 @@ module.exports = {
     ctx.status = 200;
     return temp;
   },
+  findPaymentForCourse: async (ctx) => {
+    const { cid } = ctx.params;
+
+    if (!cid) {
+      ctx.status = 400;
+      return ctx.send({
+        message: "Course id is required",
+      });
+    }
+
+    const knex = strapi.connections.default;
+
+    // JOIN students on student_payments.student = students.id
+    const result = await knex
+      .select("*")
+      .from("student_payments")
+      .join("students", "student_payments.student", "=", "students.id")
+      .join(
+        "student_payments_components",
+        "student_payments.id",
+        "=",
+        "student_payments_components.student_payment_id"
+      )
+      .join(
+        "components_comp_students_student_payments",
+        "components_comp_students_student_payments.id",
+        "=",
+        "student_payments_components.component_id"
+      )
+      .where("course", cid)
+      .orderBy("student_payments.student", "asc");
+
+    console.log(`result`, result);
+
+    
+    const temp = result?.map((row) => {
+      return {
+        student_payment_id: row.student_payment_id,
+        payment_id: row.id,
+        studentId: row.student,
+        student: row.name,
+        amount: row.amount,
+        course: row.course,
+        date: row.date,
+        courseName: row.courseName,
+        month: row.month,
+      };
+    });
+    ctx.status = 200;
+    return temp;
+  },
 };
