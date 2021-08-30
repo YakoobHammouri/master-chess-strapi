@@ -13,7 +13,7 @@ module.exports = {
       try {
         result?.studentAttendance?.forEach((std) => {
           if (!std.studentName) {
-            console.log("std 111 :  ", std);
+            
             std.studentName = std.student.name;
             isLoack = true;
             needUpdate = true;

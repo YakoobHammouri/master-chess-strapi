@@ -26,6 +26,14 @@
     },
     {
       "method": "GET",
+      "path": "/student-payments/payments-course/:cid",
+      "handler": "student-payment.findPaymentForCourse",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/student-payments/count",
       "handler": "student-payment.count",
       "config": {

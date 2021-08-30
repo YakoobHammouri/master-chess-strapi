@@ -3,7 +3,13 @@ import { Table } from "@buffetjs/core";
 import EditModel from "./EditModel";
 import { T } from "../../../../utils";
 
-function EditCoursePaymentTable({ rows, stdId, course, isSearch }) {
+function EditCoursePaymentTable({
+  rows,
+  stdId,
+  course,
+  isSearch,
+  isSearchByCourse,
+}) {
   const headers = [
     {
       name: T("table.tableHeader.RowON"),
@@ -29,6 +35,11 @@ function EditCoursePaymentTable({ rows, stdId, course, isSearch }) {
 
   if (isSearch) {
     headers.splice(0, 2);
+  } else if (isSearchByCourse) {
+    headers.splice(1, 0, {
+      name: "Student Name",
+      value: "student",
+    });
   }
 
   const [isOpenedCreateModal, setIsOpenedCreateModal] = useState(false);
@@ -39,7 +50,7 @@ function EditCoursePaymentTable({ rows, stdId, course, isSearch }) {
     <>
       <Table
         onClickRow={(e, data) => {
-          if (!isSearch) {
+          if (!isSearch && !isSearchByCourse) {
             setSelectedPayment(data);
             setIsOpenedCreateModal(true);
           }
@@ -47,7 +58,7 @@ function EditCoursePaymentTable({ rows, stdId, course, isSearch }) {
         headers={headers}
         rows={rows}
       />
-      {!isSearch ? (
+      {!isSearch && !isSearchByCourse ? (
         <EditModel
           onClose={handleToggleModalCreate}
           isOpened={isOpenedCreateModal}
