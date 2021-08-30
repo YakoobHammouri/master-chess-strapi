@@ -33,7 +33,7 @@ const Print = async (url, obj, LoadingHandler) => {
     });
 };
 
-function index({ color, obj, isLoading, LoadingHandler, isDocx }) {
+function index({ color, obj, isLoading, LoadingHandler, isDocx, isPayment }) {
   return (
     <Button
       color={color ?? "secondary"}
@@ -43,6 +43,8 @@ function index({ color, obj, isLoading, LoadingHandler, isDocx }) {
       onClick={async () => {
         if (isDocx) {
           await Print("/master-chess/attend-word", obj, LoadingHandler);
+        } else if (isPayment) {
+          await Print("/master-chess/payment-pdf", obj, LoadingHandler);
         } else {
           await Print("/master-chess/attend-pdf", obj, LoadingHandler);
         }

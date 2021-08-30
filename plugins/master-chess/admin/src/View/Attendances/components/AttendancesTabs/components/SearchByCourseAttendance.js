@@ -149,6 +149,7 @@ const EditAttendance = () => {
     dispatch({ type: SELECT_COURSE_ID, courseId: selected.value });
   };
 
+  
   const isRuningHandler = (status) => {
     setIsRuning(status);
   };

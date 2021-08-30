@@ -112,5 +112,6 @@ exports
 *.cache
 build
 .strapi-updater.json
-public/PDF/Attend/*
-public/docx/Attend/*
+public/PDF/*
+public/docx/*
+
