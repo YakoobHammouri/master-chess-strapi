@@ -6,11 +6,11 @@
   "main": "./public/electron.js",
   "scripts": {
     "dev": "strapi develop",
-    "start": "strapi start",
+    "start": "concurrently -k \"npm run strapi\" \"npm:electron\"",
     "build": "strapi build -- --clean",
-    "strapi": "strapi",
+    "strapi": "strapi start",
     "adev": "npm run dev -- --watch-admin",
-    "edev": "concurrently -k \"npm start\" \"npm:electron\"",
+    "edev": "concurrently -k \"npm run strapi\" \"npm:electron\"",
     "electron": "wait-on tcp:1401 && electron ."
   },
   "devDependencies": {
