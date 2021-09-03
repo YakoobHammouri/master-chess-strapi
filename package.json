@@ -3,16 +3,30 @@
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
+  "main": "./public/electron.js",
   "scripts": {
     "dev": "strapi develop",
-    "start": "strapi start",
+    "start2": "concurrently -k \"npm run strapi\" \"npm:electron\"",
     "build": "strapi build -- --clean",
-    "strapi": "strapi",
-    "adev": "npm run dev -- --watch-admin"
+    "strapi": "strapi start",
+    "adev": "npm run dev -- --watch-admin",
+    "edev": "concurrently -k \"npm run strapi\" \"npm:electron\"",
+    "electron": "wait-on tcp:1401 && electron .",
+    "package-win": "electron-packager .  --overwrite --asar=true --platform=win32 --arch=ia32 --icon=public/uploads/logo.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Master Chess\"",
+    "electron-pack": "electron-builder -c.extraMetadata.main=public/electron.js",
+    "preelectron-pack": "strapi build",
+    "start": "electron public/electron.js"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "electron": "^14.0.0",
+    "electron-builder": "^22.11.7",
+    "electron-packager": "^15.3.0",
+    "wait-on": "^6.0.0"
+  },
   "dependencies": {
     "axios": "^0.21.1",
+    "electron-squirrel-startup": "^1.0.0",
     "html-pdf": "^3.0.1",
     "html-to-docx": "^1.2.2",
     "knex": "0.21.18",
