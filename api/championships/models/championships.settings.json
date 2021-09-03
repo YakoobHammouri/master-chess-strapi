@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "championships",
+  "info": {
+    "name": "championships",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "course",
+        "Indoor",
+        "public"
+      ],
+      "required": true
+    },
+    "location": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "numberOfRounds": {
+      "required": true,
+      "type": "integer"
+    },
+    "system": {
+      "type": "enumeration",
+      "enum": [
+        "Swiss",
+        "Arena",
+        "Robin"
+      ]
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "RoundTime": {
+      "type": "string",
+      "required": true
+    },
+    "course": {
+      "model": "courses"
+    },
+    "contenders": {
+      "type": "component",
+      "repeatable": true,
+      "component": "comp-students.championship"
+    }
+  }
+}
