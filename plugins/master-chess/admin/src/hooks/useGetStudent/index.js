@@ -30,7 +30,7 @@ const useGetStudent = () => {
     (state) => state.get(REDUCER_NAME).studentList
   );
 
-  useEffect(() => {
+  const loadStudentList = () => {
     fetchStudentList()
       .then((std) => {
         if (!std) {
@@ -49,9 +49,31 @@ const useGetStudent = () => {
       .catch((err) => {
         console.log(`err`, err);
       });
+  };
+
+  useEffect(() => {
+    loadStudentList();
+    // fetchStudentList()
+    //   .then((std) => {
+    //     if (!std) {
+    //       return;
+    //     }
+
+    //     const stdList = std.map((prod) => {
+    //       return {
+    //         value: `${prod.id}`,
+    //         label: prod.name,
+    //       };
+    //     });
+    //     dispatch({ type: STUDENT_LiST, stdList });
+    //     return stdList;
+    //   })
+    //   .catch((err) => {
+    //     console.log(`err`, err);
+    //   });
   }, []);
 
-  return { studentList };
+  return { studentList, loadStudentList };
 };
 
 export default useGetStudent;

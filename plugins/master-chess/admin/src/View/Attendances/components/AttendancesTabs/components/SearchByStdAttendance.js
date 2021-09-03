@@ -18,7 +18,7 @@ import {
 
 const SearchByStdAttendance = () => {
   const dispatch = useDispatch();
-  const { studentList } = useGetStudent();
+  const { studentList, loadStudentList } = useGetStudent();
   const { getStudentById } = useGetStudentById();
   const { getCourseById } = useGetCourseById();
 
@@ -90,9 +90,13 @@ const SearchByStdAttendance = () => {
 
   // clear
   useEffect(() => {
-    setSelectStudent({});
-    setSelectCourse({});
-    dispatch({ type: CLEAR_TAKE_ATTENDANCES, clear_take_attendance: false });
+    if (clear === true) {
+      setCourseList([]);
+      setSelectStudent({});
+      setSelectCourse({});
+      loadStudentList();
+      dispatch({ type: CLEAR_TAKE_ATTENDANCES, clear_take_attendance: false });
+    }
   }, [clear]);
 
   const onStudentChange = (selected) => {
