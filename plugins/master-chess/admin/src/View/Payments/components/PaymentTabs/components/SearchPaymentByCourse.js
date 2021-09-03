@@ -23,7 +23,7 @@ const EditCoursePayment = () => {
   const [selectCourse, setSelectCourse] = useState({});
   const [courseList, setCourseList] = useState([]);
   const [paymentList, setPaymentList] = useState([]);
-  const [isRuning, setIsRuning] = useState(false);
+  const [isRuning, setIsRuning] = useState({ pdf: false, docx: false });
   // select Studeent
   useEffect(() => {
     get(endPoint.Courses)
@@ -66,17 +66,9 @@ const EditCoursePayment = () => {
     }
   }, [selectCourse]);
 
-  // clear
-  // useEffect(() => {
-  //   setSelectCourse({});
-  //   dispatch({ type: CLEAR_PAYMENT, clear_Payment: false });
-  // }, [clear]);
-
   // update Table
   useEffect(() => {
     if (updateTable) {
-      getStudentCourse();
-
       // reset value to false
       dispatch({
         type: UPDATE_EDIT_PAYMENT_Table,
@@ -89,8 +81,12 @@ const EditCoursePayment = () => {
     setSelectCourse(selected);
   };
 
-  const isRuningHandler = (status) => {
-    setIsRuning(status);
+  const isRuningHandler = (status, type) => {
+    if (type === "pdf") {
+      setIsRuning((prev) => ({ ...prev, pdf: status }));
+    } else if (type === "docx") {
+      setIsRuning((prev) => ({ ...prev, docx: status }));
+    }
   };
   return (
     <>
@@ -137,7 +133,7 @@ const EditCoursePayment = () => {
                         ],
                         atted: paymentList,
                       }}
-                      isLoading={isRuning}
+                      isLoading={isRuning.pdf}
                       LoadingHandler={isRuningHandler}
                       isPayment={true}
                       type={"payment"}

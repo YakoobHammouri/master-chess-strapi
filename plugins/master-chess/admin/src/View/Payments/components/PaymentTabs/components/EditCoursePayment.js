@@ -94,10 +94,12 @@ const EditCoursePayment = () => {
 
   // clear
   useEffect(() => {
-    setSelectStudent({});
-    setSelectCourse({});
-    setPaymentList([]);
-    dispatch({ type: CLEAR_PAYMENT, clear_Payment: false });
+    if (clear) {
+      setSelectStudent({});
+      setSelectCourse({});
+      setPaymentList([]);
+      dispatch({ type: CLEAR_PAYMENT, clear_Payment: false });
+    }
   }, [clear]);
 
   // update Table
@@ -147,13 +149,18 @@ const EditCoursePayment = () => {
       <Row>
         <Col>
           <Padded top bottom size="smd">
-            {paymentList?.length ? (
+            <EditCoursePaymentTable
+              rows={paymentList}
+              stdId={selectStudent?.value}
+              course={selectCourse}
+            />
+            {/* {paymentList?.length ? (
               <EditCoursePaymentTable
                 rows={paymentList}
                 stdId={selectStudent?.value}
                 course={selectCourse}
               />
-            ) : null}
+            ) : null} */}
           </Padded>
         </Col>
       </Row>

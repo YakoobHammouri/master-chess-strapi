@@ -6,8 +6,8 @@ import { faFilePdf, faFileWord } from "@fortawesome/free-solid-svg-icons";
 import { T } from "../../utils";
 import { getTrad } from "../../utils";
 
-const Print = async (url, obj, LoadingHandler, type) => {
-  LoadingHandler(true);
+const Print = async (url, obj, LoadingHandler, type, ft) => {
+  LoadingHandler(true, ft);
   axios
     .post(url, obj, {
       responseType: "blob",
@@ -24,12 +24,22 @@ const Print = async (url, obj, LoadingHandler, type) => {
       link.click();
       link.parentNode.removeChild(link);
 
-      LoadingHandler(false);
+      strapi.notification.toggle({
+        type: "success",
+        message: { id: getTrad("create.file.success") },
+      });
+
       return "Ok";
     })
     .catch((err) => {
       console.error("Eroro :", err);
-      LoadingHandler(false);
+      strapi.notification.toggle({
+        type: "warning",
+        message: { id: getTrad("create.file.error") },
+      });
+    })
+    .finally(() => {
+      LoadingHandler(false, ft);
     });
 };
 
@@ -50,11 +60,29 @@ function index({
       isLoading={isLoading}
       onClick={async () => {
         if (isDocx) {
-          await Print("/master-chess/attend-word", obj, LoadingHandler, type);
+          await Print(
+            "/master-chess/attend-word",
+            obj,
+            LoadingHandler,
+            type,
+            "docx"
+          );
         } else if (isPayment) {
-          await Print("/master-chess/payment-pdf", obj, LoadingHandler, type);
+          await Print(
+            "/master-chess/payment-pdf",
+            obj,
+            LoadingHandler,
+            type,
+            "pdf"
+          );
         } else {
-          await Print("/master-chess/attend-pdf", obj, LoadingHandler, type);
+          await Print(
+            "/master-chess/attend-pdf",
+            obj,
+            LoadingHandler,
+            type,
+            "pdf"
+          );
         }
       }}
     />

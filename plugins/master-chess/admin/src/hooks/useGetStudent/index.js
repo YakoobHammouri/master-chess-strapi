@@ -30,7 +30,7 @@ const useGetStudent = () => {
     (state) => state.get(REDUCER_NAME).studentList
   );
 
-  useEffect(() => {
+  const loadStudentList = () => {
     fetchStudentList()
       .then((std) => {
         if (!std) {
@@ -49,9 +49,13 @@ const useGetStudent = () => {
       .catch((err) => {
         console.log(`err`, err);
       });
+  };
+
+  useEffect(() => {
+    loadStudentList();
   }, []);
 
-  return { studentList };
+  return { studentList, loadStudentList };
 };
 
 export default useGetStudent;
