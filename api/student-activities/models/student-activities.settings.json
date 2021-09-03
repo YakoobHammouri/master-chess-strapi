@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "student_activities",
+  "info": {
+    "name": "Student Activities"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "student": {
+      "model": "students"
+    }
+  }
+}
