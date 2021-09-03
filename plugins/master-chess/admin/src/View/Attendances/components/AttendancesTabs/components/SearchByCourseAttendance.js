@@ -36,7 +36,7 @@ const EditAttendance = () => {
   const { getCourseList } = useGetCourse();
   const { getAttendancesById } = useGetAttendancesById();
 
-  const [isRuning, setIsRuning] = useState(false);
+  const [isRuning, setIsRuning] = useState({ pdf: false, docx: false });
   const [selectcenter, setSelectCenter] = useState({});
   const [selectCourse, setSelectCourse] = useState({});
   const [headerAttendList, setHeaderAttendList] = useState([]);
@@ -149,8 +149,12 @@ const EditAttendance = () => {
     dispatch({ type: SELECT_COURSE_ID, courseId: selected.value });
   };
 
-  const isRuningHandler = (status) => {
-    setIsRuning(status);
+  const isRuningHandler = (status, type) => {
+    if (type === "pdf") {
+      setIsRuning((prev) => ({ ...prev, pdf: status }));
+    } else if (type === "docx") {
+      setIsRuning((prev) => ({ ...prev, docx: status }));
+    }
   };
   return (
     <>
@@ -193,7 +197,7 @@ const EditAttendance = () => {
                         headers: headerAttendList,
                         atted: courseAttendList,
                       }}
-                      isLoading={isRuning}
+                      isLoading={isRuning.pdf}
                       LoadingHandler={isRuningHandler}
                       isDocx={false}
                       type={"attendance"}
@@ -211,7 +215,7 @@ const EditAttendance = () => {
                         headers: headerAttendList,
                         atted: courseAttendList,
                       }}
-                      isLoading={isRuning}
+                      isLoading={isRuning.docx}
                       LoadingHandler={isRuningHandler}
                       isDocx={true}
                       type={"attendance"}

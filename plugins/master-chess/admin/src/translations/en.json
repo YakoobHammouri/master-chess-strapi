@@ -31,6 +31,9 @@
   "attendances.text.Yes": "حاضر",
   "attend.text.print": "print",
   "app.components.Button.cancel": "Cancel",
+  "create.file.success": "The File successfully generated",
+  "create.file.error": "Sorry, Some Error happened in generate file",
+
   "models.paymetn.take.payment": "Course Payment",
   "models.paymetn.edit.payment": "Edit Payment",
   "models.paymetn.search.payment.student": "search by student",
