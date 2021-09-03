@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_comp_students_championships",
+  "info": {
+    "name": "championship",
+    "icon": "allergies",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "first_student": {
+      "model": "students"
+    },
+    "second_student": {
+      "model": "students"
+    },
+    "firstResult": {
+      "type": "enumeration",
+      "enum": [
+        "win",
+        "loss",
+        "draw"
+      ]
+    },
+    "secondResult": {
+      "type": "enumeration",
+      "enum": [
+        "win",
+        "loss",
+        "draw"
+      ]
+    },
+    "lossType": {
+      "type": "enumeration",
+      "enum": [
+        "Checkmate",
+        "time"
+      ]
+    }
+  }
+}
