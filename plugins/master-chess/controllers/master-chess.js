@@ -16,7 +16,7 @@ const createFile = (
       const rootDir = process.cwd();
 
       const filepath2 = Path.resolve(
-        `${rootDir}/public/uploads/print/AttendCourseTable.html`
+        `${rootDir}/public/print/AttendCourseTable.html`
       );
 
       // console.log(`filePath 1111111`, filePath);
@@ -82,12 +82,10 @@ const createFile = (
         ? Path.resolve(`${rootDir}/public/PDF/Payment/${fileName}`)
         : Path.resolve(`${rootDir}/public/PDF/Attend/${fileName}`);
 
-      console.log(`pdfpath 11111111`, pdfpath);
-
       var html = fs.readFileSync(filepath2, "utf8");
 
       const objcompiled = {
-        logo: `${strapi.config.get("server.url")}/uploads/logo.png`,
+        logo: `${strapi.config.get("server.url")}/logo.png`,
         center: center ?? "---",
         course: course,
         sdate: sdate,

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Document</title>
+  <style>
+    .elYMNl table {
+      width: 100%;
+      min-width: 500px;
+      font-family: "Lato";
+      overflow: hidden;
+      border-collapse: collapse;
+    }
+
+
+    .elYMNl thead tr {
+      line-height: 0.1rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      border-bottom: 2px solid rgb(225, 225, 225);
+    }
+
+    .elYMNl tr {
+      padding-left: 2.5em;
+      padding-right: 2.5em;
+      text-align: left;
+    }
+
+    .elYMNl thead tr th {
+      background-color: #F3F3F4;
+      height: 36px;
+    }
+
+    .elYMNl tr th,
+    .elYMNl tr td {
+      font-size: 1.3rem;
+      padding: 0 15px;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    tr {
+      padding: 1px;
+    }
+
+    td {
+      padding: 4px 8px !important;
+    }
+
+    .d-flex,
+    .d-sm-flex {
+      display: flex;
+    }
+
+    .justify-content-around {
+      justify-content: space-around;
+    }
+
+    .mx-2 {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+
+    .pb-sm-1 {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .table {
+      width: 100%;
+      margin-bottom: 16px;
+      color: #212529;
+      vertical-align: top;
+      caption-side: bottom;
+      border-collapse: collapse;
+    }
+
+
+    *,
+    ::after,
+    ::before {
+      box-sizing: border-box;
+    }
+
+    .table>thead {
+      vertical-align: bottom;
+    }
+
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+
+    tr {
+      border-bottom: 1px solid #ddd;
+
+      height: 50px !important;
+    }
+
+    tbody>tr:nth-of-type(even) {
+      background-color: #f9f9f9;
+
+    }
+
+    td {
+      margin-top: 16px !important;
+      margin-bottom: 16px !important;
+    }
+  </style>
+
+
+
+</head>
+
+
+<body style="width: 95%; padding: 30px; display: table;
+    margin-left: auto;
+    margin-right: auto;">
+  <!-- border-bottom: 2px solid #b8b8b8; -->
+  <header style=" margin-bottom: 25px;">
+    <div style="float: right; width: 50%;">
+      <div>
+        <div style="padding-top: 8px; padding-bottom: 8px;">
+          <h4 style="float: right;">المركز : </h4>
+          <h4 style="float: right;" class="mx-2">
+            <%= center %>
+          </h4>
+        </div>
+        <br />
+        <div style="padding-top: 8px; padding-bottom: 8px;">
+          <h4 style="float: right;"> الدورة :</h4>
+          <h4 style="float: right;" class="mx-2">
+            <%= course %>
+          </h4>
+        </div>
+        <br />
+        <div style="padding-top: 8px; padding-bottom: 8px;">
+          <h4 style="float: right;"> تاريخ البداية :</h4>
+          <h4 style="float: right;" class="mx-2">
+            <%= sdate %>
+          </h4>
+        </div>
+        <br />
+        <div style="padding-top: 8px; padding-bottom: 8px;">
+          <h4 style="float: right;"> تاريخ الانتهاء :</h4>
+          <h4 style="float: right;" class="mx-2">
+            <%= edate %>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div style="float:right; width: 40%;">
+      <div style="float: left; vertical-align: middle;">
+        <img src=" <%=logo %> " width="100" height="100" />
+      </div>
+
+    </div>
+    <br />
+  </header>
+
+  <div style="clear: both; padding-top: 8px; padding-bottom: 8px;"></div>
+  <hr style="clear: both;" />
+  <div style="clear: both; padding-top: 8px; padding-bottom: 8px;"></div>
+  <section class="container-fluid">
+    <!-- class="sc-jsSDDP elYMNl " -->
+    <!-- <div style="border-bottom: 2px solid #b8b8b8;"></div> -->
+    <div style="direction: rtl;">
+      <table class="table table-hover" id="pdfstd">
+        <thead>
+          <%= theader %>
+        </thead>
+        <tbody>
+          <%= atbody %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer>
+  </footer>
+</body>
+
+</html>
