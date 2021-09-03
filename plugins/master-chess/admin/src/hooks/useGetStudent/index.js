@@ -53,24 +53,6 @@ const useGetStudent = () => {
 
   useEffect(() => {
     loadStudentList();
-    // fetchStudentList()
-    //   .then((std) => {
-    //     if (!std) {
-    //       return;
-    //     }
-
-    //     const stdList = std.map((prod) => {
-    //       return {
-    //         value: `${prod.id}`,
-    //         label: prod.name,
-    //       };
-    //     });
-    //     dispatch({ type: STUDENT_LiST, stdList });
-    //     return stdList;
-    //   })
-    //   .catch((err) => {
-    //     console.log(`err`, err);
-    //   });
   }, []);
 
   return { studentList, loadStudentList };
