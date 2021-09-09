@@ -38,6 +38,7 @@ const SearchPaymentByStudent = () => {
       );
       return (
         <BannerItem
+          key={i}
           name={payment?.course?.name ?? "---"}
           isFirst={i === 0}
           paymentList={tempList}
@@ -86,9 +87,9 @@ const SearchPaymentByStudent = () => {
     <>
       <Row>
         <Col>
-          <Padded id="444" left right size={"lg"}>
-            <Padded id="444" left right size={"lg"}>
-              <Padded id="444" left right size={"lg"}>
+          <Padded left right size={"lg"}>
+            <Padded left right size={"lg"}>
+              <Padded left right size={"lg"}>
                 <Dropdowns
                   name={"StudentList"}
                   lableTxt={"StudentList.label"}
