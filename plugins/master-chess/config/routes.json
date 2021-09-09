@@ -31,6 +31,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/payment-word",
+      "handler": "master-chess.paymentToWord",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

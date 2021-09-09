@@ -125,7 +125,7 @@ const EditCoursePayment = () => {
                         edate: selectCourse?.meta?.end ?? "----",
                         headers: [
                           T("table.tableHeader.RowON"),
-                          "Student Name",
+                          T("table.tableHeaer.stdName"),
                           T("table.tableHeaer.courseName"),
                           T("table.tableHeaer.amount"),
                           T("table.tableHeaer.month"),
@@ -139,9 +139,36 @@ const EditCoursePayment = () => {
                       type={"payment"}
                     />
                   </Padded>
+                  <Padded left right top bottom size="sm">
+                    <Print
+                      color={"primary"}
+                      printId={"pdfstd"}
+                      obj={{
+                        center: selectCourse?.meta?.center ?? "---",
+                        course: selectCourse?.meta?.name ?? "---",
+                        sdate: selectCourse?.meta?.start ?? "----",
+                        edate: selectCourse?.meta?.end ?? "----",
+                        headers: [
+                          T("table.tableHeader.RowON"),
+                          T("table.tableHeaer.stdName"),
+                          T("table.tableHeaer.courseName"),
+                          T("table.tableHeaer.amount"),
+                          T("table.tableHeaer.month"),
+                          T("table.tableHeaer.paymentDate"),
+                        ],
+                        atted: paymentList,
+                      }}
+                      isLoading={isRuning.docx}
+                      LoadingHandler={isRuningHandler}
+                      isDocx={true}
+                      isPayment={true}
+                      type={"payment"}
+                    />
+                  </Padded>
                 </Flex>
                 <EditCoursePaymentTable
                   isSearchByCourse={true}
+                  style={{ direction: "rtl" }}
                   rows={paymentList}
                 />
               </>

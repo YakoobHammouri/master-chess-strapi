@@ -15,6 +15,7 @@ const _onSaveHandler = async (
   dispatch,
   paymentAmount,
   paymentMonth,
+  paymentDate,
   stdId,
   course
 ) => {
@@ -29,6 +30,7 @@ const _onSaveHandler = async (
 
       const { data } = await get(`${endPoint.StudentPayment}/student/${stdId}`);
 
+      console.log(`paymentDate 11111111111111`, paymentDate.value);
       // the Student not Have the student payemt
       // add Student Payment
       if (data === null) {
@@ -40,7 +42,8 @@ const _onSaveHandler = async (
               course: {
                 id: course.value,
               },
-              date: new moment()._d,
+              date: paymentDate.value._d,
+              // date: new moment()._d,
               month: paymentMonth.value,
               courseName: course.meta.name,
             },
@@ -66,7 +69,8 @@ const _onSaveHandler = async (
           course: {
             id: course.value,
           },
-          date: new moment()._d,
+          date: paymentDate.value._d,
+          // date: new moment()._d,
           month: paymentMonth.value,
           courseName: course.meta.name,
         };
@@ -105,6 +109,7 @@ const _onEditHandler = async (
   dispatch,
   paymentAmount,
   paymentMonth,
+  paymentDate,
   stdId,
   course,
   paymentId
@@ -132,6 +137,8 @@ const _onEditHandler = async (
         const obj = data.Payments[index];
         obj.amount = paymentAmount.value;
         obj.month = paymentMonth.value;
+        obj.date = paymentDate.value._d;
+        console.log(`obj 111111111`, obj);
         data.Payments[index] = obj;
         await edit(`${endPoint.StudentPayment}/${data?.id}`, data);
         dispatch({
@@ -166,7 +173,13 @@ const _onEditHandler = async (
 function useSavePayment() {
   const { add, get, edit } = useCRUD();
   const dispatch = useDispatch();
-  const onSaveHandler = async (paymentAmount, paymentMonth, stdId, course) => {
+  const onSaveHandler = async (
+    paymentAmount,
+    paymentMonth,
+    paymentDate,
+    stdId,
+    course
+  ) => {
     return new Promise(async (r, rej) => {
       try {
         const result = await _onSaveHandler(
@@ -176,6 +189,7 @@ function useSavePayment() {
           dispatch,
           paymentAmount,
           paymentMonth,
+          paymentDate,
           stdId,
           course
         );
@@ -193,6 +207,7 @@ function useSavePayment() {
   const onEditHandler = async (
     paymentAmount,
     paymentMonth,
+    paymentDate,
     stdId,
     course,
     paymentId
@@ -205,6 +220,7 @@ function useSavePayment() {
           dispatch,
           paymentAmount,
           paymentMonth,
+          paymentDate,
           stdId,
           course,
           paymentId

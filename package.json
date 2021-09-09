@@ -6,15 +6,18 @@
   "scripts": {
     "dev": "strapi develop",
     "start": "strapi start",
+    "pstart": "NODE_ENV=production strapi start",
     "build": "strapi build -- --clean",
     "strapi": "strapi",
-    "adev": "npm run dev -- --watch-admin"
+    "adev": "npm run dev -- --watch-admin",
+    "pbuild": "NODE_ENV=production strapi build -- --clean",
+    "pm2": "NODE_ENV=production pm2 start npm -- start"
   },
   "devDependencies": {},
   "dependencies": {
     "axios": "^0.21.1",
-    "html-pdf": "^3.0.1",
-    "html-to-docx": "^1.2.2",
+    "docx": "^6.0.3",
+    "html-pdf-node": "^1.0.7",
     "knex": "0.21.18",
     "moment": "^2.29.1",
     "sqlite3": "5.0.0",
