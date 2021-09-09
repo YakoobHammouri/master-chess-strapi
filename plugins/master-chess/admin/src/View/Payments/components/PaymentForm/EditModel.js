@@ -14,6 +14,7 @@ const EditModel = ({
   course,
   amount,
   month,
+  date,
   paymentId,
 }) => {
   const { formatMessage } = useIntl();
@@ -55,12 +56,12 @@ const EditModel = ({
         stdId={stdId}
         course={course}
         amount={amount}
+        date={date}
         month={month}
         paymentId={paymentId}
         isEdit={true}
         onClose={onClose}
       />
-
       <ModalFooter>
         <section>
           <Button type="button" color="cancel" onClick={onClose}>

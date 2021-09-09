@@ -26,7 +26,7 @@ const ListView = ({ componentUid }) => {
       case "Payments":
         return <Payments />;
       default:
-        return "";
+        return <Attendances />;
     }
   };
 

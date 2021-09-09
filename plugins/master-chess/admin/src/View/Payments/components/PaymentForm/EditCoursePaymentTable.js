@@ -37,7 +37,7 @@ function EditCoursePaymentTable({
     headers.splice(0, 2);
   } else if (isSearchByCourse) {
     headers.splice(1, 0, {
-      name: "Student Name",
+      name: T("table.tableHeaer.stdName"),
       value: "student",
     });
   }
@@ -47,16 +47,18 @@ function EditCoursePaymentTable({
   const handleToggleModalCreate = () => setIsOpenedCreateModal((s) => !s);
 
   return (
-    <>
+    <div style={{ direction: "rtl" }}>
       <Table
         onClickRow={(e, data) => {
           if (!isSearch && !isSearchByCourse) {
             setSelectedPayment(data);
+            console.log(`data 111111`, data);
             setIsOpenedCreateModal(true);
           }
         }}
         headers={headers}
         rows={rows}
+        style={{ direction: "rtl" }}
       />
       {!isSearch && !isSearchByCourse ? (
         <EditModel
@@ -66,10 +68,11 @@ function EditCoursePaymentTable({
           course={course}
           amount={selectedPayment?.amount}
           month={selectedPayment?.month}
+          date={selectedPayment?.date}
           paymentId={selectedPayment?.payment_id}
         />
       ) : null}
-    </>
+    </div>
   );
 }
 
