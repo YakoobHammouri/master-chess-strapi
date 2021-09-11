@@ -10,5 +10,11 @@ module.exports = {
         maxFileSize: 1000 * 1024 * 1024, // multipart data, modify here limit of uploaded file size
       },
     },
+    gzip: {
+      enabled: true,
+      options: {
+        br: false,
+      },
+    },
   },
 };

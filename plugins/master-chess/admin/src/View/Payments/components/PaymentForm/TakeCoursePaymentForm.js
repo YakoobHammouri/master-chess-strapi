@@ -28,6 +28,7 @@ function TakeCoursePaymentForm({
   stdId,
   course,
   amount,
+  date,
   month,
   paymentId,
   isEdit,
@@ -48,8 +49,14 @@ function TakeCoursePaymentForm({
     error: "",
   });
 
+  const [paymentDate, setPaymentDate] = useState({
+    value: date ?? new moment(),
+    error: "",
+  });
+
   const monthRef = useRef(paymentMonth);
   const amountRef = useRef(paymentAmount);
+  const dateRef = useRef(paymentDate);
 
   const onPaymentMonthChange = ({ target: { value } }) => {
     setPaymentMonth((prev) => ({ ...prev, value }));
@@ -59,6 +66,11 @@ function TakeCoursePaymentForm({
   const onPaymentAmountChange = ({ target: { value } }) => {
     setPaymentAmount((prev) => ({ ...prev, value }));
     amountRef.current.value = value;
+  };
+
+  const onPaymentDateChange = ({ target: { value } }) => {
+    setPaymentDate((prev) => ({ ...prev, value }));
+    dateRef.current.value = value;
   };
 
   const validateDate = async () => {
@@ -73,6 +85,10 @@ function TakeCoursePaymentForm({
       setPaymentMonth((prev) => ({ ...prev, error: requiredText }));
       isValid = false;
     }
+    if (!paymentDate.value) {
+      setPaymentDate((prev) => ({ ...prev, error: requiredText }));
+      isValid = false;
+    }
 
     if (!isNumber(paymentAmount.value)) {
       setPaymentAmount((prev) => ({ ...prev, error: ampuntNumberText }));
@@ -85,6 +101,7 @@ function TakeCoursePaymentForm({
           await onEditHandler(
             paymentAmount,
             paymentMonth,
+            paymentDate,
             stdId,
             course,
             paymentId
@@ -93,7 +110,13 @@ function TakeCoursePaymentForm({
             onClose(false);
           }
         } else {
-          await onSaveHandler(paymentAmount, paymentMonth, stdId, course);
+          await onSaveHandler(
+            paymentAmount,
+            paymentMonth,
+            paymentDate,
+            stdId,
+            course
+          );
           setPaymentAmount({
             value: null,
             error: "",
@@ -156,6 +179,24 @@ function TakeCoursePaymentForm({
               value={paymentAmount.value}
               error={paymentAmount.error}
               type={"number"}
+              validations={{
+                required: true,
+              }}
+            />
+          </Col>
+
+          <Col>
+            <Inputs
+              ref={dateRef}
+              label={T("models.paymetn.take.payment.Date.Text")}
+              name={"paymentDate"}
+              description={""}
+              placeholder={"Payment Date"}
+              onChange={onPaymentDateChange}
+              value={paymentDate.value}
+              error={paymentDate.error}
+              type={"date"}
+              displayFormat={"DD/MM/YYYY"}
               validations={{
                 required: true,
               }}

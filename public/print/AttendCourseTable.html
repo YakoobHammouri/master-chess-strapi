@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.rtl.min.css"
+    integrity="sha384-XfhC/Sid4FIGSXYebcOtcSCRFkd/zZzAMVipf0bNWucloRvcKK2/dpVWodQbQ1Ek" crossorigin="anonymous">
+  <title>Document</title>
+  <style>
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    p {
+      font-family: Arial, Helvetica, sans-serif;
+      /* font-size: 10px; */
+      padding-top: 6px;
+    }
+
+    h4 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .elYMNl table {
+      width: 100%;
+      min-width: 500px;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
+      border-collapse: collapse;
+    }
+
+
+    .elYMNl thead tr {
+      line-height: 0.1rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      border-bottom: 2px solid rgb(225, 225, 225);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .elYMNl tr {
+      padding-left: 2.5em;
+      padding-right: 2.5em;
+      text-align: left;
+    }
+
+    .elYMNl thead tr th {
+      background-color: #F3F3F4;
+      height: 36px;
+    }
+
+    .elYMNl tr th,
+    .elYMNl tr td {
+      font-size: 1.3rem;
+      padding: 0 15px;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    tr {
+      padding: 1px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    td {
+      padding: 4px 8px !important;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .d-flex,
+    .d-sm-flex {
+      display: flex;
+    }
+
+    .justify-content-around {
+      justify-content: space-around;
+    }
+
+    .mx-2 {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+
+    .pb-sm-1 {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .table {
+      width: 100%;
+      margin-bottom: 16px;
+      color: #212529;
+      vertical-align: top;
+      caption-side: bottom;
+      border-collapse: collapse;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+
+    *,
+    ::after,
+    ::before {
+      box-sizing: border-box;
+    }
+
+    .table>thead {
+      vertical-align: bottom;
+    }
+
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr {
+      text-align: center;
+      vertical-align: middle;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+
+    tr {
+      border-bottom: 1px solid #ddd;
+      font-family: Arial, Helvetica, sans-serif;
+      height: 50px !important;
+    }
+
+    tbody>tr:nth-of-type(even) {
+      background-color: #f9f9f9;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    td {
+      margin-top: 16px !important;
+      margin-bottom: 16px !important;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+
+
+
+</head>
+
+
+<body style="width: 95%; padding: 30px; display: table;
+    margin-left: auto;
+    margin-right: auto;">
+  <!-- border-bottom: 2px solid #b8b8b8; -->
+  <header style=" margin-bottom: 25px;">
+    <div style="float: right; width: 50%;">
+      <div>
+        <div style="padding-top: 8px; padding-bottom: 8px;">
+          <h4 style="float: right;">المركز : </h4>
+          <h4 style="float: right;" class="mx-2">
+            <%= center %>
+          </h4>
+        </div>
+        <br />
+        <div style="padding-top: 8px; padding-bottom: 8px;">
+          <h4 style="float: right;"> الدورة :</h4>
+          <h4 style="float: right;" class="mx-2">
+            <%= course %>
+          </h4>
+        </div>
+        <br />
+        <div style="padding-top: 8px; padding-bottom: 8px;">
+          <h4 style="float: right;"> تاريخ البداية :</h4>
+          <h4 style="float: right;" class="mx-2">
+            <%= sdate %>
+          </h4>
+        </div>
+        <br />
+        <div style="padding-top: 8px; padding-bottom: 8px;">
+          <h4 style="float: right;"> تاريخ الانتهاء :</h4>
+          <h4 style="float: right;" class="mx-2">
+            <%= edate %>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div style="float:right; width: 40%; padding-top: 25px;">
+      <div style="float: left; vertical-align: middle;">
+        <img src=" <%=logo %> " width="100" height="100" />
+      </div>
+
+    </div>
+    <br />
+  </header>
+
+  <div style="clear: both; padding-top: 8px; padding-bottom: 8px;"></div>
+  <hr style="clear: both;" />
+  <div style="clear: both; padding-top: 8px; padding-bottom: 8px;"></div>
+  <section class="container-fluid">
+    <!-- class="sc-jsSDDP elYMNl " -->
+    <!-- <div style="border-bottom: 2px solid #b8b8b8;"></div> -->
+    <!-- Split button -->
+
+    <div style="direction: rtl;">
+      <table class="table table-hover" id="pdfstd">
+        <thead>
+          <%= theader %>
+        </thead>
+        <tbody>
+          <%= atbody %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer>
+  </footer>
+</body>
+
+</html>

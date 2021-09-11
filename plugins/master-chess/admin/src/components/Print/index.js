@@ -60,13 +60,23 @@ function index({
       isLoading={isLoading}
       onClick={async () => {
         if (isDocx) {
-          await Print(
-            "/master-chess/attend-word",
-            obj,
-            LoadingHandler,
-            type,
-            "docx"
-          );
+          if (isPayment) {
+            await Print(
+              "/master-chess/payment-word",
+              obj,
+              LoadingHandler,
+              type,
+              "docx"
+            );
+          } else {
+            await Print(
+              "/master-chess/attend-word",
+              obj,
+              LoadingHandler,
+              type,
+              "docx"
+            );
+          }
         } else if (isPayment) {
           await Print(
             "/master-chess/payment-pdf",

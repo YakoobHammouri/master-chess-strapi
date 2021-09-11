@@ -1,29 +1,45 @@
 "use strict";
 const _ = require("lodash");
 const Path = require("path");
-var pdf = require("html-pdf");
+var pdf = require("html-pdf-node");
 const fs = require("fs");
-const HTMLtoDOCX = require("html-to-docx");
+const {
+  AlignmentType,
+  Document,
+  Footer,
+  Packer,
+  Paragraph,
+  HeadingLevel,
+  PageOrientation,
+} = require("docx");
 
-const createFile = (
+const { headerTabled, attendTable } = require("./doc");
+
+function ensureDirectoryExistence(filePath) {
+  var _dirname = Path.dirname(filePath);
+  if (fs.existsSync(_dirname)) {
+    return true;
+  }
+  ensureDirectoryExistence(_dirname);
+  fs.mkdirSync(_dirname);
+}
+
+const createPdfFile = (
   { center, course, sdate, edate, headers, atted },
-  isDocx,
   isPayment
 ) => {
   return new Promise(async (r, rej) => {
     try {
-      console.log("Start pdfr isDocx : ", isDocx);
       const rootDir = process.cwd();
 
       const filepath2 = Path.resolve(
-        `${rootDir}/public/uploads/print/AttendCourseTable.html`
+        `${rootDir}/public/print/AttendCourseTable.html`
       );
 
-      // console.log(`filePath 1111111`, filePath);
       let theader = "";
       headers?.forEach((header, i) => {
-        theader += `<th key={i}>
-          <p style={{ textAlign: "center", verticalAlign: "middle" }}>
+        theader += `<th >
+          <p  style="text-align: center; vertical-align: middle; font-family: Arial;">
             ${header}
           </p>
         </th>`;
@@ -33,29 +49,29 @@ const createFile = (
       if (isPayment) {
         atted?.forEach((row) => {
           atbody += `<tr> 
-                <td style={{ verticalAlign: "middle" }}>
-                 <p style={{ textAlign: "center" }}>${row.payment_id}</p>
+                <td style="vertical-align: middle;">
+                 <p style="text-align: center; font-family: Arial;">${row.payment_id}</p>
                </td>
-                <td style={{ verticalAlign: "middle" }}>
-                 <p style={{ textAlign: "center" }}>${row.student}</p>
-               </td>
-
-               <td style={{ verticalAlign: "middle" }}>
-                 <p style={{ textAlign: "center" }}>${row.courseName}</p>
+                <td style="vertical-align: middle;">
+                 <p style="text-align: center; font-family: Arial;">${row.student}</p>
                </td>
 
-               <td style={{ verticalAlign: "middle" }}>
-                 <p style={{ textAlign: "center" }}>${row.amount}</p>
+               <td style="vertical-align: middle;">
+                 <p style="text-align: center; font-family: Arial;">${row.courseName}</p>
+               </td>
+
+               <td style="vertical-align: middle;">
+                 <p style="text-align: center; font-family: Arial;">${row.amount}</p>
                </td>
 
               
-               <td style={{ verticalAlign: "middle" }}>
-                 <p style={{ textAlign: "center" }}>${row.month}</p>
+               <td style="vertical-align: middle;">
+                 <p style="text-align: center; font-family: Arial;">${row.month}</p>
                </td>
 
                
-               <td style={{ verticalAlign: "middle" }}>
-                 <p style={{ textAlign: "center" }}>${row.date}</p>
+               <td style="vertical-align: middle;">
+                 <p style="text-align: center; font-family: Arial;">${row.date}</p>
                </td>
 
                </tr>`;
@@ -64,9 +80,15 @@ const createFile = (
         atted?.forEach((row) => {
           let temp = "";
 
+          // row?.forEach((r) => {
+          //   temp += `<td style="vertical-align: middle;">
+          //        <p style="text-align: center; font-family: Arial;">${r}</p>
+          //      </td>`;
+          // });
+
           row?.forEach((r) => {
-            temp += `<td style={{ verticalAlign: "middle" }}>
-                 <p style={{ textAlign: "center" }}>${r}</p>
+            temp += `<td style="vertical-align: middle; text-align: center; font-family: Arial;">
+                 ${r}
                </td>`;
           });
 
@@ -74,20 +96,17 @@ const createFile = (
         });
       }
 
-      const fileName = isDocx ? `${Date.now()}.docx` : `${Date.now()}.pdf`;
+      const fileName = `${Date.now()}.pdf`;
 
-      const pdfpath = isDocx
-        ? Path.resolve(`${rootDir}/public/docx/Attend/${fileName}`)
-        : isPayment
+      const pdfpath = isPayment
         ? Path.resolve(`${rootDir}/public/PDF/Payment/${fileName}`)
         : Path.resolve(`${rootDir}/public/PDF/Attend/${fileName}`);
 
-      console.log(`pdfpath 11111111`, pdfpath);
-
+      console.log(`pdfpath`, pdfpath);
       var html = fs.readFileSync(filepath2, "utf8");
 
       const objcompiled = {
-        logo: `${strapi.config.get("server.url")}/uploads/logo.png`,
+        logo: `${strapi.config.get("server.url")}/logo.png`,
         center: center ?? "---",
         course: course,
         sdate: sdate,
@@ -100,27 +119,139 @@ const createFile = (
       const hPrint = compiled(objcompiled);
       var options = { format: "A4" };
 
-      if (isDocx) {
-        const fileBuffer = await HTMLtoDOCX(hPrint, null, {
-          table: { row: { cantSplit: true } },
-          footer: true,
-          pageNumber: true,
-        });
-        fs.writeFile(pdfpath, fileBuffer, (error) => {
-          if (error) {
-            console.log("Docx file creation failed", error);
-            return rej(error);
-          }
+      let file = { content: hPrint };
+      pdf
+        .generatePdf(file, options)
+        .then(async (pdfBuffer) => {
+          console.log("PDF Buffer:-", pdfBuffer);
+          await fs.writeFileSync(pdfpath, pdfBuffer);
           return r({ path: pdfpath, fileName });
+        })
+        .catch((err) => {
+          console.log(`err in generate Pdf  1111`, err);
+          rej(err);
         });
-      } else {
-        pdf.create(hPrint, options).toFile(pdfpath, function (err, res) {
-          if (err) {
-            return rej(err);
-          }
-          return r({ path: pdfpath, fileName });
-        });
-      }
+    } catch (err) {
+      console.log(`Error in Create File `, err);
+      rej(err);
+    }
+  });
+};
+
+const createDocxFile = (
+  { center, course, sdate, edate, headers, atted },
+  isPayment
+) => {
+  return new Promise(async (r, rej) => {
+    try {
+      const rootDir = process.cwd();
+
+      const fileName = `${Date.now()}.docx`;
+
+      const xmlStyle = Path.resolve(
+        `${rootDir}/public/print/AttendTableStyle.xml`
+      );
+
+      const styles = fs.readFileSync(xmlStyle, "utf-8");
+
+      const pdfpath = isPayment
+        ? Path.resolve(`${rootDir}/public/PDF/Payment/${fileName}`)
+        : Path.resolve(`${rootDir}/public/PDF/Attend/${fileName}`);
+
+      // const pdfpath = Path.resolve(`${rootDir}/public/docx/Attend/${fileName}`);
+
+      const objcompiled = {
+        center: center ?? "---",
+        course: course,
+        sdate: sdate,
+        edate: edate,
+      };
+
+      const doc = new Document({
+        styles: {
+          default: {
+            heading3: {
+              run: {
+                font: "Calibri",
+                size: 26,
+                bold: true,
+              },
+              paragraph: {
+                spacing: { line: 276 },
+              },
+            },
+            heading4: {
+              run: {
+                font: "Calibri",
+                size: 30,
+                bold: true,
+              },
+              paragraph: {
+                alignment: AlignmentType.JUSTIFIED,
+              },
+            },
+            heading5: {
+              run: {
+                font: "Calibri",
+                size: 26,
+                bold: true,
+              },
+              paragraph: {
+                alignment: AlignmentType.JUSTIFIED,
+              },
+            },
+          },
+        },
+        externalStyles: styles,
+        sections: [
+          {
+            properties: {
+              page: {
+                margin: {
+                  top: 500,
+                  right: 500,
+                  bottom: 500,
+                  left: 500,
+                },
+                size: {
+                  orientation:
+                    headers.length > 9
+                      ? PageOrientation.LANDSCAPE
+                      : PageOrientation.PORTRAIT,
+                },
+              },
+            },
+            footers: {
+              default: new Footer({
+                children: [
+                  new Paragraph({
+                    text: "1",
+                    style: "normalPara",
+                    alignment: AlignmentType.LEFT,
+                  }),
+                ],
+              }),
+            },
+            children: [
+              headerTabled(objcompiled),
+              new Paragraph({
+                text: "",
+                heading: HeadingLevel.HEADING_1,
+                thematicBreak: true,
+                spacing: {
+                  after: 600,
+                },
+              }),
+              attendTable(headers, atted, isPayment),
+            ],
+          },
+        ],
+      });
+
+      Packer.toBuffer(doc).then(async (buffer) => {
+        await fs.writeFileSync(pdfpath, buffer);
+        return r({ path: pdfpath, fileName });
+      });
     } catch (err) {
       console.log(`Error in Create File `, err);
       rej(err);
@@ -136,10 +267,12 @@ module.exports = {
   },
   attendToPDF: async (ctx) => {
     try {
-      const data = await createFile(ctx.request.body, false);
+      const data = await createPdfFile(ctx.request.body);
+      console.log(`data`, data);
       const src = fs.createReadStream(data.path);
       ctx.response.set("content-type", "application/pdf");
 
+      console.log(`src`, src);
       ctx.response.set("Content-disposition", data.fileName);
       ctx.statusCode = 200;
       ctx.body = src;
@@ -150,7 +283,7 @@ module.exports = {
   },
   paymentToPDF: async (ctx) => {
     try {
-      const data = await createFile(ctx.request.body, false, true);
+      const data = await createPdfFile(ctx.request.body, true);
       const src = fs.createReadStream(data.path);
       ctx.response.set("content-type", "application/pdf");
 
@@ -164,7 +297,7 @@ module.exports = {
   },
   attendToWord: async (ctx) => {
     try {
-      const data = await createFile(ctx.request.body, true);
+      const data = await createDocxFile(ctx.request.body, false);
       const src = fs.createReadStream(data.path);
       ctx.response.set(
         "content-type",
@@ -176,6 +309,24 @@ module.exports = {
       ctx.body = src;
     } catch (err) {
       console.log("error in attendToPDF  ", err);
+      return null;
+    }
+  },
+
+  paymentToWord: async (ctx) => {
+    try {
+      console.log(`start payment doc`);
+      const data = await createDocxFile(ctx.request.body, true);
+      const src = fs.createReadStream(data.path);
+      ctx.response.set(
+        "content-type",
+        "	application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      );
+      ctx.response.set("Content-disposition", data.fileName);
+      ctx.statusCode = 200;
+      ctx.body = src;
+    } catch (err) {
+      console.log("error in payment doc  ", err);
       return null;
     }
   },
