@@ -35,6 +35,11 @@ function LeftMenu({ wait }) {
           to: `/plugins/${pluginId}/service/Payments`,
           title: "Payments",
         },
+        {
+          name: "StudentActivities",
+          to: `/plugins/${pluginId}/service/student-activities`,
+          title: "Student Activities",
+        },
       ],
     },
   ];
