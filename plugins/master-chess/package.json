@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "This plugin for master chess academy, this plugin cover centers, courses , students , attachments , attendance payment.",
   "strapi": {
-    "name": "master-chess",
+    "name": "Master Chess",
     "icon": "chess",
     "description": "This plugin for master chess academy, this plugin cover centers, courses , students , attachments , attendance payment."
   },

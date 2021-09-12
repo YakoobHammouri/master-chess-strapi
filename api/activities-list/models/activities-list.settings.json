@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activities_lists",
+  "info": {
+    "name": "Activities List"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "total": {
+      "type": "integer"
+    },
+    "activities_type": {
+      "model": "activities-type"
+    }
+  }
+}

@@ -95,6 +95,7 @@ const HomePage = ({ history: { push } }) => {
                     )}
                   </FormattedMessage>
                 </LinkWrapper>
+
                 <LinkWrapper
                   href={"/admin/plugins/master-chess/service/Payments"}
                   // target="_blank"
@@ -104,6 +105,27 @@ const HomePage = ({ history: { push } }) => {
                   <FormattedMessage
                     id={
                       "app.components.plugins.master.chess.service.payment.content"
+                    }
+                  >
+                    {(title) => (
+                      <p className="bold" style={{ paddingTop: 10 }}>
+                        {title}
+                      </p>
+                    )}
+                  </FormattedMessage>
+                </LinkWrapper>
+
+                <LinkWrapper
+                  href={
+                    "/admin/plugins/master-chess/service/student-activities"
+                  }
+                  // target="_blank"
+                  key={"/admin/plugins/master-chess/service/student-activities"}
+                  type={"studentActivities"}
+                >
+                  <FormattedMessage
+                    id={
+                      "app.components.plugins.master.chess.service.studentActivities.content"
                     }
                   >
                     {(title) => (

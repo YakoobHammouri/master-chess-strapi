@@ -213,6 +213,12 @@ const LinkWrapper = styled.a`
         `;
       }
 
+      if (type === "studentActivities") {
+        return css`
+          content: "\f63b";
+          color: #42b88e;
+        `;
+      }
       return css`
         content: "\f121";
         color: #f0811e;

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { get, has, isEqual } from "lodash";
 import { Prompt, useHistory, useLocation } from "react-router-dom";
 import { ListWrapper, useGlobalContext } from "strapi-helper-plugin";
-import { Attendances, Payments } from "../../View";
+import { Attendances, Payments, StudentActivities } from "../../View";
 import getTrad from "../../utils/getTrad";
 import LeftMenu from "../LeftMenu";
 import Wrapper from "./Wrapper";
@@ -25,6 +25,8 @@ const ListView = ({ componentUid }) => {
         return <Attendances />;
       case "Payments":
         return <Payments />;
+      case "student-activities":
+        return <StudentActivities />;
       default:
         return <Attendances />;
     }
