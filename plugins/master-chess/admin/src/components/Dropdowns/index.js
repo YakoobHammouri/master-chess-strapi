@@ -18,9 +18,9 @@ const index = ({
   return (
     <Wrapper>
       <span id="locale-code">
-        <Label for={name} text={T(lableTxt)} />
+        <Label for={name} text={lableTxt ? T(lableTxt) : ""} />
       </span>
-      <BaselineAlignment top size="5px" />
+      <BaselineAlignment top size="10px" />
       <Select
         className="basic-single"
         classNamePrefix="select"

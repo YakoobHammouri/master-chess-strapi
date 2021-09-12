@@ -2,6 +2,9 @@
   "menu.section.models.name.": "Master Chess Service",
   "prompt.unsaved": "unsaved",
   "Save": "Save",
+  "Add": "Add",
+  "Edit": "Edit",
+  "Delete": "Delete",
   "menu.section.models.attendance": "Attendance",
   "models.attendance.take.Attendance": "Take Attendance",
   "models.attendance.edit.Attendance": "Eite Attendance",
@@ -35,6 +38,7 @@
   "create.file.error": "Sorry, Some Error happened in generate file",
 
   "models.paymetn.take.payment": "Course Payment",
+
   "models.paymetn.edit.payment": "Edit Payment",
   "models.paymetn.search.payment.student": "search by student",
   "models.paymetn.search.payment.course": "search by Course",
@@ -46,5 +50,9 @@
   "paymetn.save.amount.must.number": "The Amount is must be number",
   "payment.get.student.payment.error": "Error in get Student Payment",
   "takePayment.success": "The Payment successfully saved",
-  "payment.student.no.have.record": "The Student does not have a Payment Record, Add one"
+  "payment.student.no.have.record": "The Student does not have a Payment Record, Add one",
+
+  "models.paymetn.take.Activities": "Student Activities",
+  "models.paymetn.edit.Activities": "Edit Activities",
+  "activitiesList.label": " The Activitie"
 }
