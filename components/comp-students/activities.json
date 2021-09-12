@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_comp_students_activities_s",
+  "info": {
+    "name": "Activities ",
+    "icon": "american-sign-language-interpreting",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "mark": {
+      "type": "integer"
+    },
+    "activities_list": {
+      "model": "activities-list"
+    },
+    "activiteName": {
+      "type": "string"
+    }
+  }
+}

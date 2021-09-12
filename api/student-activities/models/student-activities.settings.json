@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "student_activities",
   "info": {
-    "name": "Student Activities"
+    "name": "Student Activities",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -13,6 +14,11 @@
   "attributes": {
     "student": {
       "model": "students"
+    },
+    "activities": {
+      "type": "component",
+      "repeatable": true,
+      "component": "comp-students.course-activities"
     }
   }
 }

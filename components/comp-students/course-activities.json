@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_comp_students_course_activities",
+  "info": {
+    "name": "course-activities",
+    "icon": "atlas",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "course": {
+      "model": "courses"
+    },
+    "courseName": {
+      "type": "string"
+    },
+    "courseActivites": {
+      "type": "component",
+      "repeatable": true,
+      "component": "comp-students.activities"
+    }
+  }
+}
