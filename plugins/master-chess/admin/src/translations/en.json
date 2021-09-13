@@ -5,6 +5,8 @@
   "Add": "Add",
   "Edit": "Edit",
   "Delete": "Delete",
+  "Required": "The Field is Required",
+  "must.number": "Please enter valid number",
   "menu.section.models.attendance": "Attendance",
   "models.attendance.take.Attendance": "Take Attendance",
   "models.attendance.edit.Attendance": "Eite Attendance",
@@ -47,6 +49,7 @@
   "models.paymetn.take.payment.Date.Text": "Date",
   "models.paymetn.take.payment.Month.Text": "Payment Month",
   "paymetn.save.Required": "The Field is Required",
+
   "paymetn.save.amount.must.number": "The Amount is must be number",
   "payment.get.student.payment.error": "Error in get Student Payment",
   "takePayment.success": "The Payment successfully saved",

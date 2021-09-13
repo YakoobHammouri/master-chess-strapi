@@ -1,13 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import { Padded } from "@buffetjs/core";
 import { Col, Row, Container } from "reactstrap";
 import { T } from "../../../../../utils";
 import { AddButtonWrapper, P, Plus } from "./Wrapper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Label } from "../../../../../components";
 
 import FormRow from "./FormRow";
-import { SAVE_ACTIVITIE } from "../../../../../containers/Context/StudentActivities/constants";
+import {
+  SAVE_ACTIVITIE,
+  FORM_ROW_ACTIVITIE_LIST,
+  REDUCER_NAME,
+} from "../../../../../containers/Context/StudentActivities/constants";
 
 import { useActivitiesLists } from "../../../../../hooks";
 
@@ -24,27 +28,35 @@ function index({
   const dispatch = useDispatch();
   const { activitiesLists } = useActivitiesLists();
 
-  const [formRowList, setFormRowList] = useState([]);
+  const formRowList = useSelector(
+    (state) => state.get(REDUCER_NAME).FormRowActivitieList
+  );
 
   useEffect(() => {
-    console.log(`object 1111111111`);
     dispatch({
       type: SAVE_ACTIVITIE,
-      funSaveActivitie: () => {
-        alert("save student Avtivite");
-      },
+      funSaveActivitie: validateDate,
     });
 
-    return () => {
-      console.log(`clean TakeCoursePaymentForm 111111111 `);
-    };
+    return () => {};
   }, [dispatch]);
+
+  const validateDate = async (formRowList, formRowDataList) => {
+    if (formRowList.length === 0) {
+      alert("Plase Add new activitie");
+      return;
+    }
+
+    console.log(`formRowDataList 1111111111`, formRowDataList);
+    formRowDataList?.map((e) => {
+      e();
+    });
+  };
 
   return (
     <div
       style={{
         borderRadius: "3px",
-        // "box-shadow": "0 2px 4px #e3e9f3",
         background: "white",
         minHeight: 150,
       }}
@@ -61,6 +73,7 @@ function index({
             <Col>
               <div style={{ marginLeft: 15, marginTop: 10 }}>
                 <Label
+                  htmlFor={"activitiesList.label"}
                   style={{
                     marginLeft: "15px;",
                     marginTop: 12,
@@ -71,12 +84,12 @@ function index({
             </Col>
             <Col>
               <div style={{ marginLeft: 15, marginTop: 10 }}>
-                <Label text="Total" />
+                <Label text="Total" htmlFor={"Total"} />
               </div>
             </Col>
             <Col>
               <div style={{ marginLeft: 15, marginTop: 10 }}>
-                <Label text="Mark" />
+                <Label text="Mark" htmlFor={"Mark"} />
               </div>
             </Col>
           </Row>
@@ -91,11 +104,10 @@ function index({
               <AddButtonWrapper>
                 <button
                   onClick={() => {
-                    console.log(`Date.now() `, Date.now());
-                    setFormRowList((prev) => [
-                      ...prev,
-                      <FormRow lists={activitiesLists} key={Date.now()} />,
-                    ]);
+                    dispatch({
+                      type: FORM_ROW_ACTIVITIE_LIST,
+                      row: <FormRow lists={activitiesLists} key={Date.now()} />,
+                    });
                   }}
                   type="button"
                 >

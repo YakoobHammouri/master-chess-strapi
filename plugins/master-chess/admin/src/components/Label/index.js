@@ -8,7 +8,7 @@ import { Label } from "@buffetjs/core";
 }
 
 const index = styled((props) => (
-  <Label htmlFor={props.for} fontSize="md" {...props}>
+  <Label htmlFor={props.htmlFor} fontSize="md" {...props}>
     {props.text}
   </Label>
 ))`

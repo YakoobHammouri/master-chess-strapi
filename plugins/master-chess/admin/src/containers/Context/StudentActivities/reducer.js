@@ -4,8 +4,10 @@ import * as actions from "./constants";
 
 export const initialState = {
   funSaveStudentActivities: null,
+  funGetRowStudentActivitiesList: [],
   clear_StudentActivities: false,
   saveStudentActivitiesLoading: false,
+  FormRowActivitieList: [],
 };
 
 const StudentActivitiesReducer = produce(
@@ -26,9 +28,25 @@ const StudentActivitiesReducer = produce(
         break;
       }
 
+      case actions.SAVE_GET_ROW_ACTIVITIE: {
+        const temp = [
+          ...draftState.funGetRowStudentActivitiesList,
+          action.getRow,
+        ];
+
+        set(draftState, "funGetRowStudentActivitiesList", temp);
+        break;
+      }
+
       case actions.SAVE_ACTIVITIE_LOADING: {
         draftState.saveStudentActivitiesLoading = action.saveLoading;
         set(draftState, "saveStudentActivitiesLoading", action.saveLoading);
+        break;
+      }
+
+      case actions.FORM_ROW_ACTIVITIE_LIST: {
+        const temp = [...draftState.FormRowActivitieList, action.row];
+        set(draftState, "FormRowActivitieList", temp);
         break;
       }
 

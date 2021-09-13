@@ -13,12 +13,20 @@ function PaymentHeader() {
     (state) => state.get(REDUCER_NAME).savePamentLoading
   );
   const savePament = useSelector(
-    (state) => state.get(REDUCER_NAME).funSavePament
+    (state) => state.get(REDUCER_NAME).funSaveStudentActivities
+  );
+
+  const formRowList = useSelector(
+    (state) => state.get(REDUCER_NAME).FormRowActivitieList
+  );
+
+  const formRowDataList = useSelector(
+    (state) => state.get(REDUCER_NAME).funGetRowStudentActivitiesList
   );
 
   const onClickSaveHandler = () => {
     if (savePament) {
-      savePament();
+      savePament(formRowList, formRowDataList);
     }
   };
 
