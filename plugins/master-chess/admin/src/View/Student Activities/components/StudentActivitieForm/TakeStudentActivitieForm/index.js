@@ -47,10 +47,12 @@ function index({
       return;
     }
 
-    console.log(`formRowDataList 1111111111`, formRowDataList);
+    // console.log(`formRowDataList 1111111111`, formRowDataList);
+    const data = [];
     formRowDataList?.map((e) => {
-      e();
+      data.push(e());
     });
+    console.log(`data 11111`, data);
   };
 
   return (

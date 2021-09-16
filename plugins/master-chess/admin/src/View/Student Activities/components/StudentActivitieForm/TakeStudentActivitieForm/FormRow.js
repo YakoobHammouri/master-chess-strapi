@@ -64,11 +64,6 @@ function formRow({ lists, isEdit }) {
     if (mark.value > _total) {
       isValid = false;
     }
-    console.log(`obj from get row data `, {
-      selectActivitie,
-      mark,
-      isValid,
-    });
 
     return {
       selectActivitie,
