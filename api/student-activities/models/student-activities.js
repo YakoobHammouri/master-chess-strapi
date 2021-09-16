@@ -39,8 +39,6 @@ module.exports = {
         .query("student-activities")
         .findOne({ student: data.student });
 
-      console.log(`stdTemp`, stdTemp);
-
       //stdTemp not Null
       if (stdTemp) {
         throw Boom.badRequest("The Student Has Activities Record");
@@ -48,9 +46,7 @@ module.exports = {
     },
     async afterCreate(result, data) {
       try {
-        // console.log(`result`, result);
         result?.activities?.forEach((item) => {
-          // console.log(`pay 11`, item);
           if (!item.courseName) {
             item.courseName = item?.course?.name;
             isLoack = true;
@@ -81,7 +77,6 @@ module.exports = {
         // locl code to update
         if (isLoack === false) {
           result?.activities?.forEach((item) => {
-            // console.log(`pay 11`, item);
             if (!item.courseName) {
               item.courseName = item?.course?.name;
               isLoack = true;
