@@ -8,7 +8,8 @@
   "options": {},
   "attributes": {
     "amount": {
-      "type": "decimal"
+      "type": "decimal",
+      "required": true
     },
     "course": {
       "model": "courses"
@@ -17,10 +18,12 @@
       "type": "date"
     },
     "courseName": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "month": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     }
   }
 }

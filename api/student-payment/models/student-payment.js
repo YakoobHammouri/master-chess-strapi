@@ -14,6 +14,17 @@ module.exports = {
       /*
       if std Temp is null, meaning the student does not have payment Record  so the payment Student  can creating , otherwise throw Error
      */
+
+      console.log(`data 1111`, data);
+
+      if (!data.student) {
+        throw Boom.badRequest("Please Select The Student for Payment Record");
+      }
+
+      if (data.Payments.length < 1) {
+        throw Boom.badRequest("Please Add The Payment");
+      }
+
       const stdTemp = await strapi
         .query("student-payment")
         .findOne({ student: data.student });

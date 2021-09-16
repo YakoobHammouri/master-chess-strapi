@@ -13,12 +13,14 @@
   "pluginOptions": {},
   "attributes": {
     "student": {
+      "unique": true,
       "model": "students"
     },
     "activities": {
       "type": "component",
       "repeatable": true,
-      "component": "comp-students.course-activities"
+      "component": "comp-students.course-activities",
+      "required": true
     }
   }
 }
