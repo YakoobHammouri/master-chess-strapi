@@ -59,7 +59,7 @@ function formRow({ lists, isEdit }) {
       isValid = false;
     }
 
-    const _total = selectActivitie?.meta?.total ?? 0;
+    const _total = selectActivitie?.value?.meta?.total ?? 0;
 
     if (mark.value > _total) {
       isValid = false;

@@ -13,7 +13,10 @@ import {
   REDUCER_NAME,
 } from "../../../../../containers/Context/StudentActivities/constants";
 
-import { useActivitiesLists } from "../../../../../hooks";
+import {
+  useActivitiesLists,
+  useSaveStudentActivities,
+} from "../../../../../hooks";
 
 function index({
   stdId,
@@ -28,6 +31,7 @@ function index({
   const dispatch = useDispatch();
   const { activitiesLists } = useActivitiesLists();
 
+  const { onSaveHandler } = useSaveStudentActivities();
   const formRowList = useSelector(
     (state) => state.get(REDUCER_NAME).FormRowActivitieList
   );
@@ -47,14 +51,62 @@ function index({
       return;
     }
 
-    // console.log(`formRowDataList 1111111111`, formRowDataList);
+    /*
+    
+    {
+    "activities": [
+        {
+            "courseActivites": [
+                {
+                    "activities_list": 3,
+                    "activiteName": "",
+                    "mark": 15
+                }
+            ],
+            "course": 4,
+            "courseName": ""
+        }
+    ],
+    "student": 8,
+    "created_by": 1,
+    "updated_by": 1
+}
+
+    */
+
     const data = [];
     formRowDataList?.map((e) => {
-      data.push(e());
+      const temp = e();
+      if (temp.isValid) {
+        data.push(temp);
+      }
     });
-    console.log(`data 11111`, data);
-  };
 
+    const _courseActivites = data?.map((item) => {
+      const activities_list = item.selectActivitie?.value?.value;
+      const activiteName = item.selectActivitie?.value?.label;
+      const mark = item.mark?.value;
+
+      return {
+        activities_list,
+        activiteName,
+        mark,
+      };
+    });
+
+    const activiteObj = {
+      course: course?.value,
+      courseName: course?.meta?.name,
+      courseActivites: _courseActivites,
+    };
+
+    // const obj = {
+    //   student: stdId,
+    //   activities: [activiteObj],
+    // };
+
+    await onSaveHandler(activiteObj, stdId, course);
+  };
   return (
     <div
       style={{

@@ -57,5 +57,8 @@
 
   "models.paymetn.take.Activities": "Student Activities",
   "models.paymetn.edit.Activities": "Edit Activities",
-  "activitiesList.label": " The Activitie"
+  "activitiesList.label": " The Activitie",
+
+  "takeActivities.success": "The Activities successfully saved",
+  "activities.get.student.activities.error": "Error in get Student Activities"
 }
