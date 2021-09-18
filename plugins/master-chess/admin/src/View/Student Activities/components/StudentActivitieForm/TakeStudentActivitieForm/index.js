@@ -51,29 +51,6 @@ function index({
       return;
     }
 
-    /*
-    
-    {
-    "activities": [
-        {
-            "courseActivites": [
-                {
-                    "activities_list": 3,
-                    "activiteName": "",
-                    "mark": 15
-                }
-            ],
-            "course": 4,
-            "courseName": ""
-        }
-    ],
-    "student": 8,
-    "created_by": 1,
-    "updated_by": 1
-}
-
-    */
-
     const data = [];
 
     let _isValid = true;
