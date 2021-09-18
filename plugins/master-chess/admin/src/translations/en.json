@@ -60,5 +60,6 @@
   "activitiesList.label": " The Activitie",
 
   "takeActivities.success": "The Activities successfully saved",
-  "activities.get.student.activities.error": "Error in get Student Activities"
+  "activities.get.student.activities.error": "Error in get Student Activities",
+  "activities.get.student.activities.fixData": "Please check the data entered"
 }

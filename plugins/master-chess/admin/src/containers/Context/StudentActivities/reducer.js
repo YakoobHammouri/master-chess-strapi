@@ -18,6 +18,8 @@ const StudentActivitiesReducer = produce(
         if (action.clear_StudentActivities === true) {
           draftState.funSaveStudentActivities = null;
           draftState.saveStudentActivitiesLoading = false;
+          draftState.FormRowActivitieList = [];
+          draftState.funGetRowStudentActivitiesList = [];
         }
         set(draftState);
         break;

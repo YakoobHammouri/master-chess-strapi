@@ -1,5 +1,3 @@
-import React from "react";
-import moment from "moment";
 import { getTrad } from "../../utils";
 import { endPoint, useCRUD } from "..";
 import { useDispatch } from "react-redux";
@@ -16,7 +14,7 @@ const _onSaveHandler = async (
   stdId,
   course
 ) => {
-  const ok = confirm("Are you sure to save the Payment?");
+  const ok = confirm("Are you sure to save the Activity?");
 
   if (ok) {
     try {
@@ -29,8 +27,8 @@ const _onSaveHandler = async (
         `${endPoint.StudentActivities}/student/${stdId}`
       );
 
-      // the Student not Have the student payemt
-      // add Student Payment
+      // the Student not Have the student activity
+      // add Student activity
       if (data === null) {
         const obj = {
           student: stdId,
@@ -50,28 +48,45 @@ const _onSaveHandler = async (
           message: { id: getTrad("takeActivities.success") },
         });
       } else {
-        // Student have Payment Record
-        // add new Payment to Student Payment Record
-        // const obj = {
-        //   amount: paymentAmount.value,
-        //   course: {
-        //     id: course.value,
-        //   },
-        //   date: paymentDate.value._d,
-        //   // date: new moment()._d,
-        //   month: paymentMonth.value,
-        //   courseName: course.meta.name,
-        // };
-        // data.Payments.push(obj);
-        // await edit(`${endPoint.StudentPayment}/${data?.id}`, data);
-        // dispatch({
-        //   type: SAVE_PAYMENT_LOADING,
-        //   saveLoading: false,
-        // });
-        // strapi.notification.toggle({
-        //   type: "success",
-        //   message: { id: getTrad("takePayment.success") },
-        // });
+        // console.log(`data 11`, data);
+
+        // console.log(`course`, course);
+        // const _course = data?.activities?.find(
+        //   (i) => i.course?.id == course.value
+        // );
+
+        const _courseIndex = data?.activities?.findIndex(
+          (i) => i.course?.id == course.value
+        );
+
+        console.log(`_courseIndex`, _courseIndex);
+        // The studnet have activity for this course
+        // it is must update
+        if (_courseIndex !== -1) {
+          data?.activities?.forEach((_course, i) => {
+            if (i === _courseIndex) {
+              _course.courseActivites = [
+                ..._course.courseActivites,
+                ...activiteObj.courseActivites,
+              ];
+              return;
+            }
+          });
+        } else {
+          // add new Course Activites
+          data?.activities?.push(activiteObj);
+          console.log(`data`, data);
+        }
+
+        await edit(`${endPoint.StudentActivities}/${data?.id}`, data);
+        dispatch({
+          type: SAVE_ACTIVITIE_LOADING,
+          saveLoading: false,
+        });
+        strapi.notification.toggle({
+          type: "success",
+          message: { id: getTrad("takeActivities.success") },
+        });
       }
     } catch (err) {
       console.log("Error in temp Std Payment  : ", err);
