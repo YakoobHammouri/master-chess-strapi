@@ -15,9 +15,11 @@
     "Payments": {
       "type": "component",
       "repeatable": true,
-      "component": "comp-students.student-payment"
+      "component": "comp-students.student-payment",
+      "required": true
     },
     "student": {
+      "unique": true,
       "model": "students"
     }
   }

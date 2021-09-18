@@ -1,4 +1,4 @@
-import { pluginId } from "../../../utils";
+import pluginId from "../../../pluginId";
 
 export const REDUCER_NAME = `${pluginId}_payment`;
 export const CLEAR_PAYMENT = `/ClearPayment`;

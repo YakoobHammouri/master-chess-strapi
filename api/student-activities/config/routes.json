@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/student-activities/student/:id",
+      "handler": "student-activities.findStudentActivities",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

@@ -5,10 +5,12 @@ import Wrapper from "./Wrapper";
 import Label from "../Label";
 import T from "../../utils/T";
 import { BaselineAlignment } from "strapi-helper-plugin";
+import { ErrorMessage } from "@buffetjs/styles";
 
 const index = ({
   name,
   lableTxt,
+  errorTxt,
   lsit,
   value,
   onValChange,
@@ -18,9 +20,9 @@ const index = ({
   return (
     <Wrapper>
       <span id="locale-code">
-        <Label for={name} text={T(lableTxt)} />
+        <Label htmlFor={name} text={lableTxt ? T(lableTxt) : ""} />
       </span>
-      <BaselineAlignment top size="5px" />
+      <BaselineAlignment top size="10px" />
       <Select
         className="basic-single"
         classNamePrefix="select"
@@ -34,6 +36,8 @@ const index = ({
         isDisabled={isDisabled}
         defaultValue={defaultValue}
       />
+      <BaselineAlignment bottom size="10px" />
+      {errorTxt ? <ErrorMessage>{errorTxt}</ErrorMessage> : ""}
     </Wrapper>
   );
 };

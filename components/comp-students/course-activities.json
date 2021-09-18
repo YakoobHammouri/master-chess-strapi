@@ -16,7 +16,8 @@
     "courseActivites": {
       "type": "component",
       "repeatable": true,
-      "component": "comp-students.activities"
+      "component": "comp-students.activities",
+      "required": true
     }
   }
 }
