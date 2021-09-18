@@ -35,7 +35,6 @@ const _onSaveHandler = async (
           activities: [activiteObj],
         };
 
-        console.log(`obj`, obj);
         await add(endPoint.StudentActivities, obj);
 
         dispatch({
@@ -48,18 +47,10 @@ const _onSaveHandler = async (
           message: { id: getTrad("takeActivities.success") },
         });
       } else {
-        // console.log(`data 11`, data);
-
-        // console.log(`course`, course);
-        // const _course = data?.activities?.find(
-        //   (i) => i.course?.id == course.value
-        // );
-
         const _courseIndex = data?.activities?.findIndex(
           (i) => i.course?.id == course.value
         );
 
-        console.log(`_courseIndex`, _courseIndex);
         // The studnet have activity for this course
         // it is must update
         if (_courseIndex !== -1) {
@@ -138,7 +129,7 @@ const _onEditHandler = async (
         obj.amount = paymentAmount.value;
         obj.month = paymentMonth.value;
         obj.date = paymentDate.value._d;
-        console.log(`obj 111111111`, obj);
+
         data.Payments[index] = obj;
         await edit(`${endPoint.StudentPayment}/${data?.id}`, data);
         dispatch({
