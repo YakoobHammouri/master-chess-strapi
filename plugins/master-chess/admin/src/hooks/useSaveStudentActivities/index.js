@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { getTrad } from "../../utils";
 import { endPoint, useCRUD } from "..";
 import { useDispatch } from "react-redux";
@@ -166,6 +167,68 @@ const _onEditHandler = async (
   }
 };
 
+const _onDeleteHandler = async (
+  get,
+  edit,
+  dispatch,
+  id,
+  activityId,
+  stdId,
+  courseId
+) => {
+  const ok = confirm("Are you sure want to delete the Activity?");
+
+  if (ok) {
+    try {
+      dispatch({
+        type: SAVE_ACTIVITIE_LOADING,
+        saveLoading: true,
+      });
+
+      const { data } = await get(
+        `${endPoint.StudentActivities}/student/${stdId}`
+      );
+
+      for (let i = 0; i < data?.activities.length; i++) {
+        if (data?.activities[i].id == id) {
+          _.remove(data?.activities[i]?.courseActivites, (i) => {
+            return i.id == activityId;
+          });
+          break;
+        }
+      }
+
+      await edit(`${endPoint.StudentActivities}/${data?.id}`, data);
+
+      dispatch({
+        type: SAVE_ACTIVITIE_LOADING,
+        saveLoading: false,
+      });
+
+      dispatch({
+        type: UPDATE_EDIT_ACTIVITIE_Table,
+        updateTable: true,
+      });
+
+      strapi.notification.toggle({
+        type: "success",
+        message: { id: getTrad("deleteActivities.success") },
+        timeout: 3500,
+      });
+    } catch (err) {
+      console.log("Error in temp Std Activity  : ", err);
+      strapi.notification.toggle({
+        type: "warning",
+        message: { id: getTrad("activities.get.student.activities.error") },
+      });
+      dispatch({
+        type: SAVE_ACTIVITIE_LOADING,
+        saveLoading: false,
+      });
+    }
+  }
+};
+
 function useSaveStudentActivities() {
   const { add, get, edit } = useCRUD();
   const dispatch = useDispatch();
@@ -215,7 +278,37 @@ function useSaveStudentActivities() {
     });
   };
 
-  return { onSaveHandler, onEditHandler };
+  const onDeleteHandler = async (id, activityId, stdId, courseId) => {
+    return new Promise(async (r, rej) => {
+      try {
+        console.log(
+          `activityId, stdId, courseId , `,
+          id,
+          activityId,
+          stdId,
+          courseId
+        );
+        const result = await _onDeleteHandler(
+          get,
+          edit,
+          dispatch,
+          id,
+          activityId,
+          stdId,
+          courseId
+        );
+
+        // dispatch({ type: Clear_GET_ROW_ACTIVITIE });
+
+        r(result);
+      } catch (err) {
+        console.log(`err use Save New Payment`, err);
+        rej(err);
+      }
+    });
+  };
+
+  return { onSaveHandler, onEditHandler, onDeleteHandler };
 }
 
 export default useSaveStudentActivities;

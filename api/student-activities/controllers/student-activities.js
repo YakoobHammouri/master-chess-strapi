@@ -45,10 +45,12 @@ module.exports = {
       .query("student-activities")
       .findOne({ student: stdid });
 
-    const _couser = stdTemp?.activities.find((i) => i?.course?.id == cid);
+    const _activities = stdTemp?.activities.find((i) => i?.course?.id == cid);
 
-    const temp = _couser?.courseActivites?.map((a) => {
+    console.log(`_couser`, _activities);
+    const temp = _activities?.courseActivites?.map((a) => {
       return {
+        activityId: _activities.id,
         id: a.id,
         mark: a.mark,
         activiteName: a.activiteName,

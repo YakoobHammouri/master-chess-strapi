@@ -62,6 +62,7 @@
   "activitiesList.mark.label": " العلامة",
 
   "takeActivities.success": "The Activities successfully saved",
+  "deleteActivities.success": "The Activities successfully Deleted",
   "takeActivities.fail": "The Activities not saved",
   "activities.get.student.activities.error": "Error in get Student Activities",
   "activities.get.student.activities.fixData": "Please check the data entered",
