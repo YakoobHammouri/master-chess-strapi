@@ -104,24 +104,6 @@ function formRow({
     const activities_id = activitieRef.current?.value;
     const currentmark = markRef.current.value;
 
-    console.log(`currentmark`, currentmark);
-    console.log(`old`, old);
-    console.log("curent", {
-      selectActivitie: activitieRef.current,
-      total: totalRef.current,
-      mark: markRef.current,
-      isValid,
-      isEdit,
-      activityId: Id,
-    });
-
-    console.log(
-      `chnafg`,
-      old?.activiteName == activiteName &&
-        old?.activities_list_id == activities_id &&
-        old?.mark == currentmark
-    );
-
     if (isEdit) {
       if (
         old?.activiteName == activiteName &&

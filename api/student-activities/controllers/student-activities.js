@@ -96,7 +96,7 @@ module.exports = {
         .from("components_comp_students_activities_s")
         .where("id", "=", activityId);
 
-      console.log(`temp`, temp);
+      // console.log(`temp`, temp);
 
       ctx.status = 200;
       return ctx.send({
