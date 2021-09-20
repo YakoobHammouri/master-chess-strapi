@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Table } from "@buffetjs/core";
 import EditModel from "./EditModel";
 import { T } from "../../../../utils";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { useSaveStudentActivities } from "../../../../hooks";
 function index({ rows, stdId, course, list, isSearch, isSearchByCourse }) {
   const headers = [
     {
@@ -32,6 +34,7 @@ function index({ rows, stdId, course, list, isSearch, isSearchByCourse }) {
     });
   }
 
+  const { onDeleteHandler } = useSaveStudentActivities();
   const [isOpenedCreateModal, setIsOpenedCreateModal] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState({});
   const handleToggleModalCreate = () => setIsOpenedCreateModal((s) => !s);
@@ -48,6 +51,19 @@ function index({ rows, stdId, course, list, isSearch, isSearchByCourse }) {
         headers={headers}
         rows={rows}
         style={{ direction: "ltr" }}
+        rowLinks={[
+          {
+            icon: <FontAwesomeIcon icon={faTrashAlt} />,
+            onClick: async (data) => {
+              const result = await onDeleteHandler(
+                data?.activityId,
+                data?.id,
+                stdId,
+                course?.value
+              );
+            },
+          },
+        ]}
       />
 
       <EditModel
