@@ -42,7 +42,7 @@ const TabsLsit = () => {
         <div
           onClick={() => {
             dispatch({
-              type: SAVE_PAYMENT,
+              type: SAVE_ACTIVITIE,
               funSaveActivitie: null,
             });
           }}
@@ -56,7 +56,7 @@ const TabsLsit = () => {
         <div
           onClick={() => {
             dispatch({
-              type: SAVE_PAYMENT,
+              type: SAVE_ACTIVITIE,
               funSaveActivitie: null,
             });
           }}

@@ -7,6 +7,7 @@ export const initialState = {
   funGetRowStudentActivitiesList: [],
   clear_StudentActivities: false,
   saveStudentActivitiesLoading: false,
+  updateEditActivityTable: false,
   FormRowActivitieList: [],
 };
 
@@ -40,9 +41,20 @@ const StudentActivitiesReducer = produce(
         break;
       }
 
+      case actions.Clear_GET_ROW_ACTIVITIE: {
+        set(draftState, "funGetRowStudentActivitiesList", []);
+        break;
+      }
+
       case actions.SAVE_ACTIVITIE_LOADING: {
         draftState.saveStudentActivitiesLoading = action.saveLoading;
         set(draftState, "saveStudentActivitiesLoading", action.saveLoading);
+        break;
+      }
+
+      case actions.UPDATE_EDIT_ACTIVITIE_Table: {
+        draftState.updateEditActivityTable = action.updateTable;
+        set(draftState, "updateEditActivityTable", action.updateTable);
         break;
       }
 

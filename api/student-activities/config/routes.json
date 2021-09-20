@@ -55,6 +55,22 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/student-activities/course-activity/:stdid/:cid",
+      "handler": "student-activities.findStudentActivityCourse",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/student-activities/update-course-activity/:id",
+      "handler": "student-activities.updateCourseActivity",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

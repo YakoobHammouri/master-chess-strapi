@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import {
   SAVE_ACTIVITIE_LOADING,
   CLEAR_ACTIVITIE,
+  UPDATE_EDIT_ACTIVITIE_Table,
+  Clear_GET_ROW_ACTIVITIE,
 } from "../../containers/Context/StudentActivities/constants";
 const _onSaveHandler = async (
   add,
@@ -98,55 +100,53 @@ const _onEditHandler = async (
   get,
   edit,
   dispatch,
-  paymentAmount,
-  paymentMonth,
-  paymentDate,
+  activity,
   stdId,
   course,
-  paymentId
+  activityId
 ) => {
   const ok = confirm("Are you sure to update the Payment?");
 
   if (ok) {
     try {
       dispatch({
-        type: SAVE_PAYMENT_LOADING,
+        type: SAVE_ACTIVITIE_LOADING,
         saveLoading: true,
       });
-      const { data } = await get(`${endPoint.StudentPayment}/student/${stdId}`);
 
-      // if length === 0 then student not have payment Record
-      if (data === null) {
-        strapi.notification.toggle({
-          type: "warning",
-          message: { id: getTrad("payment.student.no.have.record") },
-        });
-      } else {
-        // Student have Payment Record
-        // add new Payment to Student Payment Record
-        const index = data.Payments.findIndex((t) => t.id === paymentId);
-        const obj = data.Payments[index];
-        obj.amount = paymentAmount.value;
-        obj.month = paymentMonth.value;
-        obj.date = paymentDate.value._d;
+      //strapi.notification.toggle({
+      //   type: "warning",
+      //   message: { id: getTrad("payment.student.no.have.record") },
+      // });
 
-        data.Payments[index] = obj;
-        await edit(`${endPoint.StudentPayment}/${data?.id}`, data);
-        dispatch({
-          type: SAVE_PAYMENT_LOADING,
-          saveLoading: false,
-        });
+      const obj = {
+        activityId,
+        mark: activity.mark?.value,
+        activities_list: activity.selectActivitie?.value,
+        activiteName: activity.selectActivitie?.label,
+      };
 
-        dispatch({
-          type: UPDATE_EDIT_PAYMENT_Table,
-          updateTable: true,
-        });
+      console.log(`obj 11111`, obj);
 
-        strapi.notification.toggle({
-          type: "success",
-          message: { id: getTrad("takePayment.success") },
-        });
-      }
+      await edit(
+        `${endPoint.StudentActivities}/update-course-activity/${activityId}`,
+        obj
+      );
+
+      dispatch({
+        type: SAVE_ACTIVITIE_LOADING,
+        saveLoading: false,
+      });
+
+      dispatch({
+        type: UPDATE_EDIT_ACTIVITIE_Table,
+        updateTable: true,
+      });
+
+      strapi.notification.toggle({
+        type: "success",
+        message: { id: getTrad("takePayment.success") },
+      });
     } catch (err) {
       console.log("Error in temp Std Payment  : ", err);
       strapi.notification.toggle({
@@ -154,7 +154,7 @@ const _onEditHandler = async (
         message: { id: getTrad("payment.get.student.payment.error") },
       });
       dispatch({
-        type: SAVE_PAYMENT_LOADING,
+        type: SAVE_ACTIVITIE_LOADING,
         saveLoading: false,
       });
     }
@@ -187,29 +187,20 @@ function useSaveStudentActivities() {
     });
   };
 
-  const onEditHandler = async (
-    paymentAmount,
-    paymentMonth,
-    paymentDate,
-    stdId,
-    course,
-    paymentId
-  ) => {
+  const onEditHandler = async (activity, activityId, stdId, course) => {
     return new Promise(async (r, rej) => {
       try {
         const result = await _onEditHandler(
           get,
           edit,
           dispatch,
-          paymentAmount,
-          paymentMonth,
-          paymentDate,
+          activity,
           stdId,
           course,
-          paymentId
+          activityId
         );
 
-        // dispatch({ type: CLEAR_PAYMENT, clear_Payment: true });
+        dispatch({ type: Clear_GET_ROW_ACTIVITIE });
 
         r(result);
       } catch (err) {
