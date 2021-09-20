@@ -68,7 +68,6 @@ const _onSaveHandler = async (
         } else {
           // add new Course Activites
           data?.activities?.push(activiteObj);
-          console.log(`data`, data);
         }
 
         await edit(`${endPoint.StudentActivities}/${data?.id}`, data);
@@ -105,7 +104,7 @@ const _onEditHandler = async (
   course,
   activityId
 ) => {
-  const ok = confirm("Are you sure to update the Payment?");
+  const ok = confirm("Are you sure to update the Activity?");
 
   if (ok) {
     try {
@@ -126,9 +125,7 @@ const _onEditHandler = async (
         activiteName: activity.selectActivitie?.label,
       };
 
-      console.log(`obj 11111`, obj);
-
-      await edit(
+      const { data } = await edit(
         `${endPoint.StudentActivities}/update-course-activity/${activityId}`,
         obj
       );
@@ -142,16 +139,24 @@ const _onEditHandler = async (
         type: UPDATE_EDIT_ACTIVITIE_Table,
         updateTable: true,
       });
-
-      strapi.notification.toggle({
-        type: "success",
-        message: { id: getTrad("takePayment.success") },
-      });
+      if (data) {
+        strapi.notification.toggle({
+          type: "success",
+          message: { id: getTrad("takeActivities.success") },
+          timeout: 3500,
+        });
+      } else {
+        strapi.notification.toggle({
+          type: "warning",
+          message: { id: getTrad("takeActivities.fail") },
+          timeout: 3500,
+        });
+      }
     } catch (err) {
-      console.log("Error in temp Std Payment  : ", err);
+      console.log("Error in temp Std Activity  : ", err);
       strapi.notification.toggle({
         type: "warning",
-        message: { id: getTrad("payment.get.student.payment.error") },
+        message: { id: getTrad("activities.get.student.activities.error") },
       });
       dispatch({
         type: SAVE_ACTIVITIE_LOADING,
