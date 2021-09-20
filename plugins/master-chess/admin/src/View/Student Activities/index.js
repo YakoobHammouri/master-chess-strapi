@@ -10,6 +10,7 @@ import { LoadingProgress } from "../../components";
 import {
   TabsList,
   TakeStudentActivities,
+  EditStudentActivities,
 } from "./components/studentActivitiesTabs";
 
 import { Padded, Separator } from "@buffetjs/core";
@@ -33,7 +34,9 @@ function index() {
             <TabPanel>
               <TakeStudentActivities />
             </TabPanel>
-            <TabPanel>{/* <EditCoursePayment /> */}</TabPanel>
+            <TabPanel>
+              <EditStudentActivities />
+            </TabPanel>
             <TabPanel>{/* <SearchPaymentByStudent /> */}</TabPanel>
             <TabPanel>{/* <SearchPaymentByCourse /> */}</TabPanel>
           </TabsPanel>

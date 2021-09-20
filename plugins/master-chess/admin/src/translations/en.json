@@ -57,9 +57,13 @@
 
   "models.paymetn.take.Activities": "Student Activities",
   "models.paymetn.edit.Activities": "Edit Activities",
-  "activitiesList.label": " The Activitie",
+  "activitiesList.label": "النشاط",
+  "activitiesList.total.label": " المجموع",
+  "activitiesList.mark.label": " العلامة",
 
   "takeActivities.success": "The Activities successfully saved",
+  "takeActivities.fail": "The Activities not saved",
   "activities.get.student.activities.error": "Error in get Student Activities",
-  "activities.get.student.activities.fixData": "Please check the data entered"
+  "activities.get.student.activities.fixData": "Please check the data entered",
+  "activities.student.activities.not.chnage": "No change in data"
 }

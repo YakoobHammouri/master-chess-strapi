@@ -52,7 +52,6 @@ function EditCoursePaymentTable({
         onClickRow={(e, data) => {
           if (!isSearch && !isSearchByCourse) {
             setSelectedPayment(data);
-            console.log(`data 111111`, data);
             setIsOpenedCreateModal(true);
           }
         }}

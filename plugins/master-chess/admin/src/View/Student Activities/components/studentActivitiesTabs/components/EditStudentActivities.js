@@ -3,32 +3,64 @@ import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { Padded } from "@buffetjs/core";
 import { Col, Row } from "reactstrap";
-import { useGetStudent, useGetStudentById } from "../../../../../hooks";
 import { Dropdowns } from "../../../../../components";
+import { getTrad } from "../../../../../utils";
+import EditTableStudentActivities from "../../EditTableStudentActivities";
+import {
+  useGetStudent,
+  useGetStudentById,
+  useCRUD,
+  endPoint,
+  useActivitiesLists,
+} from "../../../../../hooks";
 
-import TakeStudentActivitieForm from "../../StudentActivitieForm";
 import {
   CLEAR_ACTIVITIE,
   REDUCER_NAME,
+  UPDATE_EDIT_ACTIVITIE_Table,
 } from "../../../../../containers/Context/StudentActivities/constants";
 
-const TakeStudentActivities = () => {
+const EditCoursePayment = () => {
   const dispatch = useDispatch();
+  const { activitiesLists } = useActivitiesLists();
   const { studentList } = useGetStudent();
   const { getStudentById } = useGetStudentById();
-
+  const { get } = useCRUD();
   const clear = useSelector(
     (state) => state.get(REDUCER_NAME).clear_StudentActivities
   );
+  const updateTable = useSelector(
+    (state) => state.get(REDUCER_NAME).updateEditActivityTable
+  );
 
   const [selectCourse, setSelectCourse] = useState({});
-  const [courseList, setCourseList] = useState([]);
   const [selectStudent, setSelectStudent] = useState(null);
+  const [courseList, setCourseList] = useState([]);
+  const [activityList, setActivityList] = useState([]);
 
-  // select Student
+  const getActivityForCourse = () => {
+    setActivityList([]);
+
+    get(
+      `${endPoint.StudentActivities}/course-activity/${selectStudent?.value}/${selectCourse?.value}`
+    )
+      .then((activity) => {
+        setActivityList(activity);
+      })
+      .catch((err) => {
+        console.log(`Error in get Student activity`, err);
+        strapi.notification.toggle({
+          type: "warning",
+          message: { id: getTrad("activities.get.student.activities.error") },
+        });
+      });
+  };
+
+  // select Studeent
   useEffect(() => {
-    setSelectCourse({});
     if (selectStudent?.value) {
+      setSelectCourse({});
+      setActivityList([]);
       getStudentById(selectStudent.value)
         .then((std) => {
           const temp = [];
@@ -59,12 +91,35 @@ const TakeStudentActivities = () => {
     }
   }, [selectStudent]);
 
-  //clear;
+  // select Course
   useEffect(() => {
-    setSelectStudent({});
-    setSelectCourse({});
-    dispatch({ type: CLEAR_ACTIVITIE, clear_StudentActivities: false });
+    if (selectCourse?.value) {
+      getActivityForCourse();
+    }
+  }, [selectCourse]);
+
+  // clear
+  useEffect(() => {
+    if (clear) {
+      setSelectStudent({});
+      setSelectCourse({});
+      setActivityList([]);
+      dispatch({ type: CLEAR_ACTIVITIE, clear_StudentActivities: false });
+    }
   }, [clear]);
+
+  //update Table
+  useEffect(() => {
+    if (updateTable) {
+      getActivityForCourse();
+
+      // reset value to false
+      dispatch({
+        type: UPDATE_EDIT_ACTIVITIE_Table,
+        updateTable: false,
+      });
+    }
+  }, [updateTable]);
 
   const onStudentChange = (selected) => {
     setSelectStudent(selected);
@@ -100,12 +155,12 @@ const TakeStudentActivities = () => {
       <Row>
         <Col>
           <Padded top bottom size="smd">
-            {selectCourse?.value ? (
-              <TakeStudentActivitieForm
-                stdId={selectStudent?.value}
-                course={selectCourse}
-              />
-            ) : null}
+            <EditTableStudentActivities
+              rows={activityList}
+              stdId={selectStudent?.value}
+              course={selectCourse}
+              list={activitiesLists}
+            />
           </Padded>
         </Col>
       </Row>
@@ -113,4 +168,4 @@ const TakeStudentActivities = () => {
   );
 };
 
-export default TakeStudentActivities;
+export default EditCoursePayment;

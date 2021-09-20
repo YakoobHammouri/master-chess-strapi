@@ -10,7 +10,7 @@ function PaymentHeader() {
   const dispatch = useDispatch();
 
   const loading = useSelector(
-    (state) => state.get(REDUCER_NAME).savePamentLoading
+    (state) => state.get(REDUCER_NAME).saveStudentActivitiesLoading
   );
   const savePament = useSelector(
     (state) => state.get(REDUCER_NAME).funSaveStudentActivities
