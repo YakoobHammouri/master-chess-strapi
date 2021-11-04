@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "name": "questions",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "questionText": {
+      "type": "string"
+    },
+    "answerOptions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "answers.answers"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "quiz": {
+      "via": "questions",
+      "model": "quizzes"
+    }
+  }
+}
