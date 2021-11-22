@@ -66,5 +66,7 @@
   "takeActivities.fail": "The Activities not saved",
   "activities.get.student.activities.error": "Error in get Student Activities",
   "activities.get.student.activities.fixData": "Please check the data entered",
-  "activities.student.activities.not.chnage": "No change in data"
+  "activities.student.activities.not.chnage": "No change in data",
+  "activities.student.no.have.record": "The Student does not have Activities Record, Add one",
+  "activities.get.student.payment.error": "Error in get Student Activities"
 }

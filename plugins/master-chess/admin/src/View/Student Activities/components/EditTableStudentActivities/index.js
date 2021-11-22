@@ -26,7 +26,7 @@ function index({ rows, stdId, course, list, isSearch, isSearchByCourse }) {
   ];
 
   if (isSearch) {
-    headers.splice(0, 2);
+    //headers.splice(0, 2);
   } else if (isSearchByCourse) {
     headers.splice(1, 0, {
       name: T("table.tableHeaer.stdName"),
@@ -51,19 +51,23 @@ function index({ rows, stdId, course, list, isSearch, isSearchByCourse }) {
         headers={headers}
         rows={rows}
         style={{ direction: "ltr" }}
-        rowLinks={[
-          {
-            icon: <FontAwesomeIcon icon={faTrashAlt} />,
-            onClick: async (data) => {
-              const result = await onDeleteHandler(
-                data?.activityId,
-                data?.id,
-                stdId,
-                course?.value
-              );
-            },
-          },
-        ]}
+        rowLinks={
+          isSearch === true
+            ? []
+            : [
+                {
+                  icon: <FontAwesomeIcon icon={faTrashAlt} />,
+                  onClick: async (data) => {
+                    const result = await onDeleteHandler(
+                      data?.activityId,
+                      data?.id,
+                      stdId,
+                      course?.value
+                    );
+                  },
+                },
+              ]
+        }
       />
 
       <EditModel
