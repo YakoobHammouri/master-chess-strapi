@@ -65,6 +65,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/student-activities/course-activity/:cid",
+      "handler": "student-activities.findAllStudentActivityCourse",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/student-activities/update-course-activity/:id",
       "handler": "student-activities.updateCourseActivity",
