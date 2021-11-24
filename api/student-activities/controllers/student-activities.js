@@ -74,7 +74,7 @@ module.exports = {
     const knex = strapi.connections.default;
 
     const result = await knex.raw(`
-    SELECT A.id , D.id , D.name ,C.course , C.courseName , Z.activiteName ,I.total, Z.mark FROM
+    SELECT A.id as activity_id  , D.id as StdId , D.name as stdName ,C.course , C.courseName , Z.activiteName ,I.total, Z.mark FROM
     students D
     JOIN student_activities A
     on
@@ -91,10 +91,64 @@ module.exports = {
     JOIN components_comp_students_activities_s Z
     on S.component_id  = Z.id
     JOIN activities_lists I
-    on Z.activities_list = I.id   where course = ${cid}`);
+    on Z.activities_list = I.id   where course = ${cid} ORDER BY D.id ASC `);
 
+    let lastID = 0;
+    const data = [];
+
+    let stdActivty = {
+      student: {},
+      activity: [],
+    };
+    result?.forEach((d, i) => {
+      // Last Id != d.StdId then new student
+      // reset Values to build new Student
+
+      if (lastID !== 0 && lastID !== d.StdId) {
+        data.push(stdActivty);
+        lastID = 0;
+        stdActivty = {
+          student: {},
+          activity: [],
+        };
+      }
+
+      // id = 0 then is new Student ,
+      // must build new std Activity with student data
+      if (lastID === 0) {
+        stdActivty.student = { stdId: d.StdId, stdName: d.stdName };
+        stdActivty.activity.push({
+          activity_id: d.activity_id,
+          course: d.course,
+          courseName: d.courseName,
+          activiteName: d.activiteName,
+          total: d.total,
+          mark: d.mark,
+        });
+        lastID = d.StdId;
+      }
+      // last = d.StdId then is not new student ,
+      // we need to add activty to current studetn ,
+      // without add student data
+      else if (lastID === d.StdId) {
+        stdActivty.activity.push({
+          activity_id: d.activity_id,
+          course: d.course,
+          courseName: d.courseName,
+          activiteName: d.activiteName,
+          total: d.total,
+          mark: d.mark,
+        });
+        lastID = d.StdId;
+      }
+
+      // this is last one so , must add to data Array
+      if (i + 1 === result?.length) {
+        data.push(stdActivty);
+      }
+    });
     ctx.status = 200;
-    return result ?? [];
+    return data ?? [];
   },
   updateCourseActivity: async (ctx) => {
     try {
