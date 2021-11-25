@@ -35,15 +35,16 @@ const SearchActivityByStudent = () => {
     if (studentActivityList.length === 0) return;
 
     return studentActivityList?.map((temp, i) => {
+      const { activity, student } = temp;
       return (
         <BannerItem
           key={i}
-          name={temp?.course?.name ?? "---"}
+          name={student?.stdName ?? "---"}
           isFirst={i === 0}
-          activityList={temp?.courseActivites}
-          course={temp?.course}
+          activityList={activity}
+          // course={temp?.course}
           isSearch={true}
-          stdName={selectStudent?.label}
+          searchByCourse={true}
         />
       );
     });
@@ -86,7 +87,7 @@ const SearchActivityByStudent = () => {
       )
         .then((stdActivity) => {
           console.log(`stdActivity 111111111`, stdActivity);
-          ///setPaymentList(paymentsCourse);
+          setStudentActivityList(stdActivity);
         })
         .catch((err) => {
           console.log("err in  get student by id in  useEffect :  ", err);

@@ -74,7 +74,7 @@ module.exports = {
     const knex = strapi.connections.default;
 
     const result = await knex.raw(`
-    SELECT A.id as activity_id  , D.id as StdId , D.name as stdName ,C.course , C.courseName , Z.activiteName ,I.total, Z.mark FROM
+    SELECT Z.id as activity_id  , D.id as StdId , D.name as stdName ,C.course , C.courseName , Z.activiteName ,I.total, Z.mark FROM
     students D
     JOIN student_activities A
     on

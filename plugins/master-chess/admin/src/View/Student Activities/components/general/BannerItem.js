@@ -10,6 +10,7 @@ function BannerItem({
   activityList,
   course,
   isSearch,
+  searchByCourse,
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,12 +26,12 @@ function BannerItem({
       />
       <Collapse isOpen={isOpen}>
         <Padded top bottom right left size="smd">
-          {/* <EditTableStudentActivities /> */}
           <SearchTableStudentActivities
             rows={activityList}
             stdName={stdName}
             isSearch={isSearch}
             course={course}
+            searchByCourse={searchByCourse}
           />
         </Padded>
       </Collapse>
