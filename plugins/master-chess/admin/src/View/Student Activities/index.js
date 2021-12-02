@@ -12,6 +12,7 @@ import {
   TakeStudentActivities,
   EditStudentActivities,
   SearchActivityByStudent,
+  SearchActivityByCourse,
 } from "./components/studentActivitiesTabs";
 
 import { Padded, Separator } from "@buffetjs/core";
@@ -41,7 +42,9 @@ function index() {
             <TabPanel>
               <SearchActivityByStudent />
             </TabPanel>
-            <TabPanel>{/* <SearchPaymentByCourse /> */}</TabPanel>
+            <TabPanel>
+              <SearchActivityByCourse />
+            </TabPanel>
           </TabsPanel>
         </TabsNav>
       </Padded>

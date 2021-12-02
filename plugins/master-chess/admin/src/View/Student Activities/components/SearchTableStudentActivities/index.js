@@ -2,11 +2,28 @@ import React from "react";
 import { Table } from "@buffetjs/core";
 import { T } from "../../../../utils";
 
-function index({ rows, stdName }) {
+function index({ rows, stdName, searchByCourse }) {
+  console.log(`searchByCourse in table`, searchByCourse);
   const CustomRow = ({ row }) => {
-    const { id, mark, activities_list, activiteName } = row;
+    const { id, activity_id, mark, activities_list, activiteName, total } = row;
 
-    return (
+    return searchByCourse === true ? (
+      <tr>
+        <td>
+          <p>{activity_id}</p>
+        </td>
+
+        <td>
+          <p>{activiteName}</p>
+        </td>
+        <td>
+          <p>{total}</p>
+        </td>
+        <td>
+          <p>{mark}</p>
+        </td>
+      </tr>
+    ) : (
       <tr>
         <td>
           <p>{id}</p>
@@ -49,6 +66,9 @@ function index({ rows, stdName }) {
     },
   ];
 
+  if (searchByCourse === true) {
+    headers.splice(1, 1);
+  }
   return (
     <div style={{ direction: "ltr" }}>
       <Table
